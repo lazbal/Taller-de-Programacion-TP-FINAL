@@ -234,36 +234,64 @@ namespace CapaVisual
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             //No controlo la cantidad de elementos en ListaHorarios para que se puedan guardar campañas o banners inactivos.
-            //Cargar los datos en la campaña provista.
-            iElementoCarteleria.Nombre = this.tbNombre.Text;
-            iElementoCarteleria.Descripcion = this.tbDescripcion.Text;
-            iElementoCarteleria.FechaInicio = this.dtpFechaInicio.Value;
-            iElementoCarteleria.FechaFin = this.dtpFechaFin.Value;
-            iElementoCarteleria.Frecuencia.Clear();
-            if (this.ListaHorarios.Count > 0)
+            //Comprobar que ningun parámetro sea null
+            if (this.tbNombre.Text == "" || this.tbDescripcion.Text == "")
             {
-                foreach (Horario mHorario in this.ListaHorarios)
-                {
-                    iElementoCarteleria.Frecuencia.Add(mHorario);
-                }
+                MessageBox.Show("Asegurese de completar todos los campos requeridos");
             }
-            //Campaña
-            iElementoCarteleria.Campaña.TiempoXImagen = new TimeSpan(Convert.ToInt32(this.numHH.Value), Convert.ToInt32(this.numMM.Value), 0);
-            iElementoCarteleria.Campaña.ListaImagenes.Clear();
-            if (this.lvImagenes.LargeImageList.Images.Count > 0)
+            else
             {
-                //iElementoCarteleria.Campaña.TiempoXImagen = new TimeSpan(Convert.ToInt32(numHH.Value), Convert.ToInt32(numMM.Value), 0);
-                //Agregar cada una de las imágenes en la vista previa a la lista en la campaña.
-                foreach (string mRuta in this.lvImagenes.LargeImageList.Images.Keys)
+                //Cargar los datos en la campaña provista.
+                iElementoCarteleria.Nombre = this.tbNombre.Text;
+                iElementoCarteleria.Descripcion = this.tbDescripcion.Text;
+                iElementoCarteleria.FechaInicio = this.dtpFechaInicio.Value;
+                iElementoCarteleria.FechaFin = this.dtpFechaFin.Value;
+                iElementoCarteleria.Frecuencia.Clear();
+                if (this.ListaHorarios.Count > 0)
                 {
-                    iElementoCarteleria.Campaña.AgregarImagen(mRuta);
+                    foreach (Horario mHorario in this.ListaHorarios)
+                    {
+                        iElementoCarteleria.Frecuencia.Add(mHorario);
+                    }
                 }
+                //Campaña
+                iElementoCarteleria.Campaña.TiempoXImagen = new TimeSpan(Convert.ToInt32(this.numHH.Value), Convert.ToInt32(this.numMM.Value), 0);
+                iElementoCarteleria.Campaña.ListaImagenes.Clear();
+                if (this.lvImagenes.LargeImageList.Images.Count > 0)
+                {
+                    //iElementoCarteleria.Campaña.TiempoXImagen = new TimeSpan(Convert.ToInt32(numHH.Value), Convert.ToInt32(numMM.Value), 0);
+                    //Agregar cada una de las imágenes en la vista previa a la lista en la campaña.
+                    foreach (string mRuta in this.lvImagenes.LargeImageList.Images.Keys)
+                    {
+                        iElementoCarteleria.Campaña.AgregarImagen(mRuta);
+                    }
+                }
+                //Banner
+                switch (this.cbTipoBanner.Text)
+                {
+                    case "Fuente RSS":
+                        {
+                            //Se carga al comprobar que la fuente existe.
+                            break;
+                        }
+                    case "Banner Estático":
+                        {
+                            iElementoCarteleria.Banner = new BannerEstatico(this.tbBanner.Text);
+                            break;
+                        }
+                    default:
+                        {
+                            MessageBox.Show("El tipo de banner seleccionado no es correcto y no se cargará"); 
+                            break;
+                        }
+                }
+
+                //Insertar en la base de datos
+                this.iFachada.AgregarElementoCarteleria(iElementoCarteleria);
+
+                //Cerrar ventana.
+                this.Close();
             }
-            //Banner
-
-
-            //Cerrar ventana.
-            this.Close();
         }
 
         private void btnHorariosOcupados_Click(object sender, EventArgs e)
