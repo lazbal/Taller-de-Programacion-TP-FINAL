@@ -15,8 +15,8 @@ namespace CapaVisual
         [STAThread]
         static void Main()
         {
-            FachadaCapaVisual iFachada = new FachadaCapaVisual();
-            AdminCarteleria ventana = new AdminCarteleria(iFachada);
+            AdminCarteleria ventana = new AdminCarteleria();
+            //Presentacion ventana = new Presentacion();
             ventana.ShowDialog();
         }
     }

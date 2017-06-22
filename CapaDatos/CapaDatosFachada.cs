@@ -10,15 +10,28 @@ namespace CapaDatos
     /// </summary>
 	public class CapaDatosFachada : ICapaDatosFachada
     {
-		#region Datos
-        private UnitOfWork iUnitOfWork = new UnitOfWork();
-		#endregion
-		#region Constructores
-		/// <summary>
-		/// Inicializa una instancia de la clase <see cref="CapaDatos.CapaDatosFachada"/>.
-		/// </summary>
-        public CapaDatosFachada()
+        #region Datos
+        private UnitOfWork iUnitOfWork;
+        private static CapaDatosFachada instancia = null;
+        #endregion
+        #region Constructores
+        /// <summary>
+        /// Método de Singleton para obtener la instancia.
+        /// </summary>
+        /// <returns></returns>
+        public static CapaDatosFachada GetInstancia()
+        {
+            if (instancia == null)
+                instancia = new CapaDatosFachada();
+            return instancia;
+        }
+
+        /// <summary>
+        /// Inicializa una instancia de la clase <see cref="CapaDatos.CapaDatosFachada"/>.
+        /// </summary>
+        private CapaDatosFachada()
 		{
+             this.iUnitOfWork = new UnitOfWork();
         }
 		#endregion
 		#region ElementoCarteleria
@@ -30,13 +43,14 @@ namespace CapaDatos
 		{
 			iUnitOfWork.ElementoCarteleriaRepositorio.Insert(pElementoCarteleria);
 			iUnitOfWork.Save();
-		}
+        }
 
-		/// <summary>
-		/// Actualiza una entrada de tabla.
-		/// </summary>
-		/// <param name="pCamapaña">Objeto actualizado.</param>
-		public void Update(ElementoCarteleria pElementoCarteleria)
+
+        /// <summary>
+        /// Actualiza una entrada de tabla.
+        /// </summary>
+        /// <param name="pCamapaña">Objeto actualizado.</param>
+        public void Update(ElementoCarteleria pElementoCarteleria)
 		{
 			iUnitOfWork.ElementoCarteleriaRepositorio.Update(pElementoCarteleria);
 			iUnitOfWork.Save();

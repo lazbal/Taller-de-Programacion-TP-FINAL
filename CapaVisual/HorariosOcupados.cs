@@ -17,11 +17,11 @@ namespace CapaVisual
         ICollection<ElementoCarteleria> iElementosCarteleria;
         #endregion
 
-        public HorariosOcupados(DateTime pFechaInicio, DateTime pFechaFin, FachadaCapaVisual pFachada)
+        public HorariosOcupados(DateTime pFechaInicio, DateTime pFechaFin)
         {
             InitializeComponent();
             //Obtener los elementos de cartelería entre las fechas
-            iElementosCarteleria = pFachada.ObtenerElementosCarteleriaEntre(pFechaInicio, pFechaFin);
+            iElementosCarteleria = FachadaCapaVisual.ObtenerElementosCarteleriaEntre(pFechaInicio, pFechaFin);
             //Iniciar el contador de fechas
             DateTime mFechaActual = pFechaInicio;
             //Para cada fecha

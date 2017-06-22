@@ -41,7 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FachadaCapaNegocio.cs" />
-    <Compile Include="IFachadaCapaNegocio.cs" />
     <Compile Include="IRssReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RssReader.cs" />

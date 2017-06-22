@@ -35,29 +35,31 @@
             // 
             // pbCampaña
             // 
+            this.pbCampaña.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pbCampaña.InitialImage = null;
-            this.pbCampaña.Location = new System.Drawing.Point(3, 2);
+            this.pbCampaña.Location = new System.Drawing.Point(0, -2);
             this.pbCampaña.Name = "pbCampaña";
-            this.pbCampaña.Size = new System.Drawing.Size(662, 300);
+            this.pbCampaña.Size = new System.Drawing.Size(666, 310);
             this.pbCampaña.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbCampaña.TabIndex = 0;
             this.pbCampaña.TabStop = false;
             // 
             // tbBanner
             // 
-            this.tbBanner.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbBanner.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbBanner.BackColor = System.Drawing.SystemColors.InfoText;
             this.tbBanner.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbBanner.Font = new System.Drawing.Font("Corbel", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbBanner.ForeColor = System.Drawing.Color.Gold;
-            this.tbBanner.Location = new System.Drawing.Point(0, 301);
+            this.tbBanner.Location = new System.Drawing.Point(0, 308);
             this.tbBanner.Name = "tbBanner";
             this.tbBanner.ReadOnly = true;
             this.tbBanner.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tbBanner.Size = new System.Drawing.Size(666, 33);
-            this.tbBanner.TabIndex = 1;
+            this.tbBanner.TabIndex = 3;
             // 
             // Presentacion
             // 

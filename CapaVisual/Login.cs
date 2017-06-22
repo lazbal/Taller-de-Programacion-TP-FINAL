@@ -8,12 +8,10 @@ namespace CapaVisual
     {
         private string iUsuario;
         private string iContraseña;
-        private FachadaCapaVisual iFachada;
 
-        public Login(FachadaCapaVisual pFachada)
+        public Login()
         {
             InitializeComponent();
-            iFachada = pFachada;
             textContraseña.PasswordChar = '*';
             iUsuario = "";
             iContraseña = "";
@@ -24,7 +22,7 @@ namespace CapaVisual
             if (textUsuario.Text == iUsuario && textContraseña.Text == iContraseña)
             {
                 this.Hide();
-                AdminCarteleria iAdministrador = new AdminCarteleria(iFachada);
+                AdminCarteleria iAdministrador = new AdminCarteleria();
                 iAdministrador.ShowDialog();
                 this.Close();
             }

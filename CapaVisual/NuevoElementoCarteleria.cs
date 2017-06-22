@@ -17,17 +17,15 @@ namespace CapaVisual
     {
         //Atributos.
         private ElementoCarteleria iElementoCarteleria;
-        private FachadaCapaVisual iFachada;
         private bool iModoActualizacion;
 
         /// <summary>
         /// Constructor de la ventana.
         /// </summary>
         /// <param name="pElementoCarteleria">Campaña a cargar/modificar.</param>
-        public NuevoElementoCarteleria(ElementoCarteleria pElementoCarteleria, FachadaCapaVisual pFachada, bool pModoActualizacion = false) : base()
+        public NuevoElementoCarteleria(ElementoCarteleria pElementoCarteleria, bool pModoActualizacion = false) : base()
         {
             InitializeComponent();
-            iFachada = pFachada;
             iModoActualizacion = pModoActualizacion;
             lvImagenes.LargeImageList = new ImageList();
             //Cargamos a la ventana el elemento de cartelería parámetro
@@ -69,6 +67,7 @@ namespace CapaVisual
             //Si es un elemento de cartelería nuevo se genera el banner.
             if (iElementoCarteleria.Banner == null)
             {
+                this.cbTipoBanner.SelectedItem = this.cbTipoBanner.Items[1];
                 iElementoCarteleria.Banner = new BannerEstatico();
             }
             else if (iElementoCarteleria.Banner is RSSFeed)
@@ -79,8 +78,8 @@ namespace CapaVisual
             }
             else
             {
-                this.tbBanner.Text = (iElementoCarteleria.Banner as BannerEstatico).Texto;
                 this.cbTipoBanner.SelectedItem = this.cbTipoBanner.Items[1];
+                this.tbBanner.Text = (iElementoCarteleria.Banner as BannerEstatico).Texto;
             }
         }
 
@@ -132,8 +131,7 @@ namespace CapaVisual
             {
                 //Se obtiene el menos intervalo de tiempo que durará la campaña en un día y se lo divide por la cantidad de imágenes que lleve la campaña.
                 decimal tiempoMinimoImagenMinutos = Convert.ToDecimal(TiempoMinimo().TotalMinutes / lvImagenes.Items.Count);
-                //Problemas cuando se hace negativo
-                this.numHH.Value = Convert.ToInt32(tiempoMinimoImagenMinutos / (decimal)60.0);
+                this.numHH.Value = Convert.ToInt32(Math.Truncate(tiempoMinimoImagenMinutos / (decimal)60.0));
                 this.numMM.Value = Convert.ToInt32(tiempoMinimoImagenMinutos - this.numHH.Value*60);
             }
         }
@@ -175,7 +173,7 @@ namespace CapaVisual
         {
             (this.iElementoCarteleria.Banner as RSSFeed).URL = this.tbBanner.Text;
             //Abrir la ventana para la seleccion de fuentes pasándole el banner como parámetro para modificarlo.
-            ComprobarRSSFeed mNuevoRSS = new ComprobarRSSFeed(iElementoCarteleria.Banner as RSSFeed, iFachada);
+            ComprobarRSSFeed mNuevoRSS = new ComprobarRSSFeed(iElementoCarteleria.Banner as RSSFeed);
             mNuevoRSS.ShowDialog();
             this.tbBanner.Text = (this.iElementoCarteleria.Banner as RSSFeed).URL;
         }
@@ -260,7 +258,7 @@ namespace CapaVisual
 
                 //Banner
                 //Sólo se actualiza sí es estático, caso contrario se actualiza en la comprobación de la fuente
-                if (cbTipoBanner.Text == "Banner Estático")
+                if (cbTipoBanner.SelectedIndex == 1)
                 {
                     iElementoCarteleria.Banner = new BannerEstatico(tbBanner.Text);
                 }
@@ -268,11 +266,11 @@ namespace CapaVisual
                 //Insertar en la base de datos
                 if (iModoActualizacion)
                 {
-                    this.iFachada.ActualizarElementoCarteleria(iElementoCarteleria);
+                    FachadaCapaVisual.ActualizarElementoCarteleria(iElementoCarteleria);
                 }
                 else
                 {
-                    this.iFachada.AgregarElementoCarteleria(iElementoCarteleria);
+                    FachadaCapaVisual.AgregarElementoCarteleria(iElementoCarteleria);
                 }
 
                 //Cerrar ventana.
@@ -281,9 +279,12 @@ namespace CapaVisual
             }
         }
 
+        /// <summary>
+        /// Muestra una tabla con los horarios ocupados actualmente.
+        /// </summary>
         private void btnHorariosOcupados_Click(object sender, EventArgs e)
         {
-            HorariosOcupados vTabla = new HorariosOcupados(this.dtpFechaInicio.Value, this.dtpFechaFin.Value, iFachada);
+            HorariosOcupados vTabla = new HorariosOcupados(this.dtpFechaInicio.Value, this.dtpFechaFin.Value);
             DialogResult resultado = vTabla.ShowDialog();
         }
     }

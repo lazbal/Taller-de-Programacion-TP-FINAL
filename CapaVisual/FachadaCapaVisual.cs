@@ -6,81 +6,64 @@ using CapaNegocio;
 
 namespace CapaVisual
 {
-    public class FachadaCapaVisual
+    public static class FachadaCapaVisual
     {
-        private IFachadaCapaNegocio iFachadaNegocio = new FachadaCapaNegocio();
-        private ICollection<ElementoCarteleria> iElementosCarteleria;
-        private Campaña iCampañaDefecto;
-        private BannerEstatico iBannerDefecto;
-
-        public FachadaCapaVisual()
+        public static IEnumerable<RSSItem> LeerRSS(string pURL)
         {
-            iElementosCarteleria = iFachadaNegocio.GetAllElementosCarteleria();
-            iCampañaDefecto = new Campaña();
-            iCampañaDefecto.TiempoXImagen = new TimeSpan(0, 30, 0);
-            iCampañaDefecto.AgregarImagen("CampañaDefecto.jpg");
-            iBannerDefecto = new BannerEstatico();
-            iBannerDefecto.Texto = "Contáctenos!!!";
-
+            return FachadaCapaNegocio.LeerRSS(pURL);
         }
 
-        public IEnumerable<RSSItem> LeerRSS(string pURL)
+        public static void AgregarElementoCarteleria(ElementoCarteleria pElementoCarteleria)
         {
-            return iFachadaNegocio.LeerRSS(pURL);
+            FachadaCapaNegocio.AgregarElementoCarteleria(pElementoCarteleria);
         }
 
-        public void AgregarElementoCarteleria(ElementoCarteleria pElementoCarteleria)
+        public static void ActualizarElementoCarteleria(ElementoCarteleria pElementoCarteleria)
         {
-            iFachadaNegocio.AgregarElementoCarteleria(pElementoCarteleria);
+            FachadaCapaNegocio.ActualizarElementoCarteleria(pElementoCarteleria);
         }
 
-        public void ActualizarElementoCarteleria(ElementoCarteleria pElementoCarteleria)
+        public static ICollection<ElementoCarteleria> ObtenerElementosCarteleria()
         {
-            iFachadaNegocio.ActualizarElementoCarteleria(pElementoCarteleria);
+            return FachadaCapaNegocio.GetAllElementosCarteleria();
         }
 
-        public ICollection<ElementoCarteleria> ObtenerElementosCarteleria()
+        public static ICollection<ElementoCarteleria> ObtenerElementosCarteleriaEntre(DateTime pFechaInicio, DateTime pFechaFin)
         {
-            return iFachadaNegocio.GetAllElementosCarteleria();
+            return FachadaCapaNegocio.GetAllElementosCarteleriaEntre(pFechaInicio, pFechaFin);
         }
 
-        public ICollection<ElementoCarteleria> ObtenerElementosCarteleriaEntre(DateTime pFechaInicio, DateTime pFechaFin)
+        public static ElementoCarteleria SiguienteElementoCarteleria()
         {
-            return iFachadaNegocio.GetAllElementosCarteleriaEntre(pFechaInicio, pFechaFin);
-        }
-
-        public ElementoCarteleria SiguienteElementoCarteleria()
-        {
-            ElementoCarteleria mSig = iElementosCarteleria.FirstOrDefault();
-            iElementosCarteleria.Remove(mSig);
-            iElementosCarteleria.Add(mSig);
+            ElementoCarteleria mSig = FachadaCapaNegocio.GetAllElementosCarteleria().FirstOrDefault();
+            FachadaCapaNegocio.GetAllElementosCarteleria().Remove(mSig);
+            FachadaCapaNegocio.GetAllElementosCarteleria().Add(mSig);
             return mSig;
         }
 
-        public ICollection<ElementoCarteleria> ObtenerElementosCarteleriaHoy()
+        public static ICollection<ElementoCarteleria> ObtenerElementosCarteleriaHoy()
         {
-            return iFachadaNegocio.ElementosCarteleriaHoy();
+            return FachadaCapaNegocio.ElementosCarteleriaHoy();
         }
 
-        public ElementoCarteleria BuscarElementoCarteleria(Int64 pId)
+        public static ElementoCarteleria BuscarElementoCarteleria(Int64 pId)
         {
-            return iFachadaNegocio.BuscarElementoCarteleria(pId);
+            return FachadaCapaNegocio.BuscarElementoCarteleria(pId);
         }
 
-        public ICollection<ElementoCarteleria> BusquedaAproxElementoCarteleria(string pTitulo)
+        public static ICollection<ElementoCarteleria> BusquedaAproxElementoCarteleria(string pTitulo)
         {
-            return iFachadaNegocio.BusquedaAproxElementoCarteleria(pTitulo);
+            return FachadaCapaNegocio.BusquedaAproxElementoCarteleria(pTitulo);
         }
 
-        public void ActualizarNoticiasHoy()
+        public static void ActualizarNoticiasHoy()
         {
-            iFachadaNegocio.ActualizarNoticiasHoy();
+            FachadaCapaNegocio.ActualizarNoticiasHoy();
         }
 
-        public void EliminarElementoCarteleria(Int64 pID)
+        public static void EliminarElementoCarteleria(Int64 pID)
         {
-            //ElementoCarteleria mElementoEliminar = iFachadaNegocio.BuscarElementoCarteleria(pID);
-            iFachadaNegocio.EliminarElementoCarteleria(pID);
+            FachadaCapaNegocio.EliminarElementoCarteleria(pID);
         }
     }
 }

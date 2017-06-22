@@ -20,14 +20,13 @@ namespace CapaVisual
     {
         //Atributos
         private RSSFeed iRSSFeed;
-        private FachadaCapaVisual iFachada;
         private ICollection<RSSItem> iListaItems;
 
         /// <summary>
         /// Constructor de la clase.
         /// </summary>
         /// <param name="pRSSFeed">Fuente RSS a ser creada/verificada.</param>
-        public ComprobarRSSFeed(RSSFeed pRSSFeed, FachadaCapaVisual pFachada) : base()
+        public ComprobarRSSFeed(RSSFeed pRSSFeed) : base()
         {
             InitializeComponent();
             //Se actualza la barra de estado.
@@ -38,8 +37,6 @@ namespace CapaVisual
             {
                 tbURL.Text = iRSSFeed.URL;
             }
-            //Referenciamos la fachada
-            iFachada = pFachada;
         }
 
         /// <summary>
@@ -74,7 +71,7 @@ namespace CapaVisual
             try
             {
                 //Se le pide a la fachada que lea la fuente rss para verificar que funcion
-                IEnumerable<RSSItem> mListaItems = iFachada.LeerRSS(tbURL.Text);
+                IEnumerable<RSSItem> mListaItems = FachadaCapaVisual.LeerRSS(tbURL.Text);
                 //Se devuelve la lista como resultado del trabajo en segundo plano.
                 e.Result = mListaItems;
             }

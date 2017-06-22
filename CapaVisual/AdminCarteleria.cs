@@ -5,16 +5,13 @@ namespace CapaVisual
 {
     public partial class AdminCarteleria : Form
     {
-        FachadaCapaVisual iFachada;
-
         /// <summary>
         /// Inicializa una instancia del objeto.
         /// </summary>
         /// <param name="pFachada"></param>
-        public AdminCarteleria(FachadaCapaVisual pFachada)
+        public AdminCarteleria()
         {
             InitializeComponent();
-            iFachada = pFachada;
         }
 
         /// <summary>
@@ -25,7 +22,7 @@ namespace CapaVisual
         private void btnNuevoElemento_Click(object sender, System.EventArgs e)
         {
             this.Hide();
-            NuevoElementoCarteleria iNuevoElemento = new NuevoElementoCarteleria(new ElementoCarteleria(), iFachada);
+            NuevoElementoCarteleria iNuevoElemento = new NuevoElementoCarteleria(new ElementoCarteleria());
             iNuevoElemento.ShowDialog();
             this.Show();
         }
@@ -35,7 +32,7 @@ namespace CapaVisual
         /// </summary>
         private void btnPresentacion_Click(object sender, System.EventArgs e)
         {
-            Presentacion iPresentacion = new Presentacion(iFachada);
+            Presentacion iPresentacion = new Presentacion();
             iPresentacion.ShowDialog();
             this.Show();
         }
@@ -46,7 +43,7 @@ namespace CapaVisual
         private void btnListarCarteles_Click(object sender, System.EventArgs e)
         {
             this.Hide();
-            Buscar iBuscador = new Buscar(iFachada);
+            Buscar iBuscador = new Buscar();
             iBuscador.ShowDialog();
             this.Show();
         }

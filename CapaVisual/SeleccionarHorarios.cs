@@ -154,6 +154,7 @@ namespace CapaVisual
         {
             this.iListaHorarios.Clear();
         //Se controla qué dia está seleccionado y se lo agrega a la lista de horarios, junto con las horas seleccionadas para inicio y fin del anuncio.
+        //Cada if corresponde a un dia de la semana
             if (cbLunes.Checked)
             {
 				if (((dtpLunesInicio.Value.Hour < dtpLunesFin.Value.Hour) || ((dtpLunesInicio.Value.Hour == dtpLunesFin.Value.Hour) && (dtpLunesInicio.Value.Minute <= dtpLunesFin.Value.Minute))))
