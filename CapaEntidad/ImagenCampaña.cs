@@ -12,15 +12,28 @@ namespace CapaEntidad
     /// </summary>
     public class ImagenCampaña
     {
-        //Atributos
-        public int ImagenCampanaId { get; set; }
+        /// <summary>
+        /// Identificador del objeto. Generador por la base de datos.
+        /// </summary>
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Int64 ImagenCampanaId { get; set; }
 
-		public virtual int refCampanaId { get; set; }
+        /// <summary>
+        /// Clave foránea. Identifica a la campaña padre.
+        /// </summary>
+		public virtual Int64 refCampanaId { get; set; }
 		[ForeignKey("refCampanaId")]
 		private Campaña iCampaña { get; set; }
 
+        /// <summary>
+        /// Ruta en disco del archivo imagen.
+        /// </summary>
 		[Required]
 		private string iRuta;
+        
+        /// <summary>
+        /// Conversión de la ruta en imágen.
+        /// </summary>
 		private Image iImagen;
 
         //Propiedades
@@ -42,6 +55,9 @@ namespace CapaEntidad
 		/// </summary>
 		public virtual Image Imagen { get { return iImagen; } }
 
+        /// <summary>
+        /// Inicializa una instancia de la clase <see cref="ImagenCampaña"/>.
+        /// </summary>
 		public ImagenCampaña ()
 		{
 			

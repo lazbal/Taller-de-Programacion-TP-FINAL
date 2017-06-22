@@ -9,14 +9,22 @@ namespace CapaEntidad
     /// </summary>
     public class RSSItem
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] 
-        public int RSSItemId { get; set; }
+        /// <summary>
+        /// Identificador del objeto. Generado por la base de datos.
+        /// </summary>
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)] 
+        public Int64 RSSItemId { get; set; }
         
-        public int refRSSFeed { get; set; }
+        /// <summary>
+        /// Clave foránea. Identifica la fuente RSS padre.
+        /// </summary>
+        public Int64 refRSSFeed { get; set; }
         [ForeignKey("refRSSFeed")]
         private RSSFeed iRSSFeed { get; set; }
 
+        /// <summary>
+        /// Inicializa una instancia de la clase <see cref="RSSItem"/>.
+        /// </summary>
 		public RSSItem ()
 		{
 			

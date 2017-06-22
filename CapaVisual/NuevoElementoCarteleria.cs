@@ -18,15 +18,17 @@ namespace CapaVisual
         //Atributos.
         private ElementoCarteleria iElementoCarteleria;
         private FachadaCapaVisual iFachada;
+        private bool iModoActualizacion;
 
         /// <summary>
         /// Constructor de la ventana.
         /// </summary>
         /// <param name="pElementoCarteleria">Campaña a cargar/modificar.</param>
-        public NuevoElementoCarteleria(ElementoCarteleria pElementoCarteleria, FachadaCapaVisual pFachada) : base()
+        public NuevoElementoCarteleria(ElementoCarteleria pElementoCarteleria, FachadaCapaVisual pFachada, bool pModoActualizacion = false) : base()
         {
             InitializeComponent();
             iFachada = pFachada;
+            iModoActualizacion = pModoActualizacion;
             lvImagenes.LargeImageList = new ImageList();
             //Cargamos a la ventana el elemento de cartelería parámetro
             iElementoCarteleria = pElementoCarteleria;
@@ -52,7 +54,6 @@ namespace CapaVisual
                 //Inicializa la lista de imágenes del recuadro derecho en la ventana.
                 iElementoCarteleria.Campaña = new Campaña();
             }
-            //this.ListaHorarios = iElementoCarteleria.Frecuencia;
             else
             {
                 foreach (ImagenCampaña mImagenCampaña in iElementoCarteleria.Campaña.ListaImagenes)
@@ -69,7 +70,6 @@ namespace CapaVisual
             if (iElementoCarteleria.Banner == null)
             {
                 iElementoCarteleria.Banner = new BannerEstatico();
-
             }
             else if (iElementoCarteleria.Banner is RSSFeed)
             {
@@ -79,8 +79,8 @@ namespace CapaVisual
             }
             else
             {
-                this.cbTipoBanner.SelectedItem = this.cbTipoBanner.Items[1];
                 this.tbBanner.Text = (iElementoCarteleria.Banner as BannerEstatico).Texto;
+                this.cbTipoBanner.SelectedItem = this.cbTipoBanner.Items[1];
             }
         }
 
@@ -177,37 +177,28 @@ namespace CapaVisual
             //Abrir la ventana para la seleccion de fuentes pasándole el banner como parámetro para modificarlo.
             ComprobarRSSFeed mNuevoRSS = new ComprobarRSSFeed(iElementoCarteleria.Banner as RSSFeed, iFachada);
             mNuevoRSS.ShowDialog();
+            this.tbBanner.Text = (this.iElementoCarteleria.Banner as RSSFeed).URL;
         }
 
+        /// <summary>
+        /// Evento al cambiar la selección en la lista de tipo de banner.
+        /// </summary>
         private void cbTipoBanner_SelectedValueChanged(object sender, EventArgs e)
         {
             switch (this.cbTipoBanner.SelectedIndex)
             {
+                //Caso de que se seleccione RSSFeed
                 case 0:
                     {
                         this.btnSeleccionarFuenteRSS.Visible = true;
-                        if (String.IsNullOrEmpty(this.tbBanner.Text))
-                        {
-                            this.tbBanner.Text = "Ingrese la URL de la fuente a comprobar";
-                        }
-                        if (!(this.iElementoCarteleria.Banner is RSSFeed))
-                        {
-                            this.iElementoCarteleria.Banner = new RSSFeed(this.tbBanner.Text);
-                        }
+                        this.iElementoCarteleria.Banner = new RSSFeed(this.tbBanner.Text);
                         break;
                     }
+                //Caso de que se seleccione Banner Estático
                 case 1:
                     {
-                        this.btnSeleccionarFuenteRSS.Visible = true;
-                        if (String.IsNullOrEmpty(this.tbBanner.Text))
-                        {
-                            this.tbBanner.Text = "Ingrese el texto a mostrar en el banner";
-                        }
-                        if (!(this.iElementoCarteleria.Banner is BannerEstatico))
-                        {
-                            this.iElementoCarteleria.Banner = new BannerEstatico(this.tbBanner.Text);
-                        }
                         this.btnSeleccionarFuenteRSS.Visible = false;
+                        this.iElementoCarteleria.Banner = new BannerEstatico(this.tbBanner.Text);
                         break;
                     }
                 default:
@@ -225,6 +216,7 @@ namespace CapaVisual
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             //Cerrar Ventana.
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
@@ -259,37 +251,32 @@ namespace CapaVisual
                 iElementoCarteleria.Campaña.ListaImagenes.Clear();
                 if (this.lvImagenes.LargeImageList.Images.Count > 0)
                 {
-                    //iElementoCarteleria.Campaña.TiempoXImagen = new TimeSpan(Convert.ToInt32(numHH.Value), Convert.ToInt32(numMM.Value), 0);
                     //Agregar cada una de las imágenes en la vista previa a la lista en la campaña.
                     foreach (string mRuta in this.lvImagenes.LargeImageList.Images.Keys)
                     {
                         iElementoCarteleria.Campaña.AgregarImagen(mRuta);
                     }
                 }
+
                 //Banner
-                switch (this.cbTipoBanner.Text)
+                //Sólo se actualiza sí es estático, caso contrario se actualiza en la comprobación de la fuente
+                if (cbTipoBanner.Text == "Banner Estático")
                 {
-                    case "Fuente RSS":
-                        {
-                            //Se carga al comprobar que la fuente existe.
-                            break;
-                        }
-                    case "Banner Estático":
-                        {
-                            iElementoCarteleria.Banner = new BannerEstatico(this.tbBanner.Text);
-                            break;
-                        }
-                    default:
-                        {
-                            MessageBox.Show("El tipo de banner seleccionado no es correcto y no se cargará"); 
-                            break;
-                        }
+                    iElementoCarteleria.Banner = new BannerEstatico(tbBanner.Text);
                 }
 
                 //Insertar en la base de datos
-                this.iFachada.AgregarElementoCarteleria(iElementoCarteleria);
+                if (iModoActualizacion)
+                {
+                    this.iFachada.ActualizarElementoCarteleria(iElementoCarteleria);
+                }
+                else
+                {
+                    this.iFachada.AgregarElementoCarteleria(iElementoCarteleria);
+                }
 
                 //Cerrar ventana.
+                this.DialogResult = DialogResult.OK;
                 this.Close();
             }
         }

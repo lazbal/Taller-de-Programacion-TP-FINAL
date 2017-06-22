@@ -28,38 +28,38 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.grillaBusqueda = new System.Windows.Forms.DataGridView();
+            this.dgBusqueda = new System.Windows.Forms.DataGridView();
             this.columnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.cadenaBuscar = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.grillaBusqueda)).BeginInit();
+            this.tbBuscar = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.dgBusqueda)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // grillaBusqueda
+            // dgBusqueda
             // 
-            this.grillaBusqueda.AllowUserToAddRows = false;
-            this.grillaBusqueda.AllowUserToDeleteRows = false;
-            this.grillaBusqueda.AllowUserToOrderColumns = true;
-            this.grillaBusqueda.AllowUserToResizeRows = false;
-            this.grillaBusqueda.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dgBusqueda.AllowUserToAddRows = false;
+            this.dgBusqueda.AllowUserToOrderColumns = true;
+            this.dgBusqueda.AllowUserToResizeRows = false;
+            this.dgBusqueda.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.grillaBusqueda.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.grillaBusqueda.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grillaBusqueda.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgBusqueda.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgBusqueda.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgBusqueda.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnId});
-            this.grillaBusqueda.Cursor = System.Windows.Forms.Cursors.Default;
-            this.grillaBusqueda.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.grillaBusqueda.Location = new System.Drawing.Point(0, 53);
-            this.grillaBusqueda.MultiSelect = false;
-            this.grillaBusqueda.Name = "grillaBusqueda";
-            this.grillaBusqueda.RowHeadersVisible = false;
-            this.grillaBusqueda.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grillaBusqueda.Size = new System.Drawing.Size(655, 234);
-            this.grillaBusqueda.TabIndex = 4;
-            this.grillaBusqueda.DoubleClick += new System.EventHandler(this.grillaBusqueda_DoubleClick);
+            this.dgBusqueda.Cursor = System.Windows.Forms.Cursors.Default;
+            this.dgBusqueda.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgBusqueda.Location = new System.Drawing.Point(0, 53);
+            this.dgBusqueda.MultiSelect = false;
+            this.dgBusqueda.Name = "dgBusqueda";
+            this.dgBusqueda.RowHeadersVisible = false;
+            this.dgBusqueda.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgBusqueda.Size = new System.Drawing.Size(655, 234);
+            this.dgBusqueda.TabIndex = 4;
+            this.dgBusqueda.DoubleClick += new System.EventHandler(this.grillaBusqueda_DoubleClick);
+            this.dgBusqueda.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgBusqueda_KeyDown);
             // 
             // columnId
             // 
@@ -76,7 +76,7 @@
             this.lblTitulo.Location = new System.Drawing.Point(3, 20);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(52, 13);
-            this.lblTitulo.TabIndex = 0;
+            this.lblTitulo.TabIndex = 1;
             this.lblTitulo.Text = "Título:";
             // 
             // tableLayoutPanel1
@@ -87,7 +87,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 88.88889F));
             this.tableLayoutPanel1.Controls.Add(this.lblTitulo, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.cadenaBuscar, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tbBuscar, 1, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, -1);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
@@ -95,14 +95,14 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(524, 54);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
-            // cadenaBuscar
+            // tbBuscar
             // 
-            this.cadenaBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cadenaBuscar.Location = new System.Drawing.Point(61, 17);
-            this.cadenaBuscar.Name = "cadenaBuscar";
-            this.cadenaBuscar.Size = new System.Drawing.Size(460, 20);
-            this.cadenaBuscar.TabIndex = 4;
-            this.cadenaBuscar.TextChanged += new System.EventHandler(this.cadenaBuscar_TextChanged);
+            this.tbBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbBuscar.Location = new System.Drawing.Point(61, 17);
+            this.tbBuscar.Name = "tbBuscar";
+            this.tbBuscar.Size = new System.Drawing.Size(460, 20);
+            this.tbBuscar.TabIndex = 0;
+            this.tbBuscar.TextChanged += new System.EventHandler(this.cadenaBuscar_TextChanged);
             // 
             // Buscar
             // 
@@ -110,10 +110,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(655, 288);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.grillaBusqueda);
+            this.Controls.Add(this.dgBusqueda);
+            this.KeyPreview = true;
             this.Name = "Buscar";
             this.Text = "Buscar";
-            ((System.ComponentModel.ISupportInitialize)(this.grillaBusqueda)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgBusqueda)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -121,10 +122,10 @@
         }
 
         #endregion
-        protected System.Windows.Forms.DataGridView grillaBusqueda;
+        protected System.Windows.Forms.DataGridView dgBusqueda;
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        protected System.Windows.Forms.TextBox cadenaBuscar;
+        protected System.Windows.Forms.TextBox tbBuscar;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnId;
     }
 }

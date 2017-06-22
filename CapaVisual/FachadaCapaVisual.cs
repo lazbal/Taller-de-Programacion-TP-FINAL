@@ -62,7 +62,7 @@ namespace CapaVisual
             return iFachadaNegocio.ElementosCarteleriaHoy();
         }
 
-        public ElementoCarteleria BuscarElementoCarteleria(int pId)
+        public ElementoCarteleria BuscarElementoCarteleria(Int64 pId)
         {
             return iFachadaNegocio.BuscarElementoCarteleria(pId);
         }
@@ -71,112 +71,16 @@ namespace CapaVisual
         {
             return iFachadaNegocio.BusquedaAproxElementoCarteleria(pTitulo);
         }
-        /*
-        public void AgregarCampaña(Campaña pCampaña)
+
+        public void ActualizarNoticiasHoy()
         {
-            iFachadaNegocio.AgregarCampaña(pCampaña);
+            iFachadaNegocio.ActualizarNoticiasHoy();
         }
 
-        public void ActualizarCampaña(Campaña pCampaña)
+        public void EliminarElementoCarteleria(Int64 pID)
         {
-            iFachadaNegocio.ActualizarCampaña(pCampaña);
+            //ElementoCarteleria mElementoEliminar = iFachadaNegocio.BuscarElementoCarteleria(pID);
+            iFachadaNegocio.EliminarElementoCarteleria(pID);
         }
-
-        public IList<Campaña> ObtenerCampañas()
-        {
-            return iFachadaNegocio.GetAllCampañas();
-        }
-
-        public void AgregarBannerEstatico(BannerEstatico pBanner)
-        {
-            iFachadaNegocio.AgregarBannerEstatico(pBanner);
-        }
-
-        public void ActualizarBannerEstatico(BannerEstatico pBanner)
-        {
-            iFachadaNegocio.ActualizarBannerEstatico(pBanner);
-        }
-
-        public IList<BannerEstatico> ObtenerBannersEstaticos()
-        {
-            return iFachadaNegocio.GetAllBannersEstaticos();
-        }
-
-        public void AgregarRssFeed(RSSFeed pBanner)
-        {
-            iFachadaNegocio.AgregarRssFeed(pBanner);
-        }
-
-        public void ActualizarRssFeed(RSSFeed pBanner)
-        {
-            iFachadaNegocio.ActualizarRssFeed(pBanner);
-        }
-
-        public IList<RSSFeed> ObtenerRssFeed()
-        {
-            return iFachadaNegocio.GetAllRssFeed();
-        }
-
-        public Campaña SiguienteCampaña()
-        {
-            Campaña mSig = iCampañas.FirstOrDefault();
-            iCampañas.Remove(mSig);
-            iCampañas.Add(mSig);
-            return mSig;
-        }
-
-        public BannerEstatico SiguienteBanner()
-        {
-            BannerEstatico mSig = iBanners.FirstOrDefault();
-            iBanners.Remove(mSig);
-            iBanners.Add(mSig);
-            return mSig;
-        }
-
-        public IList<Campaña> ObtenerCampañasHoy ()
-        {
-            return iFachadaNegocio.CampañasHoy();
-        }
-
-        public IList<BannerEstatico> ObtenerBannersHoy()
-        {
-            return iFachadaNegocio.BannersHoy();
-        }
-
-        public Campaña BuscarCampaña(int pId)
-        {
-            return iFachadaNegocio.BuscarCampaña(pId);
-        }
-
-        public BannerEstatico BuscarBannerEstatico(int pId)
-        {
-            return iFachadaNegocio.BuscarBannerEstatico(pId);
-        }
-
-        public RSSFeed BuscarRssFeed(int pId)
-        {
-            return iFachadaNegocio.BuscarRssFeed(pId);
-        }
-
-        public IList<Campaña> BusquedaAproxCampaña (string pTitulo)
-        {
-            return iFachadaNegocio.BusquedaAproxCampaña(pTitulo);
-        }
-
-        public IList<BannerEstatico> BusquedaAproxBannerEstatico (string pTitulo)
-        {
-            return iFachadaNegocio.BusquedaAproxBannerEstatico(pTitulo);
-        }
-
-        public IList<RSSFeed> BusquedaAproxBannerRss(string pTitulo)
-        {
-            return iFachadaNegocio.BusquedaAproxBannerRSS(pTitulo);
-        }
-
-        public IEnumerable<RSSItem> LeerRss(string pURL)
-        {
-            return iFachadaNegocio.LeerRSS(pURL);
-        }
-        */
     }
 }

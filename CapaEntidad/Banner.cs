@@ -8,8 +8,11 @@ namespace CapaEntidad
 	/// </summary>
 	public abstract class Banner : IBanner
 	{
-		[Key, ForeignKey ("ElementoCarteleria")]
-		public int refElementoCarteleriaId { get; set; }
+        /// <summary>
+        /// Clave foránea del elemento cartelería. Funciona como clave principal del banner.
+        /// </summary>
+        [Key, ForeignKey ("ElementoCarteleria")]
+		public Int64 refElementoCarteleriaId { get; set; }
         public virtual ElementoCarteleria ElementoCarteleria { get; set; }
 
         /// <summary>
@@ -17,9 +20,9 @@ namespace CapaEntidad
         /// </summary>
 		public abstract string Mostrar();
 
-        public override string ToString()
-        {
-            return this.Mostrar();
-        }
+        /// <summary>
+        /// Representación string del objeto.
+        /// </summary>
+        public override abstract string ToString();
     }
 }

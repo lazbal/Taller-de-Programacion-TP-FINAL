@@ -244,11 +244,13 @@
             this.dtpDomingoFin.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
             this.dtpDomingoFin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpDomingoFin.Location = new System.Drawing.Point(192, 172);
+            this.dtpDomingoFin.MaxDate = new System.DateTime(1753, 1, 2, 0, 0, 0, 0);
             this.dtpDomingoFin.Name = "dtpDomingoFin";
             this.dtpDomingoFin.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dtpDomingoFin.ShowUpDown = true;
             this.dtpDomingoFin.Size = new System.Drawing.Size(63, 20);
             this.dtpDomingoFin.TabIndex = 23;
+            this.dtpDomingoFin.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpDomingoFin.Visible = false;
             // 
             // dtpDomingoInicio
@@ -260,11 +262,13 @@
             this.dtpDomingoInicio.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
             this.dtpDomingoInicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpDomingoInicio.Location = new System.Drawing.Point(113, 172);
+            this.dtpDomingoInicio.MaxDate = new System.DateTime(1753, 1, 2, 0, 0, 0, 0);
             this.dtpDomingoInicio.Name = "dtpDomingoInicio";
             this.dtpDomingoInicio.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dtpDomingoInicio.ShowUpDown = true;
             this.dtpDomingoInicio.Size = new System.Drawing.Size(63, 20);
             this.dtpDomingoInicio.TabIndex = 22;
+            this.dtpDomingoInicio.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpDomingoInicio.Visible = false;
             // 
             // dtpSabadoFin
@@ -276,11 +280,13 @@
             this.dtpSabadoFin.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
             this.dtpSabadoFin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpSabadoFin.Location = new System.Drawing.Point(192, 148);
+            this.dtpSabadoFin.MaxDate = new System.DateTime(1753, 1, 2, 0, 0, 0, 0);
             this.dtpSabadoFin.Name = "dtpSabadoFin";
             this.dtpSabadoFin.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dtpSabadoFin.ShowUpDown = true;
             this.dtpSabadoFin.Size = new System.Drawing.Size(63, 20);
             this.dtpSabadoFin.TabIndex = 21;
+            this.dtpSabadoFin.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpSabadoFin.Visible = false;
             // 
             // dtpSabadoInicio
@@ -292,11 +298,13 @@
             this.dtpSabadoInicio.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
             this.dtpSabadoInicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpSabadoInicio.Location = new System.Drawing.Point(113, 148);
+            this.dtpSabadoInicio.MaxDate = new System.DateTime(1753, 1, 2, 0, 0, 0, 0);
             this.dtpSabadoInicio.Name = "dtpSabadoInicio";
             this.dtpSabadoInicio.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dtpSabadoInicio.ShowUpDown = true;
             this.dtpSabadoInicio.Size = new System.Drawing.Size(63, 20);
             this.dtpSabadoInicio.TabIndex = 20;
+            this.dtpSabadoInicio.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpSabadoInicio.Visible = false;
             // 
             // dtpViernesFin
@@ -308,11 +316,13 @@
             this.dtpViernesFin.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
             this.dtpViernesFin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpViernesFin.Location = new System.Drawing.Point(192, 124);
+            this.dtpViernesFin.MaxDate = new System.DateTime(1753, 1, 2, 0, 0, 0, 0);
             this.dtpViernesFin.Name = "dtpViernesFin";
             this.dtpViernesFin.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dtpViernesFin.ShowUpDown = true;
             this.dtpViernesFin.Size = new System.Drawing.Size(63, 20);
             this.dtpViernesFin.TabIndex = 19;
+            this.dtpViernesFin.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpViernesFin.Visible = false;
             // 
             // dtpViernesInicio
@@ -324,11 +334,13 @@
             this.dtpViernesInicio.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
             this.dtpViernesInicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpViernesInicio.Location = new System.Drawing.Point(113, 124);
+            this.dtpViernesInicio.MaxDate = new System.DateTime(1753, 1, 2, 0, 0, 0, 0);
             this.dtpViernesInicio.Name = "dtpViernesInicio";
             this.dtpViernesInicio.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dtpViernesInicio.ShowUpDown = true;
             this.dtpViernesInicio.Size = new System.Drawing.Size(63, 20);
             this.dtpViernesInicio.TabIndex = 18;
+            this.dtpViernesInicio.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpViernesInicio.Visible = false;
             // 
             // dtpJuevesFin
@@ -340,11 +352,13 @@
             this.dtpJuevesFin.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
             this.dtpJuevesFin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpJuevesFin.Location = new System.Drawing.Point(192, 100);
+            this.dtpJuevesFin.MaxDate = new System.DateTime(1753, 1, 2, 0, 0, 0, 0);
             this.dtpJuevesFin.Name = "dtpJuevesFin";
             this.dtpJuevesFin.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dtpJuevesFin.ShowUpDown = true;
             this.dtpJuevesFin.Size = new System.Drawing.Size(63, 20);
             this.dtpJuevesFin.TabIndex = 17;
+            this.dtpJuevesFin.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpJuevesFin.Visible = false;
             // 
             // dtpMiercolesFin
@@ -356,11 +370,13 @@
             this.dtpMiercolesFin.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
             this.dtpMiercolesFin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpMiercolesFin.Location = new System.Drawing.Point(192, 76);
+            this.dtpMiercolesFin.MaxDate = new System.DateTime(1753, 1, 2, 0, 0, 0, 0);
             this.dtpMiercolesFin.Name = "dtpMiercolesFin";
             this.dtpMiercolesFin.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dtpMiercolesFin.ShowUpDown = true;
             this.dtpMiercolesFin.Size = new System.Drawing.Size(63, 20);
             this.dtpMiercolesFin.TabIndex = 16;
+            this.dtpMiercolesFin.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpMiercolesFin.Visible = false;
             // 
             // dtpMartesInicio
@@ -372,11 +388,13 @@
             this.dtpMartesInicio.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
             this.dtpMartesInicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpMartesInicio.Location = new System.Drawing.Point(113, 52);
+            this.dtpMartesInicio.MaxDate = new System.DateTime(1753, 1, 2, 0, 0, 0, 0);
             this.dtpMartesInicio.Name = "dtpMartesInicio";
             this.dtpMartesInicio.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dtpMartesInicio.ShowUpDown = true;
             this.dtpMartesInicio.Size = new System.Drawing.Size(63, 20);
             this.dtpMartesInicio.TabIndex = 4;
+            this.dtpMartesInicio.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpMartesInicio.Visible = false;
             // 
             // dtpMartesFin
@@ -388,11 +406,13 @@
             this.dtpMartesFin.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
             this.dtpMartesFin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpMartesFin.Location = new System.Drawing.Point(192, 52);
+            this.dtpMartesFin.MaxDate = new System.DateTime(1753, 1, 2, 0, 0, 0, 0);
             this.dtpMartesFin.Name = "dtpMartesFin";
             this.dtpMartesFin.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dtpMartesFin.ShowUpDown = true;
             this.dtpMartesFin.Size = new System.Drawing.Size(63, 20);
             this.dtpMartesFin.TabIndex = 5;
+            this.dtpMartesFin.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpMartesFin.Visible = false;
             // 
             // dtpMiercolesInicio
@@ -404,11 +424,13 @@
             this.dtpMiercolesInicio.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
             this.dtpMiercolesInicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpMiercolesInicio.Location = new System.Drawing.Point(113, 76);
+            this.dtpMiercolesInicio.MaxDate = new System.DateTime(1753, 1, 2, 0, 0, 0, 0);
             this.dtpMiercolesInicio.Name = "dtpMiercolesInicio";
             this.dtpMiercolesInicio.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dtpMiercolesInicio.ShowUpDown = true;
             this.dtpMiercolesInicio.Size = new System.Drawing.Size(63, 20);
             this.dtpMiercolesInicio.TabIndex = 11;
+            this.dtpMiercolesInicio.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpMiercolesInicio.Visible = false;
             // 
             // dtpJuevesInicio
@@ -420,11 +442,13 @@
             this.dtpJuevesInicio.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
             this.dtpJuevesInicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpJuevesInicio.Location = new System.Drawing.Point(113, 100);
+            this.dtpJuevesInicio.MaxDate = new System.DateTime(1753, 1, 2, 0, 0, 0, 0);
             this.dtpJuevesInicio.Name = "dtpJuevesInicio";
             this.dtpJuevesInicio.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dtpJuevesInicio.ShowUpDown = true;
             this.dtpJuevesInicio.Size = new System.Drawing.Size(63, 20);
             this.dtpJuevesInicio.TabIndex = 12;
+            this.dtpJuevesInicio.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpJuevesInicio.Visible = false;
             // 
             // dtpLunesInicio
@@ -436,11 +460,13 @@
             this.dtpLunesInicio.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
             this.dtpLunesInicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpLunesInicio.Location = new System.Drawing.Point(113, 28);
+            this.dtpLunesInicio.MaxDate = new System.DateTime(1753, 1, 2, 0, 0, 0, 0);
             this.dtpLunesInicio.Name = "dtpLunesInicio";
             this.dtpLunesInicio.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dtpLunesInicio.ShowUpDown = true;
             this.dtpLunesInicio.Size = new System.Drawing.Size(63, 20);
             this.dtpLunesInicio.TabIndex = 25;
+            this.dtpLunesInicio.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpLunesInicio.Visible = false;
             // 
             // dtpLunesFin
@@ -452,11 +478,13 @@
             this.dtpLunesFin.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
             this.dtpLunesFin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpLunesFin.Location = new System.Drawing.Point(192, 28);
+            this.dtpLunesFin.MaxDate = new System.DateTime(1753, 1, 2, 0, 0, 0, 0);
             this.dtpLunesFin.Name = "dtpLunesFin";
             this.dtpLunesFin.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dtpLunesFin.ShowUpDown = true;
             this.dtpLunesFin.Size = new System.Drawing.Size(63, 20);
             this.dtpLunesFin.TabIndex = 26;
+            this.dtpLunesFin.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpLunesFin.Visible = false;
             // 
             // SeleccionarHorarios
@@ -466,6 +494,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.bCancelar;
             this.ClientSize = new System.Drawing.Size(271, 241);
+            this.ControlBox = false;
             this.Controls.Add(this.bCancelar);
             this.Controls.Add(this.bAceptar);
             this.Controls.Add(this.tableHorarios);

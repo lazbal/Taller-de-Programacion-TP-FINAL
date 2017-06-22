@@ -17,13 +17,14 @@ namespace CapaEntidad
 		public string Texto { get; set; }
 
         /// <summary>
-        /// Constructor de la clase BannerEstático.
+        /// Inicializa una instancia de la clase <see cref="BannerEstatico"/>.
         /// </summary>
-		public BannerEstatico() : base() {}
+		public BannerEstatico() : base() { }
 
         /// <summary>
-        /// Constructor de la clase BannerEstático.
+        /// Inicializa una instancia de la clase <see cref="BannerEstatico"/>.
         /// </summary>
+        /// <param name="pTexto">Texto del banner.</param>
 		public BannerEstatico (string pTexto) : base()
 		{
             this.Texto = pTexto;
@@ -35,6 +36,14 @@ namespace CapaEntidad
 		public override string Mostrar()
 		{
 			return Texto;
-		}
+        }
+
+        /// <summary>
+        /// Representación string del objeto.
+        /// </summary>
+        public override string ToString()
+        {
+            return Mostrar();
+        }
     }
 }

@@ -6,25 +6,57 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace CapaEntidad
 {
 	public class ElementoCarteleria
-	{
-		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int ElementoCarteleriaId { get; set; }
+    {
+        /// <summary>
+        /// Identificador del objeto. Generado por la base de datos.
+        /// </summary>
+		[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		public Int64 ElementoCarteleriaId { get; set; }
+
+        /// <summary>
+        /// Nombre del cartel
+        /// </summary>
         [Required]
         public virtual string Nombre { get; set; } = null;
+        
+        /// <summary>
+        /// Descripción del cartel
+        /// </summary>
         [Required]
         public virtual string Descripcion { get; set; } = null;
+
+        /// <summary>
+        /// Fecha en que inicia a estar activo el cartel.
+        /// </summary>
         [Required]
         public virtual DateTime FechaInicio { get; set; }
+
+        /// <summary>
+        /// Fecha en que finaliza su actividad.
+        /// </summary>
         [Required]
         public virtual DateTime FechaFin { get; set; }
+
+        /// <summary>
+        /// Días y horas en que se debe mostrar durante la semana.
+        /// Para más información véase <see cref="Horario"/>
+        /// </summary>
         [Required]
 		public virtual ICollection<Horario> Frecuencia { get; set; }
 
+        /// <summary>
+        /// Campaña compuesta de imágenes que se mostrará.
+        /// </summary>
         public virtual Campaña Campaña { get; set; } = null;
 
-		public virtual Banner Banner { get; set; } = null;
+        /// <summary>
+        /// Banner a mostrar. Puede ser texto plano o provenir de fuentes externas.
+        /// </summary>
+		public virtual IBanner Banner { get; set; } = null;
 
+        /// <summary>
+        /// Inicializa una instancia de la clase <see cref="ElementoCarteleria"/>.
+        /// </summary>
         public ElementoCarteleria ()
 		{
 			Frecuencia = new List<Horario>();
@@ -32,6 +64,9 @@ namespace CapaEntidad
             FechaFin = DateTime.Today;
         }
 
+        /// <summary>
+        /// Inicializa una instancia de la clase <see cref="ElementoCarteleria"/>.
+        /// </summary>
 		public ElementoCarteleria (String pNombre, String pDescripcion, DateTime pFechaInicio, DateTime pFechaFin,
 			ICollection<Horario> pFrecuencia, Campaña pCampaña, Banner pBanner)
 		{
@@ -45,7 +80,8 @@ namespace CapaEntidad
 		}
 
 		/// <summary>
-		/// Devuelve el horario a cumplir en el día de la fecha. Su funcional reside en los elementos que contienen un horario para el día de la fecha.
+		/// Devuelve el horario a cumplir en el día de la fecha.
+        /// Su funcional reside en los elementos que contienen un horario para el día de la fecha.
 		/// </summary>
 		public Horario GetHorarioHoy()
 		{
@@ -58,7 +94,8 @@ namespace CapaEntidad
         }
 
         /// <summary>
-        /// Devuelve el horario a cumplir en el día de la fecha. Su funcional reside en los elementos que contienen un horario para un día de la semana.
+        /// Devuelve el horario a cumplir en el día de la fecha.
+        /// Su funcional reside en los elementos que contienen un horario para un día de la semana.
         /// </summary>
         public Horario GetHorarioDia(DayOfWeek pDia)
         {

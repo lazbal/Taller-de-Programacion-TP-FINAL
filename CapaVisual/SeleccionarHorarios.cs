@@ -24,8 +24,9 @@ namespace CapaVisual
             //Sí la lista contiene elementos (es una modificación de horarios), éstos se cargarán en la ventana.
             foreach (Horario elem in iListaHorarios)
             {
-                DateTime elemInicio = new DateTime(DateTime.Today.Year,DateTime.Today.Month,DateTime.Today.Day, elem.HoraInicio.Hours, elem.HoraInicio.Minutes, elem.HoraInicio.Seconds);
-                DateTime elemFin = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, elem.HoraFin.Hours, elem.HoraFin.Minutes, elem.HoraFin.Seconds);
+                //Se usan los datos de la menor fecha.
+                DateTime elemInicio = new DateTime(1753, 01, 01, elem.HoraInicio.Hours, elem.HoraInicio.Minutes, elem.HoraInicio.Seconds);
+                DateTime elemFin = new DateTime(1753, 01, 01, elem.HoraFin.Hours, elem.HoraFin.Minutes, elem.HoraFin.Seconds);
                 switch (elem.DiaSemana)
                 {
                     case DayOfWeek.Monday:

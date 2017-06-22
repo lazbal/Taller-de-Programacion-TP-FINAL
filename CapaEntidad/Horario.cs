@@ -6,18 +6,24 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace CapaEntidad
 {
     /// <summary>
-    /// Clase para determinar las frecuencias de los anuncios. Cada horario es un día de la semana y el rango de horas en que se mostrará.
+    /// Clase para determinar las frecuencias de los anuncios.
+    /// Cada horario es un día de la semana y el rango de horas en que se mostrará.
     /// </summary>
     public class Horario
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int HorarioId { get; set; }
+        /// <summary>
+        /// Identificador del objeto. Generado por la base de datos.
+        /// </summary>
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		public Int64 HorarioId { get; set; }
 
-		public int refElementoCarteleriaId { get; set; }
+        /// <summary>
+        /// Clave foránea del elemento cartelería padre.
+        /// </summary>
+		public Int64 refElementoCarteleriaId { get; set; }
 		[ForeignKey	("refElementoCarteleriaId")]
 		private ElementoCarteleria iElementoCarteleria { get; set; }
-
-        //Propiedades
+        
         /// <summary>
         /// Hora en que inicia el anuncio.
         /// </summary>
@@ -36,6 +42,9 @@ namespace CapaEntidad
 		[Required]
         public DayOfWeek DiaSemana { get; set; }
 
+        /// <summary>
+        /// Inicializa una instancia de la clase <see cref="Horario"/>.
+        /// </summary>
 		public Horario ()
 		{
 			
@@ -65,6 +74,9 @@ namespace CapaEntidad
 			return false;
 		}
 
+        /// <summary>
+        /// Representación string del objeto.
+        /// </summary>
         public override string ToString()
         {
             return this.DiaSemana + " de " + this.HoraInicio + " a " + this.HoraFin;

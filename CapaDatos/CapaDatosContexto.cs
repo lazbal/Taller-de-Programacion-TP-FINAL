@@ -15,6 +15,7 @@ namespace CapaDatos
         /// </summary>
 		public CapaDatosContexto() : base("name = Context")
 		{
+            Database.SetInitializer<CapaDatosContexto>(new DropCreateDatabaseIfModelChanges<CapaDatosContexto>());
         }
 		#endregion
 		#region Propiedades y Datos

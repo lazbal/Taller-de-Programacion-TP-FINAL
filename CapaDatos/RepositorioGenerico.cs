@@ -74,19 +74,6 @@ namespace CapaDatos
 		}
 
         /// <summary>
-        /// Método para eliminar un elemento de la base de datos.
-        /// </summary>
-        /// <param name="id">ID del elemento a eliminar.</param>
-        public void Delete(object id)
-        {
-            //Obtiene el elemento e invoca al otro delete.
-            TEntity entityToDelete = dbSet.Find(id);
-			if (entityToDelete != null) {
-				this.Delete(entityToDelete);
-			}
-        }
-
-        /// <summary>
         /// Método para actualizar un elemento de la base de datos.
         /// </summary>
         /// <param name="entityToUpdate">Elemento actualizado.</param>

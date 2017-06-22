@@ -6,13 +6,22 @@ namespace CapaVisual
     public partial class AdminCarteleria : Form
     {
         FachadaCapaVisual iFachada;
-        
+
+        /// <summary>
+        /// Inicializa una instancia del objeto.
+        /// </summary>
+        /// <param name="pFachada"></param>
         public AdminCarteleria(FachadaCapaVisual pFachada)
         {
             InitializeComponent();
             iFachada = pFachada;
         }
 
+        /// <summary>
+        /// Abre el formulario para la creación de un nuevo cartel.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnNuevoElemento_Click(object sender, System.EventArgs e)
         {
             this.Hide();
@@ -21,14 +30,19 @@ namespace CapaVisual
             this.Show();
         }
 
+        /// <summary>
+        /// Abre el formulario para iniciar la presentación de campañas.
+        /// </summary>
         private void btnPresentacion_Click(object sender, System.EventArgs e)
         {
-            this.Hide();
-            Presentacion iPresentacion = new Presentacion();
+            Presentacion iPresentacion = new Presentacion(iFachada);
             iPresentacion.ShowDialog();
             this.Show();
         }
 
+        /// <summary>
+        /// Abre el formulario para la búsqueda y edición de carteles.
+        /// </summary>
         private void btnListarCarteles_Click(object sender, System.EventArgs e)
         {
             this.Hide();

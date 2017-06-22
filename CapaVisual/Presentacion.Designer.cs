@@ -56,7 +56,7 @@
             this.tbBanner.Name = "tbBanner";
             this.tbBanner.ReadOnly = true;
             this.tbBanner.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tbBanner.Size = new System.Drawing.Size(666, 40);
+            this.tbBanner.Size = new System.Drawing.Size(666, 33);
             this.tbBanner.TabIndex = 1;
             // 
             // Presentacion
@@ -68,6 +68,7 @@
             this.Controls.Add(this.pbCampaña);
             this.Name = "Presentacion";
             this.Text = "Presentacion";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Presentacion_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pbCampaña)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

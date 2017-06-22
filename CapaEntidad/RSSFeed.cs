@@ -23,14 +23,18 @@ namespace CapaEntidad
         public virtual ICollection<RSSItem> UltimasNoticias { get; set; }
 
         /// <summary>
-        /// Constructor de la clase RSSFeed.
+        /// Inicializa una instancia de la clase <see cref="RSSFeed"/>.
         /// </summary>
         public RSSFeed() : base()
         {
-			this.UltimasNoticias = new List<RSSItem> ();
-		}
+            this.UltimasNoticias = new List<RSSItem>();
+        }
 
-		public RSSFeed(String pURL) : base()
+        /// <summary>
+        /// Inicializa una instancia de la clase <see cref="RSSFeed"/>.
+        /// </summary>
+        /// <param name="pURL">URL fuente</param>
+        public RSSFeed(String pURL) : base()
 		{
 			this.URL = pURL;
 			this.UltimasNoticias = new List<RSSItem> ();
@@ -55,6 +59,14 @@ namespace CapaEntidad
 				union += (rssItem.ObtenerCadena () + " // ");
 			}
 			return union;
-		}
+        }
+
+        /// <summary>
+        /// Representación string del objeto.
+        /// </summary>
+        public override string ToString()
+        {
+            return URL;
+        }
     }
 }
