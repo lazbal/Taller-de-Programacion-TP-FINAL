@@ -52,7 +52,7 @@ namespace CapaEntidad
         /// <summary>
         /// Banner a mostrar. Puede ser texto plano o provenir de fuentes externas.
         /// </summary>
-		public virtual IBanner Banner { get; set; } = null;
+		public virtual Banner Banner { get; set; } = null;
 
         /// <summary>
         /// Inicializa una instancia de la clase <see cref="ElementoCarteleria"/>.

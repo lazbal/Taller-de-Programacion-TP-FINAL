@@ -58,15 +58,17 @@ namespace CapaDatos
             modelBuilder.Entity<Horario>()
                 .HasKey(h => new { h.HorarioId, h.refElementoCarteleriaId });
 
-            modelBuilder.Entity<BannerEstatico> ().Map (m => {
-				m.MapInheritedProperties ();
-				m.ToTable ("BannerEstatico");
-			});
+            //modelbuilder.entity<bannerestatico>().map(m =>
+            //{
+            //    m.mapinheritedproperties();
+            //    m.totable("bannerestatico");
+            //});
 
-			modelBuilder.Entity<RSSFeed>().Map(m =>	{
-				m.MapInheritedProperties();
-				m.ToTable("RSSFeed");
-			});
+            //modelbuilder.entity<rssfeed>().map(m =>
+            //{
+            //    m.mapinheritedproperties();
+            //    m.totable("rssfeed");
+            //});
 
             modelBuilder.Entity<ImagenCampaña>()
                 .Property(i => i.ImagenCampanaId)

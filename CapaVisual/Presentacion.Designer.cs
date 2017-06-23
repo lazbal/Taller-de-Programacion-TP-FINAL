@@ -71,6 +71,7 @@
             this.Name = "Presentacion";
             this.Text = "Presentacion";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Presentacion_FormClosing);
+            this.Load += new System.EventHandler(this.Presentacion_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbCampaña)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

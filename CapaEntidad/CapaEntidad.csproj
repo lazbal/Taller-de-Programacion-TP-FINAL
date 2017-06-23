@@ -45,7 +45,6 @@
     <Compile Include="ElementoCarteleria.cs" />
     <Compile Include="RSSItem.cs" />
     <Compile Include="Banner.cs" />
-    <Compile Include="IBanner.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

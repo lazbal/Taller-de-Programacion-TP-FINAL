@@ -9,10 +9,14 @@ namespace CapaVisual
     public partial class Presentacion : Form
     {
         private ElementoCarteleria iCartelActual;
+        private ElementoCarteleria iCartelSiguiente;
         private IEnumerator<ElementoCarteleria> iCartelesHoy;
         private IEnumerator<ImagenCampaña> iImagenesCartelActual;
         private System.Timers.Timer iTemporizadorCartel;
         private System.Timers.Timer iTemporizadorImagen;
+        //Delegado para la modificación del texto banner desde distintos hilos.
+        public delegate void CambiarBanner(string pBanner);
+        public CambiarBanner BannerDelegado;
         
         /// <summary>
         /// Inicializa una instancia de la ventana de presentación
@@ -33,6 +37,15 @@ namespace CapaVisual
             iTemporizadorImagen = new System.Timers.Timer();
             //Asignamos el método al evento de finalización del temporizador
             this.iTemporizadorImagen.Elapsed += new System.Timers.ElapsedEventHandler(this.Imagen_Elapsed);
+            //Asignar delegado
+            BannerDelegado = new CambiarBanner(CambiarBannerMetodo);
+        }
+
+        /// <summary>
+        /// Una vez creada la ventana.
+        /// </summary>
+        private void Presentacion_Load(object sender, EventArgs e)
+        {
             //Disparamos el evento para que inicie la presentación
             this.Cartel_Elapsed(this, null);
         }
@@ -59,25 +72,62 @@ namespace CapaVisual
         private void CambiarCartel()
         {
             //Sí se movió el puntero al próximo cartel y éste no está vacio.
-            if (this.iCartelesHoy.MoveNext() && this.iCartelesHoy.Current != null)
+            if (this.iCartelesHoy.MoveNext())
             {
-                //Lo capturamos
-                this.iCartelActual = this.iCartelesHoy.Current;
-                //Obtenemos el horario del día de hoy
-                Horario mHorarioHoy = this.iCartelActual.GetHorarioHoy();
-                //Asignamos el intervalo en milisegundos que durará el cartel.
-                this.iTemporizadorCartel.Interval = (mHorarioHoy.HoraFin - mHorarioHoy.HoraInicio).TotalMilliseconds/10000;
-                //Capturamos el enumerador de imágenes de la campaña del cartel.
-                this.iImagenesCartelActual = this.iCartelActual.Campaña.ListaImagenes.GetEnumerator();
-                //Asignamos el intervalo en milisegundos que durará cada imagen de la campaña.
-                this.iTemporizadorImagen.Interval = this.iCartelActual.Campaña.TiempoXImagen.TotalMilliseconds/100;
-                //Ponemos a correr el temporizador del cartel.
-                this.iTemporizadorCartel.Start();
-                //Colocamos la primer imagen.
-                this.CambiarImagen();
-                if (this.iCartelActual.Banner != null)
+                //Primer ejecución
+                if (iCartelSiguiente == null && iCartelActual == null)
                 {
-                    this.tbBanner.Text = this.iCartelActual.Banner.Mostrar();
+                    this.iCartelSiguiente = this.iCartelesHoy.Current;
+                    this.CambiarCartel();
+                }
+                else if (iCartelSiguiente != null)
+                {
+                    this.iCartelActual = iCartelSiguiente;
+                    this.iCartelSiguiente = this.iCartelesHoy.Current;
+                    DateTime mHoraLocalActual = FachadaCapaVisual.iFechaBaseHorarios + DateTime.Now.TimeOfDay;
+                    //Obtenemos el horario del día de hoy de la campaña actual
+                    Horario mHorarioHoyActual = this.iCartelActual.GetHorarioHoy();
+                    if (mHorarioHoyActual.HoraFin >= mHoraLocalActual.TimeOfDay)
+                    {
+                        if (mHorarioHoyActual.HoraInicio <= mHoraLocalActual.TimeOfDay)
+                        {
+                            double mIntervaloCampaña = (mHorarioHoyActual.HoraFin - mHoraLocalActual.TimeOfDay).TotalMilliseconds;
+                            if (iCartelSiguiente != null)
+                            {
+                                //Obtenemos el horario del día de hoy de la campaña siguiente
+                                Horario mHorarioHoySiguiente = this.iCartelSiguiente.GetHorarioHoy();
+                                //Sí los carteles se superponen, se mostrará el posterior cuando sea su tiempo de iniciar
+                                //aunque el anterior no haya terminado
+                                double mOpcion2 = (mHorarioHoySiguiente.HoraInicio - mHoraLocalActual.TimeOfDay).TotalMilliseconds;
+                                //Se selecciona el menor de los dos intervalos de tiempo (si se superponen la opcion2 sera menor.
+                                mIntervaloCampaña = Math.Min(mIntervaloCampaña, mOpcion2);
+                            }
+                            //Asignamos el menor intervalo en milisegundos que durará el cartel.
+                            this.iTemporizadorCartel.Interval = mIntervaloCampaña;
+                            //Capturamos el enumerador de imágenes de la campaña del cartel.
+                            this.iImagenesCartelActual = this.iCartelActual.Campaña.ListaImagenes.GetEnumerator();
+                            //Asignamos el intervalo en milisegundos que durará cada imagen de la campaña.
+                            this.iTemporizadorImagen.Interval = this.iCartelActual.Campaña.TiempoXImagen.TotalMilliseconds;
+                            //Ponemos a correr el temporizador del cartel.
+                            this.iTemporizadorCartel.Start();
+                            //Colocamos la primer imagen.
+                            this.CambiarImagen();
+                            //Colocamos el banner.
+                            this.Invoke(BannerDelegado, iCartelActual.Banner.Mostrar());
+                        }
+                        else
+                        {
+                            //Colocamos el cartel por defecto
+                            MostrarCartelPorDefecto();
+                            //Colocamos un intervalo de tiempo hasta que sea el momento de iniciar de la campaña actual.
+                            this.iTemporizadorCartel.Interval = (mHorarioHoyActual.HoraInicio - mHoraLocalActual.TimeOfDay).TotalMilliseconds;
+                            this.iTemporizadorCartel.Start();
+                        }
+                    }
+                    else
+                    {
+                        CambiarCartel();
+                    }
                 }
             }
             else
@@ -85,10 +135,20 @@ namespace CapaVisual
                 //Paramos los temporizadores
                 this.iTemporizadorCartel.Stop();
                 this.iTemporizadorImagen.Stop();
-                //Colocamos la imagen por defecto
-                this.pbCampaña.Image = Properties.Resources.CampañaDefecto;
+                //Colocamos el cartel por defecto
+                MostrarCartelPorDefecto();
             }
         }
+
+        /// <summary>
+        /// Muestra un cartel por defecto para rellenar los tiempos vacíos.
+        /// </summary>
+        private void MostrarCartelPorDefecto()
+        {
+            this.pbCampaña.Image = Properties.Resources.CampañaDefecto;
+            this.Invoke(BannerDelegado,Properties.Resources.BannerDefecto);
+        }
+
 
         /// <summary>
         /// Cambia a la siguiente imagen. Reinicia el ciclo si se finalizó la secuencia.
@@ -109,6 +169,17 @@ namespace CapaVisual
                 this.iImagenesCartelActual.Reset();
                 //Colocamos la primer imgaen
                 this.CambiarImagen();
+            }
+        }
+
+        /// <summary>
+        /// Cambia al banner del cartel actual.
+        /// </summary>
+        public void CambiarBannerMetodo(string pBanner)
+        {
+            if (pBanner != null)
+            {
+                this.tbBanner.Text = pBanner;
             }
         }
 

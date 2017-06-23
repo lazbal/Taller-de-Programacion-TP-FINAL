@@ -144,7 +144,8 @@ namespace CapaDatos
         public ICollection<ElementoCarteleria> GetElementosCarteleriaHoy()
         {
             IQueryable<ElementoCarteleria> consulta = GetQueryAllElementosCarteleriaEntre(DateTime.Today, DateTime.Today);
-            return consulta.ToList();
+            //Se ordenan por el día de la fecha de la consulta.
+            return consulta.AsEnumerable().OrderBy(elem => elem.GetHorarioHoy().HoraInicio).ToList();
         }
 
         /// <summary>
@@ -154,8 +155,9 @@ namespace CapaDatos
         /// <param name="pFechaFinal">Fecha final.</param>
         public ICollection<ElementoCarteleria> GetAllElementosCarteleriaEntre (DateTime pFechaInicial, DateTime pFechaFinal)
 		{
-			 IQueryable<ElementoCarteleria> consulta = GetQueryAllElementosCarteleriaEntre(pFechaInicial, pFechaFinal);
-            return consulta.ToList();
+		    IQueryable<ElementoCarteleria> consulta = GetQueryAllElementosCarteleriaEntre(pFechaInicial, pFechaFinal);
+            //Se ordenan por el día de la fecha de la consulta. En caso de ser null irá primero.
+            return consulta.AsEnumerable().OrderBy(elem => elem.GetHorarioHoy().HoraInicio).ToList();
 		}
 
         /// <summary>

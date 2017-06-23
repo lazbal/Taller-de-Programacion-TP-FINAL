@@ -14,18 +14,18 @@ namespace CapaEntidad
         /// Texto a mostrar del banner.
         /// </summary>
 		[Required]
-		public string Texto { get; set; }
+		public virtual string Texto { get; set; }
 
         /// <summary>
         /// Inicializa una instancia de la clase <see cref="BannerEstatico"/>.
         /// </summary>
-		public BannerEstatico() : base() { }
+		public BannerEstatico() { }
 
         /// <summary>
         /// Inicializa una instancia de la clase <see cref="BannerEstatico"/>.
         /// </summary>
         /// <param name="pTexto">Texto del banner.</param>
-		public BannerEstatico (string pTexto) : base()
+		public BannerEstatico (string pTexto)
 		{
             this.Texto = pTexto;
 		}

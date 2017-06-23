@@ -61,6 +61,15 @@ namespace CapaVisual.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a www.carteleria.com.
+        /// </summary>
+        internal static string BannerDefecto {
+            get {
+                return ResourceManager.GetString("BannerDefecto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap CampañaDefecto {

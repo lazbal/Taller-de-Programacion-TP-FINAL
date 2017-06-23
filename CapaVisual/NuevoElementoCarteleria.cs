@@ -78,8 +78,9 @@ namespace CapaVisual
             }
             else
             {
-                this.cbTipoBanner.SelectedItem = this.cbTipoBanner.Items[1];
+                //Debe ir primero esta linea
                 this.tbBanner.Text = (iElementoCarteleria.Banner as BannerEstatico).Texto;
+                this.cbTipoBanner.SelectedItem = this.cbTipoBanner.Items[1];
             }
         }
 

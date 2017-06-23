@@ -6,13 +6,13 @@ namespace CapaEntidad
 	/// <summary>
 	/// Interfaz banner.
 	/// </summary>
-	public abstract class Banner : IBanner
+	public abstract class Banner
 	{
         /// <summary>
         /// Clave foránea del elemento cartelería. Funciona como clave principal del banner.
         /// </summary>
-        [Key, ForeignKey ("ElementoCarteleria")]
-		public Int64 refElementoCarteleriaId { get; set; }
+		[Key, ForeignKey("ElementoCarteleria")]
+        public Int64 refElementoCarteleriaId { get; set; }
         public virtual ElementoCarteleria ElementoCarteleria { get; set; }
 
         /// <summary>
