@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CapaEntidad
 {
-	public class ElementoCarteleria
+	public class ElementoCarteleria : IComparable<ElementoCarteleria>
     {
         /// <summary>
         /// Identificador del objeto. Generado por la base de datos.
@@ -85,12 +85,14 @@ namespace CapaEntidad
 		/// </summary>
 		public Horario GetHorarioHoy()
 		{
-			foreach (Horario horario in Frecuencia) {
-				if (horario.DiaSemana == DateTime.Today.DayOfWeek) {
-					return horario;
-				}
-			}
-			return null;
+            foreach (Horario horario in Frecuencia)
+            {
+                if (horario.DiaSemana == DateTime.Today.DayOfWeek)
+                {
+                    return horario;
+                }
+            }
+            return null;
         }
 
         /// <summary>
@@ -157,6 +159,25 @@ namespace CapaEntidad
 			return mColisiones;
 		}
 
-	}
+        /// <summary>
+        /// Implementacion de la interfaz IComparable.
+        /// Permite el ordenamiento de elementos.
+        /// </summary>
+        public int CompareTo(ElementoCarteleria pOther)
+        {
+            //Si el otro elemento es nulo o no posee elemento para hoy, se considera pOther mayor
+            if (pOther == null || pOther.GetHorarioHoy() == null)
+            {
+                return -1;
+            }
+            //Sí este elemento es nulo, no tiene horario, o la hora de inicio mayor, se considera pOther menor
+            else if (this == null || this.GetHorarioHoy() == null || pOther.GetHorarioHoy().HoraInicio <= this.GetHorarioHoy().HoraInicio)
+            {
+                return +1;
+            }
+            //Otro caso, pOther se considera mayor. No se necesita que dos objetos sean considerados iguales.
+            return -1;
+        }
+    }
 }
 

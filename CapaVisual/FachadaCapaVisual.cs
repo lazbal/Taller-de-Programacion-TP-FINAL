@@ -8,7 +8,10 @@ namespace CapaVisual
 {
     public static class FachadaCapaVisual
     {
-        public static DateTime iFechaBaseHorarios = DateTime.ParseExact(@"01/01/1753","d", null);
+        public static DateTime FechaBaseHorarios()
+        {
+            return DateTime.ParseExact(@"01/01/1753", @"dd/mm/yyyy", null);
+        }
 
         public static IEnumerable<RSSItem> LeerRSS(string pURL)
         {

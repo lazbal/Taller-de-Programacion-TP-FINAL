@@ -54,7 +54,7 @@ namespace CapaVisual
             if (!bgWorkerRSS.IsBusy)
             {
                 //Realizar la tarea de lectura del RSSFeed en segundo plano.
-                this.bgWorkerRSS.RunWorkerAsync();
+                this.bgWorkerRSS.RunWorkerAsync(this.tbURL.Text);
             }
             else
             {
@@ -71,7 +71,7 @@ namespace CapaVisual
             try
             {
                 //Se le pide a la fachada que lea la fuente rss para verificar que funcion
-                IEnumerable<RSSItem> mListaItems = FachadaCapaVisual.LeerRSS(tbURL.Text);
+                IEnumerable<RSSItem> mListaItems = FachadaCapaVisual.LeerRSS((string)e.Argument);
                 //Se devuelve la lista como resultado del trabajo en segundo plano.
                 e.Result = mListaItems;
             }
@@ -94,10 +94,16 @@ namespace CapaVisual
             //En caso de que la URL esté vacía.
             catch (ArgumentNullException nullException)
             {
-                MessageBox.Show(nullException.Message, "Campo Vacío");
+                MessageBox.Show(nullException.Message, "Valor nulo");
                 //Marcar el trabajo en segundo plano como cancelado.
                 e.Cancel = true;
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                e.Cancel = true;
+            }
+
         }
 
         /// <summary>

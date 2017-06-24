@@ -138,18 +138,20 @@ namespace CapaDatos
         }
 
         /// <summary>
-        /// Obtener todas las <see cref="ElementoCarteleria"/> en la base de datos para el día de la fecha.
+        /// Obtener todas las <see cref="ElementoCarteleria"/> en la base de datos que comprenden la fecha de hoy.
+        /// Ordenadas por el horario de inicio para el día de hoy.
+        /// Las que no posean un horario para el día de hoy se colocan al final de la coleccion.
         /// </summary>
         /// <returns>Todos los ElementosCarteleria del día.</returns>
         public ICollection<ElementoCarteleria> GetElementosCarteleriaHoy()
         {
             IQueryable<ElementoCarteleria> consulta = GetQueryAllElementosCarteleriaEntre(DateTime.Today, DateTime.Today);
             //Se ordenan por el día de la fecha de la consulta.
-            return consulta.AsEnumerable().OrderBy(elem => elem.GetHorarioHoy().HoraInicio).ToList();
+            return consulta.AsEnumerable().OrderBy(elem => elem).ToList();
         }
 
         /// <summary>
-        /// Devuelve todos los elementos de carteleria entre dos fechas
+        /// Devuelve todos los elementos de carteleria entre dos fechas.
         /// </summary>
         /// <param name="pFechaInicial">Fecha inicial.</param>
         /// <param name="pFechaFinal">Fecha final.</param>
@@ -157,7 +159,7 @@ namespace CapaDatos
 		{
 		    IQueryable<ElementoCarteleria> consulta = GetQueryAllElementosCarteleriaEntre(pFechaInicial, pFechaFinal);
             //Se ordenan por el día de la fecha de la consulta. En caso de ser null irá primero.
-            return consulta.AsEnumerable().OrderBy(elem => elem.GetHorarioHoy().HoraInicio).ToList();
+            return consulta.ToList();
 		}
 
         /// <summary>

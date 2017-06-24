@@ -39,6 +39,7 @@
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.gbCampaña = new System.Windows.Forms.GroupBox();
+            this.numSS = new System.Windows.Forms.NumericUpDown();
             this.gbBanner = new System.Windows.Forms.GroupBox();
             this.btnSeleccionarFuenteRSS = new System.Windows.Forms.Button();
             this.tbBanner = new System.Windows.Forms.TextBox();
@@ -47,6 +48,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numHH)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMM)).BeginInit();
             this.gbCampaña.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numSS)).BeginInit();
             this.gbBanner.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -97,13 +99,13 @@
             this.labelTiempoxImagen.AutoSize = true;
             this.labelTiempoxImagen.Location = new System.Drawing.Point(3, 28);
             this.labelTiempoxImagen.Name = "labelTiempoxImagen";
-            this.labelTiempoxImagen.Size = new System.Drawing.Size(142, 13);
+            this.labelTiempoxImagen.Size = new System.Drawing.Size(155, 13);
             this.labelTiempoxImagen.TabIndex = 16;
-            this.labelTiempoxImagen.Text = "Tiempo Por Imágen: (hh:mm)";
+            this.labelTiempoxImagen.Text = "Tiempo Por Imágen: (hh:mm:ss)";
             // 
             // numHH
             // 
-            this.numHH.Location = new System.Drawing.Point(154, 26);
+            this.numHH.Location = new System.Drawing.Point(164, 26);
             this.numHH.Maximum = new decimal(new int[] {
             23,
             0,
@@ -116,7 +118,7 @@
             // 
             // numMM
             // 
-            this.numMM.Location = new System.Drawing.Point(203, 26);
+            this.numMM.Location = new System.Drawing.Point(213, 26);
             this.numMM.Maximum = new decimal(new int[] {
             59,
             0,
@@ -161,6 +163,7 @@
             // 
             // gbCampaña
             // 
+            this.gbCampaña.Controls.Add(this.numSS);
             this.gbCampaña.Controls.Add(this.bTMS);
             this.gbCampaña.Controls.Add(this.labelTiempoxImagen);
             this.gbCampaña.Controls.Add(this.bQuitarImagenes);
@@ -173,6 +176,19 @@
             this.gbCampaña.TabIndex = 23;
             this.gbCampaña.TabStop = false;
             this.gbCampaña.Text = "Campaña";
+            // 
+            // numSS
+            // 
+            this.numSS.Location = new System.Drawing.Point(262, 26);
+            this.numSS.Maximum = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
+            this.numSS.Name = "numSS";
+            this.numSS.Size = new System.Drawing.Size(43, 20);
+            this.numSS.TabIndex = 21;
+            this.numSS.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // gbBanner
             // 
@@ -258,6 +274,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numMM)).EndInit();
             this.gbCampaña.ResumeLayout(false);
             this.gbCampaña.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numSS)).EndInit();
             this.gbBanner.ResumeLayout(false);
             this.gbBanner.PerformLayout();
             this.ResumeLayout(false);
@@ -283,5 +300,6 @@
         private System.Windows.Forms.ComboBox cbTipoBanner;
         private System.Windows.Forms.Button btnSeleccionarFuenteRSS;
         private System.Windows.Forms.Button btnHorariosOcupados;
+        private System.Windows.Forms.NumericUpDown numSS;
     }
 }

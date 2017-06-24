@@ -59,6 +59,7 @@ namespace CapaVisual
                     lvImagenes.LargeImageList.Images.Add(mImagenCampaña.Ruta, mImagenCampaña.Imagen);
                     lvImagenes.Items.Add(mImagenCampaña.Ruta, mImagenCampaña.Ruta);
                 }
+                this.numSS.Value = this.iElementoCarteleria.Campaña.TiempoXImagen.Seconds;
                 this.numMM.Value = this.iElementoCarteleria.Campaña.TiempoXImagen.Minutes;
                 this.numHH.Value = this.iElementoCarteleria.Campaña.TiempoXImagen.Hours;
             }
@@ -72,8 +73,9 @@ namespace CapaVisual
             }
             else if (iElementoCarteleria.Banner is RSSFeed)
             {
-                this.cbTipoBanner.SelectedItem = this.cbTipoBanner.Items[0];
+                //Debe ir primero esta linea
                 this.tbBanner.Text = (iElementoCarteleria.Banner as RSSFeed).URL;
+                this.cbTipoBanner.SelectedItem = this.cbTipoBanner.Items[0];
                 this.btnSeleccionarFuenteRSS.Visible = true;
             }
             else
@@ -131,9 +133,10 @@ namespace CapaVisual
             if (this.lvImagenes.Items.Count != 0)
             {
                 //Se obtiene el menos intervalo de tiempo que durará la campaña en un día y se lo divide por la cantidad de imágenes que lleve la campaña.
-                decimal tiempoMinimoImagenMinutos = Convert.ToDecimal(TiempoMinimo().TotalMinutes / lvImagenes.Items.Count);
-                this.numHH.Value = Convert.ToInt32(Math.Truncate(tiempoMinimoImagenMinutos / (decimal)60.0));
-                this.numMM.Value = Convert.ToInt32(tiempoMinimoImagenMinutos - this.numHH.Value*60);
+                decimal tiempoMinimoPorImagenSegundos = Convert.ToDecimal(TiempoMinimo().TotalSeconds / lvImagenes.Items.Count);
+                this.numHH.Value = Convert.ToInt32(Math.Truncate(tiempoMinimoPorImagenSegundos / (decimal)3600.0));
+                this.numMM.Value = Convert.ToInt32(Math.Truncate((tiempoMinimoPorImagenSegundos - this.numHH.Value * 3600) / (decimal)60.0));
+                this.numSS.Value = Convert.ToInt32(tiempoMinimoPorImagenSegundos - this.numMM.Value * 60 - this.numHH.Value * 3600);
             }
         }
 
@@ -246,7 +249,7 @@ namespace CapaVisual
                     }
                 }
                 //Campaña
-                iElementoCarteleria.Campaña.TiempoXImagen = new TimeSpan(Convert.ToInt32(this.numHH.Value), Convert.ToInt32(this.numMM.Value), 0);
+                iElementoCarteleria.Campaña.TiempoXImagen = new TimeSpan(Convert.ToInt32(this.numHH.Value), Convert.ToInt32(this.numMM.Value), Convert.ToInt32(this.numSS.Value));
                 iElementoCarteleria.Campaña.ListaImagenes.Clear();
                 if (this.lvImagenes.LargeImageList.Images.Count > 0)
                 {
