@@ -14,7 +14,7 @@ namespace CapaEntidad
         /// Texto a mostrar del banner.
         /// </summary>
 		[Required]
-		public virtual string Texto { get; set; }
+		public string Texto { get; set; }
 
         /// <summary>
         /// Inicializa una instancia de la clase <see cref="BannerEstatico"/>.

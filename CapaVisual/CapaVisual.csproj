@@ -66,8 +66,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Management" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -99,6 +101,12 @@
     </Compile>
     <Compile Include="HorariosOcupados.Designer.cs">
       <DependentUpon>HorariosOcupados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Instalador.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Instalador.Designer.cs">
+      <DependentUpon>Instalador.cs</DependentUpon>
     </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
