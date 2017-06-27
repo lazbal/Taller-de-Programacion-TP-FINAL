@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace CapaVisual
         static void Main()
         {
             AdminCarteleria ventana = new AdminCarteleria();
-            //Presentacion ventana = new Presentacion();
+            ////Presentacion ventana = new Presentacion();
             ventana.ShowDialog();
         }
     }
