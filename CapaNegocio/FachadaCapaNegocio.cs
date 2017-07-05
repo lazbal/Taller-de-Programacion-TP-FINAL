@@ -106,7 +106,15 @@ namespace CapaNegocio
         /// <returns></returns>
         public static ICollection<ElementoCarteleria> ElementosCarteleriaHoy()
         {
-            return CapaDatosFachada.GetInstancia().GetElementosCarteleriaHoy();
+            ICollection<ElementoCarteleria> mCartelesHoy = new List<ElementoCarteleria>();
+            foreach (ElementoCarteleria mEC in CapaDatosFachada.GetInstancia().GetElementosCarteleriaHoy())
+            {
+                if (mEC.GetHorarioHoy() != null)
+                {
+                    mCartelesHoy.Add(mEC);
+                }
+            }
+            return mCartelesHoy;
         }
 
         /// <summary>

@@ -165,18 +165,27 @@ namespace CapaEntidad
         /// </summary>
         public int CompareTo(ElementoCarteleria pOther)
         {
+            if (pOther == this)
+            {
+                return 0;
+            }
             //Si el otro elemento es nulo o no posee elemento para hoy, se considera pOther mayor
-            if (pOther == null || pOther.GetHorarioHoy() == null)
+            else if (pOther == null || pOther.GetHorarioHoy() == null)
             {
                 return -1;
             }
             //Sí este elemento es nulo, no tiene horario, o la hora de inicio mayor, se considera pOther menor
-            else if (this == null || this.GetHorarioHoy() == null || pOther.GetHorarioHoy().HoraInicio <= this.GetHorarioHoy().HoraInicio)
+            else if (this == null || this.GetHorarioHoy() == null || pOther.GetHorarioHoy().HoraInicio < this.GetHorarioHoy().HoraInicio)
             {
                 return +1;
             }
-            //Otro caso, pOther se considera mayor. No se necesita que dos objetos sean considerados iguales.
-            return -1;
+            //Sí este elemento tiene hora de inicio menor, se considera pOther mayor
+            else if (pOther.GetHorarioHoy().HoraInicio > this.GetHorarioHoy().HoraInicio)
+            {
+                return -1;
+            }
+            //Otro caso, se consideran iguales.
+            return 0;
         }
     }
 }

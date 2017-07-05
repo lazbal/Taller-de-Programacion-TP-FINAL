@@ -152,14 +152,15 @@ namespace CapaVisual
         /// </summary>
         private void bAceptar_Click(object sender, EventArgs e)
         {
-            this.iListaHorarios.Clear();
-        //Se controla qué dia está seleccionado y se lo agrega a la lista de horarios, junto con las horas seleccionadas para inicio y fin del anuncio.
-        //Cada if corresponde a un dia de la semana
+            ICollection<Horario> mListaProvisoria = new List<Horario>();
+            string mDiasFallidos = "";
+            //Se controla qué dia está seleccionado y se lo agrega a la lista de horarios, junto con las horas seleccionadas para inicio y fin del anuncio.
+            //Cada if corresponde a un dia de la semana
             if (cbLunes.Checked)
             {
 				if (((dtpLunesInicio.Value.Hour < dtpLunesFin.Value.Hour) || ((dtpLunesInicio.Value.Hour == dtpLunesFin.Value.Hour) && (dtpLunesInicio.Value.Minute <= dtpLunesFin.Value.Minute))))
                 {
-                    iListaHorarios.Add(new Horario(
+                    mListaProvisoria.Add(new Horario(
                                                     DayOfWeek.Monday,
                                                     new TimeSpan(dtpLunesInicio.Value.Hour, dtpLunesInicio.Value.Minute, 0),
                                                     new TimeSpan(dtpLunesFin.Value.Hour, dtpLunesFin.Value.Minute, 0)
@@ -168,18 +169,14 @@ namespace CapaVisual
                 }
                 else 
                 {
-                    throw new ArgumentOutOfRangeException("En Lunes la hora de inicio es posterior a la de fin.");
+                    mDiasFallidos += DayOfWeek.Monday.ToString() + " ";
                 }
-            }
-            else
-            {
-                iListaHorarios.RemoveAll(horario => horario.DiaSemana == DayOfWeek.Monday);
             }
             if (cbMartes.Checked)
             {
 				if (((dtpMartesInicio.Value.Hour < dtpMartesFin.Value.Hour) || ((dtpMartesInicio.Value.Hour == dtpMartesFin.Value.Hour) && (dtpMartesInicio.Value.Minute <= dtpMartesFin.Value.Minute))))
                 {
-                    iListaHorarios.Add(new Horario(
+                    mListaProvisoria.Add(new Horario(
                                                 DayOfWeek.Tuesday,
                                                 new TimeSpan(dtpMartesInicio.Value.Hour, dtpMartesInicio.Value.Minute, 0),
                                                 new TimeSpan(dtpMartesFin.Value.Hour, dtpMartesFin.Value.Minute, 0)
@@ -188,18 +185,14 @@ namespace CapaVisual
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("En Martes la hora de inicio es posterior a la de fin.");
+                    mDiasFallidos += DayOfWeek.Tuesday.ToString() + " ";
                 }
-            }
-            else
-            {
-                iListaHorarios.RemoveAll(horario => horario.DiaSemana == DayOfWeek.Tuesday);
             }
             if (cbMiercoles.Checked)
             {
 				if (((dtpMiercolesInicio.Value.Hour < dtpMiercolesFin.Value.Hour) || ((dtpMiercolesInicio.Value.Hour == dtpMiercolesFin.Value.Hour) && (dtpMiercolesInicio.Value.Minute <= dtpMiercolesFin.Value.Minute))))
                 {
-                    iListaHorarios.Add(new Horario(
+                    mListaProvisoria.Add(new Horario(
                                                 DayOfWeek.Wednesday,
                                                 new TimeSpan(dtpMiercolesInicio.Value.Hour, dtpMiercolesInicio.Value.Minute, 0),
                                                 new TimeSpan(dtpMiercolesFin.Value.Hour, dtpMiercolesFin.Value.Minute, 0)
@@ -208,18 +201,14 @@ namespace CapaVisual
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("En Miércoles la hora de inicio es posterior a la de fin.");
+                    mDiasFallidos += DayOfWeek.Wednesday.ToString() + " ";
                 }
-            }
-            else
-            {
-                iListaHorarios.RemoveAll(horario => horario.DiaSemana == DayOfWeek.Wednesday);
             }
             if (cbJueves.Checked)
             {
 				if (((dtpJuevesInicio.Value.Hour < dtpJuevesFin.Value.Hour) || ((dtpJuevesInicio.Value.Hour == dtpJuevesFin.Value.Hour) && (dtpJuevesInicio.Value.Minute <= dtpJuevesFin.Value.Minute))))
                 {
-                    iListaHorarios.Add(new Horario(
+                    mListaProvisoria.Add(new Horario(
                                                 DayOfWeek.Thursday,
                                                 new TimeSpan(dtpJuevesInicio.Value.Hour, dtpJuevesInicio.Value.Minute, 0),
                                                 new TimeSpan(dtpJuevesFin.Value.Hour, dtpJuevesFin.Value.Minute, 0)
@@ -228,18 +217,14 @@ namespace CapaVisual
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("En Jueves la hora de inicio es posterior a la de fin.");
+                    mDiasFallidos += DayOfWeek.Thursday.ToString() + " ";
                 }
-            }
-            else
-            {
-                iListaHorarios.RemoveAll(horario => horario.DiaSemana == DayOfWeek.Thursday);
             }
             if (cbViernes.Checked)
             {
 				if (((dtpViernesInicio.Value.Hour < dtpViernesFin.Value.Hour) || ((dtpViernesInicio.Value.Hour == dtpViernesFin.Value.Hour) && (dtpViernesInicio.Value.Minute <= dtpViernesFin.Value.Minute))))
                 {
-                    iListaHorarios.Add(new Horario(
+                    mListaProvisoria.Add(new Horario(
                                                 DayOfWeek.Friday,
                                                 new TimeSpan(dtpViernesInicio.Value.Hour, dtpViernesInicio.Value.Minute, 0),
                                                 new TimeSpan(dtpViernesFin.Value.Hour, dtpViernesFin.Value.Minute, 0)
@@ -248,18 +233,14 @@ namespace CapaVisual
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("En Viernes la hora de inicio es posterior a la de fin.");
+                    mDiasFallidos += DayOfWeek.Friday.ToString() + " ";
                 }
-            }
-            else
-            {
-                iListaHorarios.RemoveAll(horario => horario.DiaSemana == DayOfWeek.Friday);
             }
             if (cbSabado.Checked)
             {
 				if (((dtpSabadoInicio.Value.Hour < dtpSabadoFin.Value.Hour) || ((dtpSabadoInicio.Value.Hour == dtpSabadoFin.Value.Hour) && (dtpSabadoInicio.Value.Minute <= dtpSabadoFin.Value.Minute))))
                 {
-                    iListaHorarios.Add(new Horario(
+                    mListaProvisoria.Add(new Horario(
                                                 DayOfWeek.Saturday,
                                                 new TimeSpan(dtpSabadoInicio.Value.Hour, dtpSabadoInicio.Value.Minute, 0),
                                                 new TimeSpan(dtpSabadoFin.Value.Hour, dtpSabadoFin.Value.Minute, 0)
@@ -268,18 +249,14 @@ namespace CapaVisual
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("En Sábado la hora de inicio es posterior a la de fin.");
+                    mDiasFallidos += DayOfWeek.Saturday.ToString() + " ";
                 }
-            }
-            else
-            {
-                iListaHorarios.RemoveAll(horario => horario.DiaSemana == DayOfWeek.Saturday);
             }
             if (cbDomingo.Checked)
             {
 				if (((dtpDomingoInicio.Value.Hour < dtpDomingoFin.Value.Hour) || ((dtpDomingoInicio.Value.Hour == dtpDomingoFin.Value.Hour) && (dtpDomingoInicio.Value.Minute <= dtpDomingoFin.Value.Minute))))
                 {
-                    iListaHorarios.Add(new Horario(
+                    mListaProvisoria.Add(new Horario(
                                                 DayOfWeek.Sunday,
                                                 new TimeSpan(dtpDomingoInicio.Value.Hour, dtpDomingoInicio.Value.Minute, 0),
                                                 new TimeSpan(dtpDomingoFin.Value.Hour, dtpDomingoFin.Value.Minute, 0)
@@ -288,15 +265,25 @@ namespace CapaVisual
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("En Domingo la hora de inicio es posterior a la de fin.");
+                    mDiasFallidos += DayOfWeek.Sunday.ToString() + " ";
                 }
+            }
+            //Sí no hubo problemas con los horarios seleccionados, le permitimos guardar los cambios
+            if (mDiasFallidos == "")
+            {
+                this.iListaHorarios.Clear();
+                foreach (Horario mHor in mListaProvisoria)
+                {
+                    this.iListaHorarios.Add(mHor);
+                }
+                this.DialogResult = DialogResult.OK;
+                //Cerrar ventana.
+                this.Close();
             }
             else
             {
-                iListaHorarios.RemoveAll(horario => horario.DiaSemana == DayOfWeek.Sunday);
+                MessageBox.Show("En "+mDiasFallidos+"la hora de inicio es posterior a la de fin.");
             }
-            //Cerrar ventana.
-            this.Close();
         }
     }
 }

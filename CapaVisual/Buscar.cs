@@ -38,6 +38,7 @@ namespace CapaVisual
                 if (result == DialogResult.Yes)
                 {
                     FachadaCapaVisual.EliminarElementoCarteleria((Int64)mSelectedRow.Cells[1].Value);
+                    cadenaBuscar_TextChanged(this, null);
                     MessageBox.Show("Eliminación realizada con éxito");
                 }
             }

@@ -109,12 +109,6 @@
     <Compile Include="Instalador.Designer.cs">
       <DependentUpon>Instalador.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Login.Designer.cs">
-      <DependentUpon>Login.cs</DependentUpon>
-    </Compile>
     <Compile Include="NuevoElementoCarteleria.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -155,9 +149,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HorariosOcupados.resx">
       <DependentUpon>HorariosOcupados.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Login.resx">
-      <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NuevoElementoCarteleria.resx">
       <DependentUpon>NuevoElementoCarteleria.cs</DependentUpon>
