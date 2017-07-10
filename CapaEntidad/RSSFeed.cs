@@ -31,6 +31,21 @@ namespace CapaEntidad
         }
 
         /// <summary>
+        /// Inicializa una instancia de la clase <see cref="RSSFeed"/> a partir de un banner base.
+        /// </summary>
+        public RSSFeed(Banner pOtroBanner) : base()
+        {
+            Id = pOtroBanner.Id;
+            Nombre = pOtroBanner.Nombre;
+            Descripcion = pOtroBanner.Descripcion;
+            FechaInicio = pOtroBanner.FechaInicio;
+            FechaFin = pOtroBanner.FechaInicio;
+            Frecuencia = pOtroBanner.Frecuencia;
+
+            this.UltimasNoticias = new List<RSSItem>();
+        }
+
+        /// <summary>
         /// Inicializa una instancia de la clase <see cref="RSSFeed"/>.
         /// </summary>
         /// <param name="pURL">URL fuente</param>

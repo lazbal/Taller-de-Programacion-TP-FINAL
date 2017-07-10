@@ -11,7 +11,7 @@ namespace CapaEntidad
         /// Identificador del objeto. Generado por la base de datos.
         /// </summary>
 		[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public Int64 ElementoCarteleriaId { get; set; }
+		public Int64 Id { get; set; }
 
         /// <summary>
         /// Nombre del cartel
@@ -45,16 +45,6 @@ namespace CapaEntidad
 		public virtual ICollection<Horario> Frecuencia { get; set; }
 
         /// <summary>
-        /// Campaña compuesta de imágenes que se mostrará.
-        /// </summary>
-        public virtual Campaña Campaña { get; set; } = null;
-
-        /// <summary>
-        /// Banner a mostrar. Puede ser texto plano o provenir de fuentes externas.
-        /// </summary>
-		public virtual Banner Banner { get; set; } = null;
-
-        /// <summary>
         /// Inicializa una instancia de la clase <see cref="ElementoCarteleria"/>.
         /// </summary>
         public ElementoCarteleria ()
@@ -68,15 +58,13 @@ namespace CapaEntidad
         /// Inicializa una instancia de la clase <see cref="ElementoCarteleria"/>.
         /// </summary>
 		public ElementoCarteleria (String pNombre, String pDescripcion, DateTime pFechaInicio, DateTime pFechaFin,
-			ICollection<Horario> pFrecuencia, Campaña pCampaña, Banner pBanner)
+			ICollection<Horario> pFrecuencia)
 		{
 			this.Nombre = pNombre;
 			this.Descripcion = pDescripcion;
 			this.FechaInicio = pFechaInicio;
 			this.FechaFin = pFechaFin;
 			this.Frecuencia = pFrecuencia;
-			this.Campaña = pCampaña;
-			this.Banner = pBanner;
 		}
 
 		/// <summary>

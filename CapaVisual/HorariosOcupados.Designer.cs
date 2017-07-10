@@ -508,8 +508,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dgHorariosOcupados;
         private System.Windows.Forms.DataGridViewTextBoxColumn cDia;
         private System.Windows.Forms.DataGridViewTextBoxColumn c0000;
         private System.Windows.Forms.DataGridViewTextBoxColumn c0030;
@@ -559,5 +557,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn c2230;
         private System.Windows.Forms.DataGridViewTextBoxColumn c2300;
         private System.Windows.Forms.DataGridViewTextBoxColumn c2330;
+        protected System.Windows.Forms.DataGridView dgHorariosOcupados;
     }
 }

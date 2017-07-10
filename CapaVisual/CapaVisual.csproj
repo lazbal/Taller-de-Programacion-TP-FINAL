@@ -103,17 +103,35 @@
     <Compile Include="HorariosOcupados.Designer.cs">
       <DependentUpon>HorariosOcupados.cs</DependentUpon>
     </Compile>
+    <Compile Include="HorariosOcupadosBanners.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HorariosOcupadosBanners.Designer.cs">
+      <DependentUpon>HorariosOcupadosBanners.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HorariosOcupadosCampañas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HorariosOcupadosCampañas.Designer.cs">
+      <DependentUpon>HorariosOcupadosCampañas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Instalador.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Instalador.Designer.cs">
       <DependentUpon>Instalador.cs</DependentUpon>
     </Compile>
-    <Compile Include="NuevoElementoCarteleria.cs">
+    <Compile Include="NuevoBanner.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NuevoElementoCarteleria.Designer.cs">
-      <DependentUpon>NuevoElementoCarteleria.cs</DependentUpon>
+    <Compile Include="NuevoBanner.Designer.cs">
+      <DependentUpon>NuevoBanner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NuevoCampaña.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NuevoCampaña.Designer.cs">
+      <DependentUpon>NuevoCampaña.cs</DependentUpon>
     </Compile>
     <Compile Include="Nuevo.cs">
       <SubType>Form</SubType>
@@ -150,8 +168,11 @@
     <EmbeddedResource Include="HorariosOcupados.resx">
       <DependentUpon>HorariosOcupados.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NuevoElementoCarteleria.resx">
-      <DependentUpon>NuevoElementoCarteleria.cs</DependentUpon>
+    <EmbeddedResource Include="NuevoBanner.resx">
+      <DependentUpon>NuevoBanner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NuevoCampaña.resx">
+      <DependentUpon>NuevoCampaña.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Nuevo.resx">
       <DependentUpon>Nuevo.cs</DependentUpon>

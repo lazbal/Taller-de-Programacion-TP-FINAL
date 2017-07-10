@@ -250,7 +250,7 @@
             this.dtpDomingoFin.ShowUpDown = true;
             this.dtpDomingoFin.Size = new System.Drawing.Size(63, 20);
             this.dtpDomingoFin.TabIndex = 23;
-            this.dtpDomingoFin.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.dtpDomingoFin.Value = new System.DateTime(1753, 1, 1, 12, 0, 0, 0);
             this.dtpDomingoFin.Visible = false;
             // 
             // dtpDomingoInicio
@@ -268,7 +268,7 @@
             this.dtpDomingoInicio.ShowUpDown = true;
             this.dtpDomingoInicio.Size = new System.Drawing.Size(63, 20);
             this.dtpDomingoInicio.TabIndex = 22;
-            this.dtpDomingoInicio.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.dtpDomingoInicio.Value = new System.DateTime(1753, 1, 1, 12, 0, 0, 0);
             this.dtpDomingoInicio.Visible = false;
             // 
             // dtpSabadoFin
@@ -286,7 +286,7 @@
             this.dtpSabadoFin.ShowUpDown = true;
             this.dtpSabadoFin.Size = new System.Drawing.Size(63, 20);
             this.dtpSabadoFin.TabIndex = 21;
-            this.dtpSabadoFin.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.dtpSabadoFin.Value = new System.DateTime(1753, 1, 1, 12, 0, 0, 0);
             this.dtpSabadoFin.Visible = false;
             // 
             // dtpSabadoInicio
@@ -304,7 +304,7 @@
             this.dtpSabadoInicio.ShowUpDown = true;
             this.dtpSabadoInicio.Size = new System.Drawing.Size(63, 20);
             this.dtpSabadoInicio.TabIndex = 20;
-            this.dtpSabadoInicio.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.dtpSabadoInicio.Value = new System.DateTime(1753, 1, 1, 12, 0, 0, 0);
             this.dtpSabadoInicio.Visible = false;
             // 
             // dtpViernesFin
@@ -322,7 +322,7 @@
             this.dtpViernesFin.ShowUpDown = true;
             this.dtpViernesFin.Size = new System.Drawing.Size(63, 20);
             this.dtpViernesFin.TabIndex = 19;
-            this.dtpViernesFin.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.dtpViernesFin.Value = new System.DateTime(1753, 1, 1, 12, 0, 0, 0);
             this.dtpViernesFin.Visible = false;
             // 
             // dtpViernesInicio
@@ -340,7 +340,7 @@
             this.dtpViernesInicio.ShowUpDown = true;
             this.dtpViernesInicio.Size = new System.Drawing.Size(63, 20);
             this.dtpViernesInicio.TabIndex = 18;
-            this.dtpViernesInicio.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.dtpViernesInicio.Value = new System.DateTime(1753, 1, 1, 12, 0, 0, 0);
             this.dtpViernesInicio.Visible = false;
             // 
             // dtpJuevesFin
@@ -358,7 +358,7 @@
             this.dtpJuevesFin.ShowUpDown = true;
             this.dtpJuevesFin.Size = new System.Drawing.Size(63, 20);
             this.dtpJuevesFin.TabIndex = 17;
-            this.dtpJuevesFin.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.dtpJuevesFin.Value = new System.DateTime(1753, 1, 1, 12, 0, 0, 0);
             this.dtpJuevesFin.Visible = false;
             // 
             // dtpMiercolesFin
@@ -376,7 +376,7 @@
             this.dtpMiercolesFin.ShowUpDown = true;
             this.dtpMiercolesFin.Size = new System.Drawing.Size(63, 20);
             this.dtpMiercolesFin.TabIndex = 16;
-            this.dtpMiercolesFin.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.dtpMiercolesFin.Value = new System.DateTime(1753, 1, 1, 12, 0, 0, 0);
             this.dtpMiercolesFin.Visible = false;
             // 
             // dtpMartesInicio
@@ -394,7 +394,7 @@
             this.dtpMartesInicio.ShowUpDown = true;
             this.dtpMartesInicio.Size = new System.Drawing.Size(63, 20);
             this.dtpMartesInicio.TabIndex = 4;
-            this.dtpMartesInicio.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.dtpMartesInicio.Value = new System.DateTime(1753, 1, 1, 12, 0, 0, 0);
             this.dtpMartesInicio.Visible = false;
             // 
             // dtpMartesFin
@@ -412,7 +412,7 @@
             this.dtpMartesFin.ShowUpDown = true;
             this.dtpMartesFin.Size = new System.Drawing.Size(63, 20);
             this.dtpMartesFin.TabIndex = 5;
-            this.dtpMartesFin.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.dtpMartesFin.Value = new System.DateTime(1753, 1, 1, 12, 0, 0, 0);
             this.dtpMartesFin.Visible = false;
             // 
             // dtpMiercolesInicio
@@ -430,7 +430,7 @@
             this.dtpMiercolesInicio.ShowUpDown = true;
             this.dtpMiercolesInicio.Size = new System.Drawing.Size(63, 20);
             this.dtpMiercolesInicio.TabIndex = 11;
-            this.dtpMiercolesInicio.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.dtpMiercolesInicio.Value = new System.DateTime(1753, 1, 1, 12, 0, 0, 0);
             this.dtpMiercolesInicio.Visible = false;
             // 
             // dtpJuevesInicio
@@ -448,7 +448,7 @@
             this.dtpJuevesInicio.ShowUpDown = true;
             this.dtpJuevesInicio.Size = new System.Drawing.Size(63, 20);
             this.dtpJuevesInicio.TabIndex = 12;
-            this.dtpJuevesInicio.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.dtpJuevesInicio.Value = new System.DateTime(1753, 1, 1, 12, 0, 0, 0);
             this.dtpJuevesInicio.Visible = false;
             // 
             // dtpLunesInicio
@@ -466,7 +466,7 @@
             this.dtpLunesInicio.ShowUpDown = true;
             this.dtpLunesInicio.Size = new System.Drawing.Size(63, 20);
             this.dtpLunesInicio.TabIndex = 25;
-            this.dtpLunesInicio.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.dtpLunesInicio.Value = new System.DateTime(1753, 1, 1, 12, 0, 0, 0);
             this.dtpLunesInicio.Visible = false;
             // 
             // dtpLunesFin
@@ -484,7 +484,7 @@
             this.dtpLunesFin.ShowUpDown = true;
             this.dtpLunesFin.Size = new System.Drawing.Size(63, 20);
             this.dtpLunesFin.TabIndex = 26;
-            this.dtpLunesFin.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.dtpLunesFin.Value = new System.DateTime(1753, 1, 1, 12, 0, 0, 0);
             this.dtpLunesFin.Visible = false;
             // 
             // SeleccionarHorarios

@@ -22,10 +22,23 @@ namespace CapaEntidad
 		public BannerEstatico() { }
 
         /// <summary>
+        /// Inicializa una instancia de la clase <see cref="BannerEstatico"/> a partir de otro banner base.
+        /// </summary>
+		public BannerEstatico(Banner pOtroBanner) : base()
+        {
+            Id = pOtroBanner.Id;
+            Nombre = pOtroBanner.Nombre;
+            Descripcion = pOtroBanner.Descripcion;
+            FechaInicio = pOtroBanner.FechaInicio;
+            FechaFin = pOtroBanner.FechaInicio;
+            Frecuencia = pOtroBanner.Frecuencia;
+        }
+
+        /// <summary>
         /// Inicializa una instancia de la clase <see cref="BannerEstatico"/>.
         /// </summary>
         /// <param name="pTexto">Texto del banner.</param>
-		public BannerEstatico (string pTexto)
+        public BannerEstatico (string pTexto)
 		{
             this.Texto = pTexto;
 		}

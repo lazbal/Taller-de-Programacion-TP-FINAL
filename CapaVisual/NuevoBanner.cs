@@ -4,61 +4,64 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
+using System.Linq;
 using System.Windows.Forms;
 using CapaEntidad;
 
 namespace CapaVisual
 {
     /// <summary>
-    /// Ventana específica para la creación/modificación de un nuevo banner.
+    /// Ventana para crear/modificar una campaña.
     /// </summary>
     public partial class NuevoBanner : Nuevo
     {
         //Atributos.
-        //Consultar al profesor como se podría hacer con una especie de TEntity
-        private BannerEstatico iBannerEstatico;
-        private RSSFeed iRSSFeed;
-        private FachadaCapaVisual iFachada;
+        private Banner iBanner;
+        private bool iModoActualizacion;
 
         /// <summary>
-        /// Banner del tipo estático.
+        /// Constructor de la ventana.
         /// </summary>
-        public BannerEstatico Banner
-        {
-            get { return iBannerEstatico; }
-            set { iBannerEstatico = value; }
-        }
-
-        /// <summary>
-        /// Banner del tipo RSS.
-        /// </summary>
-        public RSSFeed RSSFeed
-        {
-            get { return iRSSFeed; }
-            set { iRSSFeed = value; }
-        }
-
-        /// <summary>
-        /// Constructor de la ventana para un banner estático.
-        /// </summary>
-        /// <param name="pBannerEstatico">Banner estático a cargar/modificar.</param>
-        public NuevoBanner(BannerEstatico pBannerEstatico)
+        /// <param name="pBanner">Banner a cargar/modificar.</param>
+        public NuevoBanner(Banner pBanner, bool pModoActualizacion = false) : base()
         {
             InitializeComponent();
-            iBannerEstatico = pBannerEstatico;
-            this.Name = "Nuevo Banner Estático";
-        }
-
-        /// <summary>
-        /// Constructor de la ventana para un banner RSS.
-        /// </summary>
-        /// <param name="pRSSFeed">Banner RSS a cargar/modificar.</param>
-        public NuevoBanner(RSSFeed pRSSFeed, FachadaCapaVisual pFachada)
-        {
-            InitializeComponent();
-            iRSSFeed = pRSSFeed;
-            iFachada = pFachada;
-            this.Name = "Nuevo Banner RSS";
+            iModoActualizacion = pModoActualizacion;
+            iBanner = pBanner;
+            if (iBanner == null)
+            {
+                this.cbTipoBanner.SelectedItem = this.cbTipoBanner.Items[1];
+                iBanner = new BannerEstatico();
+            }
+            else if (iBanner is RSSFeed)
+            {
+                //Debe ir primero esta linea
+                this.tbBanner.Text = (iBanner as RSSFeed).URL;
+                this.cbTipoBanner.SelectedItem = this.cbTipoBanner.Items[0];
+                this.btnSeleccionarFuenteRSS.Visible = true;
+            }
+            else
+            {
+                //Debe ir primero esta linea
+                this.tbBanner.Text = (iBanner as BannerEstatico).Texto;
+                this.cbTipoBanner.SelectedItem = this.cbTipoBanner.Items[1];
+            }
+            //Para las fechas no se comprueba la nulidad ya que no es posible.
+            this.dtpFechaInicio.Value = iBanner.FechaInicio;
+            this.dtpFechaFin.Value = iBanner.FechaFin;
+            if (!String.IsNullOrEmpty(iBanner.Nombre))
+            {
+                this.tbNombre.Text = iBanner.Nombre;
+            }
+            if (!String.IsNullOrEmpty(iBanner.Descripcion))
+            {
+                this.tbDescripcion.Text = iBanner.Descripcion;
+            }
+            if (iBanner.Frecuencia == null)
+            {
+                this.iBanner.Frecuencia = new List<Horario>();
+            }
+            this.ListaHorarios = this.iBanner.Frecuencia.ToList();
         }
 
         /// <summary>
@@ -66,68 +69,116 @@ namespace CapaVisual
         /// </summary>
         private void btnSeleccionarFuenteRSS_Click(object sender, EventArgs e)
         {
+            (this.iBanner as RSSFeed).URL = this.tbBanner.Text;
             //Abrir la ventana para la seleccion de fuentes pasándole el banner como parámetro para modificarlo.
-            ComprobarRSSFeed mNuevoRSS = new ComprobarRSSFeed(RSSFeed,iFachada);
+            ComprobarRSSFeed mNuevoRSS = new ComprobarRSSFeed(iBanner as RSSFeed);
             mNuevoRSS.ShowDialog();
+            this.tbBanner.Text = (this.iBanner as RSSFeed).URL;
         }
 
         /// <summary>
-        /// Cancelar cambios.
+        /// Evento al cambiar la selección en la lista de tipo de banner.
+        /// </summary>
+        private void cbTipoBanner_SelectedValueChanged(object sender, EventArgs e)
+        {
+            switch (this.cbTipoBanner.SelectedIndex)
+            {
+                //Caso de que se seleccione RSSFeed
+                case 0:
+                    {
+                        this.btnSeleccionarFuenteRSS.Visible = true;
+                        if (!(iBanner is RSSFeed))
+                        {
+                            this.iBanner = new RSSFeed(iBanner);
+                        }
+                        (this.iBanner as RSSFeed).URL = this.tbBanner.Text;
+                        break;
+                    }
+                //Caso de que se seleccione Banner Estático
+                case 1:
+                    {
+                        this.btnSeleccionarFuenteRSS.Visible = false;
+                        if (!(iBanner is BannerEstatico))
+                        {
+                            this.iBanner = new BannerEstatico(iBanner);
+                        }
+                        (this.iBanner as BannerEstatico).Texto = this.tbBanner.Text;
+                        break;
+                    }
+                default:
+                    {
+                        this.tbBanner.Text = "Seleccione el tipo de banner";
+                        this.btnSeleccionarFuenteRSS.Visible = false;
+                        break;
+                    }
+            }
+        }
+
+        /// <summary>
+        /// Cancelar los cambios.
         /// </summary>
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            //Cerrar ventana.
+            //Cerrar Ventana.
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
         /// <summary>
-        /// Aceptar cambios.
+        /// Muestra una tabla con los horarios ocupados actualmente.
         /// </summary>
+        private void btnHorariosOcupados_Click(object sender, EventArgs e)
+        {
+            HorariosOcupados vTabla = new HorariosOcupadosBanners(this.dtpFechaInicio.Value, this.dtpFechaFin.Value);
+            DialogResult resultado = vTabla.ShowDialog();
+        }
+
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             //No controlo la cantidad de elementos en ListaHorarios para que se puedan guardar campañas o banners inactivos.
-            //Sí es un banner estático se carga éste atributo.
-            if (iBannerEstatico != null)
+            //Comprobar que ningun parámetro sea null
+            if (this.tbNombre.Text == "" || this.tbDescripcion.Text == "")
             {
-                Banner.Texto = tbEstatico.Text;
-                Banner.Nombre = this.tbNombre.Text;
-                Banner.Descripcion = this.tbDescripcion.Text;
-                Banner.Frecuencia = this.ListaHorarios;
-                Banner.FechaInicio = this.dtpFechaInicio.Value;
-                Banner.FechaFin = this.dtpFechaFin.Value;
+                MessageBox.Show("Asegurese de completar todos los campos requeridos");
             }
-            //Sino, es un banner RSS y se carga dicho atributo.
             else
             {
-                RSSFeed.Nombre = this.tbNombre.Text;
-                RSSFeed.Descripcion = this.tbDescripcion.Text;
-                RSSFeed.Frecuencia = this.ListaHorarios;
-                RSSFeed.FechaInicio = this.dtpFechaInicio.Value;
-                RSSFeed.FechaFin = this.dtpFechaFin.Value;
+                cbTipoBanner_SelectedValueChanged(this, null);
+                //Cargar los datos en la campaña provista.
+                iBanner.Nombre = this.tbNombre.Text;
+                iBanner.Descripcion = this.tbDescripcion.Text;
+                iBanner.FechaInicio = this.dtpFechaInicio.Value;
+                iBanner.FechaFin = this.dtpFechaFin.Value;
+                iBanner.Frecuencia.Clear();
+                if (this.ListaHorarios.Count > 0)
+                {
+                    foreach (Horario mHorario in this.ListaHorarios)
+                    {
+                        iBanner.Frecuencia.Add(mHorario);
+                    }
+                }
+
+                //Insertar en la base de datos
+                if (iModoActualizacion)
+                {
+                    FachadaCapaVisual.ActualizarBanner(iBanner);
+                }
+                else
+                {
+                    FachadaCapaVisual.AgregarBanner(iBanner);
+                }
+
+                //Cerrar ventana.
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
-            //Cerrar ventana.
-            this.Close();
         }
 
-        /// <summary>
-        /// Acciones a realizar durante la carga de la ventana.
-        /// </summary>
-        private void NuevoBanner_Load(object sender, EventArgs e)
+        private void btnCancelar_Click_1(object sender, EventArgs e)
         {
-            //Sí es un banner estático el que se provee al constructor, la ventana se carga para tal elemento.
-            if (iBannerEstatico != null)
-            {
-                lblEstatico.Visible = true;
-                tbEstatico.Visible = true;
-                btnSeleccionarFuenteRSS.Visible = false;
-            }
-            //Sino se carga para un banner RSS.
-            else
-            {
-                lblEstatico.Visible = false;
-                tbEstatico.Visible = false;
-                btnSeleccionarFuenteRSS.Visible = true;
-            }
+            //Cerrar Ventana.
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }

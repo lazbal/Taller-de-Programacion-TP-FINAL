@@ -105,7 +105,7 @@
             this.tbDescripcion.Location = new System.Drawing.Point(15, 87);
             this.tbDescripcion.Multiline = true;
             this.tbDescripcion.Name = "tbDescripcion";
-            this.tbDescripcion.Size = new System.Drawing.Size(197, 71);
+            this.tbDescripcion.Size = new System.Drawing.Size(197, 113);
             this.tbDescripcion.TabIndex = 10;
             // 
             // lblDescripcion
@@ -124,7 +124,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(465, 177);
+            this.ClientSize = new System.Drawing.Size(465, 211);
             this.Controls.Add(this.tbDescripcion);
             this.Controls.Add(this.lblDescripcion);
             this.Controls.Add(this.tbNombre);

@@ -13,77 +13,55 @@ namespace CapaVisual
     /// <summary>
     /// Ventana para crear/modificar una campaña.
     /// </summary>
-    public partial class NuevoElementoCarteleria : Nuevo
+    public partial class NuevoCampaña : Nuevo
     {
         //Atributos.
-        private ElementoCarteleria iElementoCarteleria;
+        private Campaña iCampaña;
         private bool iModoActualizacion;
 
         /// <summary>
         /// Constructor de la ventana.
         /// </summary>
-        /// <param name="pElementoCarteleria">Campaña a cargar/modificar.</param>
-        public NuevoElementoCarteleria(ElementoCarteleria pElementoCarteleria, bool pModoActualizacion = false) : base()
+        /// <param name="pCampaña">Campaña a cargar/modificar.</param>
+        public NuevoCampaña(Campaña pCampaña, bool pModoActualizacion = false) : base()
         {
             InitializeComponent();
             iModoActualizacion = pModoActualizacion;
             lvImagenes.LargeImageList = new ImageList();
             //Cargamos a la ventana el elemento de cartelería parámetro
-            iElementoCarteleria = pElementoCarteleria;
+            if (pCampaña == null)
+            {
+                pCampaña = new Campaña();
+            }
+            iCampaña = pCampaña;
             //Para las fechas no se comprueba la nulidad ya que no es posible.
-            this.dtpFechaInicio.Value = iElementoCarteleria.FechaInicio;
-            this.dtpFechaFin.Value = iElementoCarteleria.FechaFin;
-            if (!String.IsNullOrEmpty(iElementoCarteleria.Nombre))
+            this.dtpFechaInicio.Value = iCampaña.FechaInicio;
+            this.dtpFechaFin.Value = iCampaña.FechaFin;
+            if (!String.IsNullOrEmpty(iCampaña.Nombre))
             {
-                this.tbNombre.Text = iElementoCarteleria.Nombre;
+                this.tbNombre.Text = iCampaña.Nombre;
             }
-            if (!String.IsNullOrEmpty(iElementoCarteleria.Descripcion))
+            if (!String.IsNullOrEmpty(iCampaña.Descripcion))
             {
-                this.tbDescripcion.Text = iElementoCarteleria.Descripcion;
+                this.tbDescripcion.Text = iCampaña.Descripcion;
             }
-            if (iElementoCarteleria.Frecuencia == null)
+            if (iCampaña.Frecuencia == null)
             {
-                this.iElementoCarteleria.Frecuencia = new List<Horario>();
+                this.iCampaña.Frecuencia = new List<Horario>();
             }
-            this.ListaHorarios = this.iElementoCarteleria.Frecuencia.ToList();
-            //Si es un elemento de cartelería nuevo se genera la lista de imágenes.
-            if (iElementoCarteleria.Campaña == null)
+            this.ListaHorarios = this.iCampaña.Frecuencia.ToList();
+            //Obtener imágenes de la campaña
+            foreach (ImagenCampaña mImagenCampaña in iCampaña.ListaImagenes)
             {
-                //Inicializa la lista de imágenes del recuadro derecho en la ventana.
-                iElementoCarteleria.Campaña = new Campaña();
+                lvImagenes.LargeImageList.Images.Add(mImagenCampaña.Ruta, mImagenCampaña.Imagen);
+                lvImagenes.Items.Add(mImagenCampaña.Ruta, mImagenCampaña.Ruta);
             }
-            else
-            {
-                foreach (ImagenCampaña mImagenCampaña in iElementoCarteleria.Campaña.ListaImagenes)
-                {
-                    lvImagenes.LargeImageList.Images.Add(mImagenCampaña.Ruta, mImagenCampaña.Imagen);
-                    lvImagenes.Items.Add(mImagenCampaña.Ruta, mImagenCampaña.Ruta);
-                }
-                this.numSS.Value = this.iElementoCarteleria.Campaña.TiempoXImagen.Seconds;
-                this.numMM.Value = this.iElementoCarteleria.Campaña.TiempoXImagen.Minutes;
-                this.numHH.Value = this.iElementoCarteleria.Campaña.TiempoXImagen.Hours;
-            }
+            //Obtener tiempo por imagen de la campaña
+            this.numSS.Value = this.iCampaña.TiempoXImagen.Seconds;
+            this.numMM.Value = this.iCampaña.TiempoXImagen.Minutes;
+            this.numHH.Value = this.iCampaña.TiempoXImagen.Hours;
             //Tamaño para la vista previa de las imágenes.
             lvImagenes.LargeImageList.ImageSize = new Size(235, 235);
-            //Si es un elemento de cartelería nuevo se genera el banner.
-            if (iElementoCarteleria.Banner == null)
-            {
-                this.cbTipoBanner.SelectedItem = this.cbTipoBanner.Items[1];
-                iElementoCarteleria.Banner = new BannerEstatico();
-            }
-            else if (iElementoCarteleria.Banner is RSSFeed)
-            {
-                //Debe ir primero esta linea
-                this.tbBanner.Text = (iElementoCarteleria.Banner as RSSFeed).URL;
-                this.cbTipoBanner.SelectedItem = this.cbTipoBanner.Items[0];
-                this.btnSeleccionarFuenteRSS.Visible = true;
-            }
-            else
-            {
-                //Debe ir primero esta linea
-                this.tbBanner.Text = (iElementoCarteleria.Banner as BannerEstatico).Texto;
-                this.cbTipoBanner.SelectedItem = this.cbTipoBanner.Items[1];
-            }
         }
 
         /// <summary>
@@ -171,48 +149,6 @@ namespace CapaVisual
         }
 
         /// <summary>
-        /// Acciónes a realizar cuando se quiere seleccionar una fuente RSS.
-        /// </summary>
-        private void btnSeleccionarFuenteRSS_Click(object sender, EventArgs e)
-        {
-            (this.iElementoCarteleria.Banner as RSSFeed).URL = this.tbBanner.Text;
-            //Abrir la ventana para la seleccion de fuentes pasándole el banner como parámetro para modificarlo.
-            ComprobarRSSFeed mNuevoRSS = new ComprobarRSSFeed(iElementoCarteleria.Banner as RSSFeed);
-            mNuevoRSS.ShowDialog();
-            this.tbBanner.Text = (this.iElementoCarteleria.Banner as RSSFeed).URL;
-        }
-
-        /// <summary>
-        /// Evento al cambiar la selección en la lista de tipo de banner.
-        /// </summary>
-        private void cbTipoBanner_SelectedValueChanged(object sender, EventArgs e)
-        {
-            switch (this.cbTipoBanner.SelectedIndex)
-            {
-                //Caso de que se seleccione RSSFeed
-                case 0:
-                    {
-                        this.btnSeleccionarFuenteRSS.Visible = true;
-                        this.iElementoCarteleria.Banner = new RSSFeed(this.tbBanner.Text);
-                        break;
-                    }
-                //Caso de que se seleccione Banner Estático
-                case 1:
-                    {
-                        this.btnSeleccionarFuenteRSS.Visible = false;
-                        this.iElementoCarteleria.Banner = new BannerEstatico(this.tbBanner.Text);
-                        break;
-                    }
-                default:
-                    {
-                        this.tbBanner.Text = "Seleccione el tipo de banner";
-                        this.btnSeleccionarFuenteRSS.Visible = false;
-                        break;
-                    }
-            }
-        }
-
-        /// <summary>
         /// Cancelar los cambios.
         /// </summary>
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -236,45 +172,38 @@ namespace CapaVisual
             else
             {
                 //Cargar los datos en la campaña provista.
-                iElementoCarteleria.Nombre = this.tbNombre.Text;
-                iElementoCarteleria.Descripcion = this.tbDescripcion.Text;
-                iElementoCarteleria.FechaInicio = this.dtpFechaInicio.Value;
-                iElementoCarteleria.FechaFin = this.dtpFechaFin.Value;
-                iElementoCarteleria.Frecuencia.Clear();
+                iCampaña.Nombre = this.tbNombre.Text;
+                iCampaña.Descripcion = this.tbDescripcion.Text;
+                iCampaña.FechaInicio = this.dtpFechaInicio.Value;
+                iCampaña.FechaFin = this.dtpFechaFin.Value;
+                iCampaña.Frecuencia.Clear();
                 if (this.ListaHorarios.Count > 0)
                 {
                     foreach (Horario mHorario in this.ListaHorarios)
                     {
-                        iElementoCarteleria.Frecuencia.Add(mHorario);
+                        iCampaña.Frecuencia.Add(mHorario);
                     }
                 }
                 //Campaña
-                iElementoCarteleria.Campaña.TiempoXImagen = new TimeSpan(Convert.ToInt32(this.numHH.Value), Convert.ToInt32(this.numMM.Value), Convert.ToInt32(this.numSS.Value));
-                iElementoCarteleria.Campaña.ListaImagenes.Clear();
+                iCampaña.TiempoXImagen = new TimeSpan(Convert.ToInt32(this.numHH.Value), Convert.ToInt32(this.numMM.Value), Convert.ToInt32(this.numSS.Value));
+                iCampaña.ListaImagenes.Clear();
                 if (this.lvImagenes.LargeImageList.Images.Count > 0)
                 {
                     //Agregar cada una de las imágenes en la vista previa a la lista en la campaña.
                     foreach (string mRuta in this.lvImagenes.LargeImageList.Images.Keys)
                     {
-                        iElementoCarteleria.Campaña.AgregarImagen(mRuta);
+                        iCampaña.AgregarImagen(mRuta);
                     }
-                }
-
-                //Banner
-                //Sólo se actualiza sí es estático, caso contrario se actualiza en la comprobación de la fuente
-                if (cbTipoBanner.SelectedIndex == 1)
-                {
-                    iElementoCarteleria.Banner = new BannerEstatico(tbBanner.Text);
                 }
 
                 //Insertar en la base de datos
                 if (iModoActualizacion)
                 {
-                    FachadaCapaVisual.ActualizarElementoCarteleria(iElementoCarteleria);
+                    FachadaCapaVisual.ActualizarCampaña(iCampaña);
                 }
                 else
                 {
-                    FachadaCapaVisual.AgregarElementoCarteleria(iElementoCarteleria);
+                    FachadaCapaVisual.AgregarCampaña(iCampaña);
                 }
 
                 //Cerrar ventana.
@@ -288,7 +217,7 @@ namespace CapaVisual
         /// </summary>
         private void btnHorariosOcupados_Click(object sender, EventArgs e)
         {
-            HorariosOcupados vTabla = new HorariosOcupados(this.dtpFechaInicio.Value, this.dtpFechaFin.Value);
+            HorariosOcupados vTabla = new HorariosOcupadosCampañas(this.dtpFechaInicio.Value, this.dtpFechaFin.Value);
             DialogResult resultado = vTabla.ShowDialog();
         }
     }

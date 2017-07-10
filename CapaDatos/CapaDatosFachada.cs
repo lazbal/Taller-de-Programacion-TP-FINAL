@@ -8,7 +8,7 @@ namespace CapaDatos
     /// <summary>
     /// Fachada para la capa de datos.
     /// </summary>
-	public class CapaDatosFachada : ICapaDatosFachada
+	public class CapaDatosFachada
     {
         #region Datos
         private UnitOfWork iUnitOfWork;
@@ -34,71 +34,45 @@ namespace CapaDatos
              this.iUnitOfWork = new UnitOfWork();
         }
 		#endregion
-		#region ElementoCarteleria
-		/// <summary>
-		/// Crea una entrada de <typeparamref name="ElementoCarteleria"/> en la tabla de éstos.
-		/// </summary>
-		/// <param name="pElementoCarteleria">Objeto a insertar en tabla.</param>
-		public void Create(ElementoCarteleria pElementoCarteleria)
-		{
-			iUnitOfWork.ElementoCarteleriaRepositorio.Insert(pElementoCarteleria);
-			iUnitOfWork.Save();
+		
+        #region Banner
+        /// <summary>
+        /// Crea una entrada de <typeparamref name="Banner"/> en la tabla de éstos.
+        /// </summary>
+        /// <param name="pBanner">Objeto a insertar en tabla.</param>
+        public void Create(Banner pBanner)
+        {
+            iUnitOfWork.BannerRepositorio.Insert(pBanner);
+            iUnitOfWork.Save();
         }
-
 
         /// <summary>
         /// Actualiza una entrada de tabla.
         /// </summary>
         /// <param name="pCamapaña">Objeto actualizado.</param>
-        public void Update(ElementoCarteleria pElementoCarteleria)
-		{
-			iUnitOfWork.ElementoCarteleriaRepositorio.Update(pElementoCarteleria);
-			iUnitOfWork.Save();
-		}
-
-        /// <summary>
-        /// Elimina una entrada de tabla.
-        /// </summary>
-        /// <param name="pElementoCarteleriaID">Id del objeto a eliminar.</param>
-        public void Delete(Int64 pElementoCarteleriaID)
-		{
-            Delete(iUnitOfWork.ElementoCarteleriaRepositorio.GetByID(pElementoCarteleriaID));
+        public void Update(Banner pBanner)
+        {
+            iUnitOfWork.BannerRepositorio.Update(pBanner);
+            iUnitOfWork.Save();
         }
 
         /// <summary>
         /// Elimina una entrada de tabla.
         /// </summary>
-        /// <param name="pElementoCarteleria">Objeto a eliminar.</param>
-        public void Delete(ElementoCarteleria pElementoCarteleria)
+        /// <param name="pBanner">Objeto a eliminar.</param>
+        public void Delete(Banner pBanner)
         {
-            //Para forzar la eliminación en cascada. Se eliminan primero los items que contienen claves foráneas.
-            //Eliminar todas las imágenes de la campaña.
-            foreach (ImagenCampaña imagen in pElementoCarteleria.Campaña.ListaImagenes.Reverse())
-            {
-                iUnitOfWork.ImagenCampañaRepositorio.Delete(imagen);
-            }
-            //Eliminar la campaña del cartel.
-            iUnitOfWork.CampañaRepositorio.Delete(pElementoCarteleria.Campaña);
-            //Dependiendo del tipo de banner que se trate.
-            if (pElementoCarteleria.Banner is BannerEstatico)
-            {
-                //simplemente se elimina el banner.
-                iUnitOfWork.BannerEstRepositorio.Delete((BannerEstatico)pElementoCarteleria.Banner);
-            }
-            else if (pElementoCarteleria.Banner is RSSFeed)
+            if (pBanner is RSSFeed)
             {
                 //se eliminan todas las noticias almacenadas primero
-                IEnumerable<RSSItem> mListaNoticiasBorrar = ((RSSFeed)pElementoCarteleria.Banner).UltimasNoticias;
+                IEnumerable<RSSItem> mListaNoticiasBorrar = ((RSSFeed)pBanner).UltimasNoticias;
                 foreach (RSSItem item in mListaNoticiasBorrar.Reverse())
                 {
                     iUnitOfWork.RSSItemRepositorio.Delete(item);
                 }
-                //luego se elimina el banner
-                iUnitOfWork.RSSFeedRepositorio.Delete((RSSFeed)pElementoCarteleria.Banner);
-
             }
-            //finalmente se elimina el cartel
-            iUnitOfWork.ElementoCarteleriaRepositorio.Delete(pElementoCarteleria);
+            //finalmente se elimina el banner
+            iUnitOfWork.BannerRepositorio.Delete(pBanner);
             //guardar cambios
             iUnitOfWork.Save();
         }
@@ -106,95 +80,213 @@ namespace CapaDatos
         /// <summary>
         /// Devuelve todas las entradas de tabla como una lista.
         /// </summary>
-        /// <returns>Lista de <typeparamref name="ElementoCarteleria"/>,</returns>
-        public IQueryable<ElementoCarteleria> GetQueryAllElementosCarteleria()
-		{
-			return iUnitOfWork.ElementoCarteleriaRepositorio.Queryable;
-        }
-
-        /// <summary>
-        /// Devuelve todas las entradas de tabla como una lista.
-        /// </summary>
-        /// <returns>Lista de <typeparamref name="ElementoCarteleria"/>,</returns>
-        public ICollection<ElementoCarteleria> GetAllElementosCarteleria()
+        /// <returns>Lista de <typeparamref name="Banner"/>,</returns>
+        public ICollection<Banner> GetAllBanners()
         {
-            IQueryable<ElementoCarteleria> consulta = GetQueryAllElementosCarteleria();
+            IQueryable<Banner> consulta = iUnitOfWork.BannerRepositorio.Queryable;
             return consulta.ToList();
         }
 
         /// <summary>
-        /// Devuelve la consulta con todos los elementos de carteleria entre dos fechas
+        /// Devuelve la consulta con todos los banners entre dos fechas
         /// </summary>
         /// <param name="pFechaInicial">Fecha inicial.</param>
         /// <param name="pFechaFinal">Fecha final.</param>
-        public IQueryable<ElementoCarteleria> GetQueryAllElementosCarteleriaEntre(DateTime pFechaInicial, DateTime pFechaFinal)
+        private IQueryable<Banner> GetQueryAllBannersEntre(DateTime pFechaInicial, DateTime pFechaFinal)
         {
-            IQueryable<ElementoCarteleria> iElementoCartelerias =
-                from elementosCarteleria in iUnitOfWork.ElementoCarteleriaRepositorio.Queryable
-                where (elementosCarteleria.FechaInicio <= pFechaFinal) &&
-                      (elementosCarteleria.FechaFin >= pFechaInicial)
-                select elementosCarteleria;
-            return iElementoCartelerias;
+            IQueryable<Banner> iBanners =
+                from banner in iUnitOfWork.BannerRepositorio.Queryable
+                where (banner.FechaInicio <= pFechaFinal) &&
+                      (banner.FechaFin >= pFechaInicial)
+                select banner;
+            return iBanners;
         }
 
         /// <summary>
-        /// Obtener todas las <see cref="ElementoCarteleria"/> en la base de datos que comprenden la fecha de hoy.
+        /// Obtener todas las <see cref="Banner"/> en la base de datos que comprenden la fecha de hoy.
         /// Ordenadas por el horario de inicio para el día de hoy.
         /// Las que no posean un horario para el día de hoy se colocan al final de la coleccion.
         /// </summary>
-        /// <returns>Todos los ElementosCarteleria del día.</returns>
-        public ICollection<ElementoCarteleria> GetElementosCarteleriaHoy()
+        /// <returns>Todos los Banners del día.</returns>
+        public ICollection<Banner> GetBannersHoy()
         {
-            IQueryable<ElementoCarteleria> consulta = GetQueryAllElementosCarteleriaEntre(DateTime.Today, DateTime.Today);
+            IQueryable<Banner> consulta = GetQueryAllBannersEntre(DateTime.Today, DateTime.Today);
             //Se ordenan por el día de la fecha de la consulta.
             return consulta.AsEnumerable().OrderBy(elem => elem).ToList();
         }
 
         /// <summary>
-        /// Devuelve todos los elementos de carteleria entre dos fechas.
+        /// Devuelve todos los banners entre dos fechas.
         /// </summary>
         /// <param name="pFechaInicial">Fecha inicial.</param>
         /// <param name="pFechaFinal">Fecha final.</param>
-        public ICollection<ElementoCarteleria> GetAllElementosCarteleriaEntre (DateTime pFechaInicial, DateTime pFechaFinal)
-		{
-		    IQueryable<ElementoCarteleria> consulta = GetQueryAllElementosCarteleriaEntre(pFechaInicial, pFechaFinal);
+        public ICollection<Banner> GetAllBannersEntre(DateTime pFechaInicial, DateTime pFechaFinal)
+        {
+            IQueryable<Banner> consulta = GetQueryAllBannersEntre(pFechaInicial, pFechaFinal);
             //Se ordenan por el día de la fecha de la consulta. En caso de ser null irá primero.
             return consulta.ToList();
-		}
+        }
 
         /// <summary>
         /// Busca y obtiene un elemento específico en la base de datos.
         /// </summary>
-        /// <param name="pElementoCarteleria">ID del objeto a buscar</param>
+        /// <param name="pBanner">ID del objeto a buscar</param>
         /// <returns>El objeto encontrado ó nulo si no lo encuentra.</returns>
-        public ElementoCarteleria GetByIdElementoCarteleria(Int64 pElementoCarteleria)
-		{
-			return iUnitOfWork.ElementoCarteleriaRepositorio.GetByID(pElementoCarteleria); ;
+        public Banner GetByIdBanner(Int64 pBanner)
+        {
+            return iUnitOfWork.BannerRepositorio.GetByID(pBanner); ;
         }
 
         /// <summary>
         /// Devuelve la consulta los elementos de carteleria cuyo nombre poseen similitud con la cadena provista.
         /// </summary>
         /// <param name="pNombre">Posible nombre.</param>
-        /// <returns>Lista de coincidencias <typeparamref name="ElementoCarteleria"/></returns>
-        public IQueryable<ElementoCarteleria> QueryBusquedaAproximacionElementoCarteleria(string pNombre)
+        /// <returns>Lista de coincidencias <typeparamref name="Banner"/></returns>
+        public IQueryable<Banner> QueryBusquedaAproximacionBanner(string pCadena)
         {
             //Se realiza una consulta a la tabla por las entradas cuyo nombre contiene la cadena provista.
-            IQueryable<ElementoCarteleria> iElementoCarteleria =
-                from elementoCarteleria in iUnitOfWork.ElementoCarteleriaRepositorio.Queryable
-                where elementoCarteleria.Nombre.Contains(pNombre)
-                select elementoCarteleria;
-            return iElementoCarteleria;
+            IQueryable<Banner> iBanner =
+                from banner in iUnitOfWork.BannerRepositorio.Queryable
+                where banner.Nombre.Contains(pCadena) ||
+                        banner.Descripcion.Contains(pCadena)
+                select banner;
+            return iBanner;
         }
 
         /// <summary>
         /// Devuelve la coleccion con los elementos de carteleria cuyo nombre poseen similitud con la cadena provista.
         /// </summary>
         /// <param name="pNombre">Posible nombre.</param>
-        /// <returns>Lista de coincidencias <typeparamref name="ElementoCarteleria"/></returns>
-        public ICollection<ElementoCarteleria> BusquedaAproximacionElementoCarteleria(string pNombre)
+        /// <returns>Lista de coincidencias <typeparamref name="Banner"/></returns>
+        public ICollection<Banner> BusquedaAproximacionBanner(string pCadena)
         {
-            return QueryBusquedaAproximacionElementoCarteleria(pNombre).ToList();
+            return QueryBusquedaAproximacionBanner(pCadena).ToList();
+        }
+        #endregion
+
+        #region Campaña
+		/// <summary>
+		/// Crea una entrada de <typeparamref name="Campaña"/> en la tabla de éstos.
+		/// </summary>
+		/// <param name="pCampaña">Objeto a insertar en tabla.</param>
+		public void Create(Campaña pCampaña)
+		{
+			iUnitOfWork.CampañaRepositorio.Insert(pCampaña);
+			iUnitOfWork.Save();
+        }
+
+        /// <summary>
+        /// Actualiza una entrada de tabla.
+        /// </summary>
+        /// <param name="pCamapaña">Objeto actualizado.</param>
+        public void Update(Campaña pCampaña)
+		{
+			iUnitOfWork.CampañaRepositorio.Update(pCampaña);
+			iUnitOfWork.Save();
+		}
+
+        /// <summary>
+        /// Elimina una entrada de tabla.
+        /// </summary>
+        /// <param name="pCampaña">Objeto a eliminar.</param>
+        public void Delete(Campaña pCampaña)
+        {
+            //Para forzar la eliminación en cascada. Se eliminan primero los items que contienen claves foráneas.
+            //Eliminar todas las imágenes de la campaña.
+            foreach (ImagenCampaña imagen in pCampaña.ListaImagenes.Reverse())
+            {
+                iUnitOfWork.ImagenCampañaRepositorio.Delete(imagen);
+            }
+            //Eliminar la campaña.
+            iUnitOfWork.CampañaRepositorio.Delete(pCampaña);
+            //guardar cambios
+            iUnitOfWork.Save();
+        }
+
+        /// <summary>
+        /// Devuelve todas las entradas de tabla como una lista.
+        /// </summary>
+        /// <returns>Lista de <typeparamref name="Campaña"/>,</returns>
+        public ICollection<Campaña> GetAllCampañas()
+        {
+            IQueryable<Campaña> consulta = iUnitOfWork.CampañaRepositorio.Queryable;
+            return consulta.ToList();
+        }
+
+        /// <summary>
+        /// Devuelve la consulta con todas las campañas entre dos fechas
+        /// </summary>
+        /// <param name="pFechaInicial">Fecha inicial.</param>
+        /// <param name="pFechaFinal">Fecha final.</param>
+        private IQueryable<Campaña> GetQueryAllCampañasEntre(DateTime pFechaInicial, DateTime pFechaFinal)
+        {
+            IQueryable<Campaña> iCampañas =
+                from campaña in iUnitOfWork.CampañaRepositorio.Queryable
+                where (campaña.FechaInicio <= pFechaFinal) &&
+                      (campaña.FechaFin >= pFechaInicial)
+                select campaña;
+            return iCampañas;
+        }
+
+        /// <summary>
+        /// Devuelve todas las campañas entre dos fechas.
+        /// </summary>
+        /// <param name="pFechaInicial">Fecha inicial.</param>
+        /// <param name="pFechaFinal">Fecha final.</param>
+        public ICollection<Campaña> GetAllCampañasEntre(DateTime pFechaInicial, DateTime pFechaFinal)
+        {
+            IQueryable<Campaña> consulta = GetQueryAllCampañasEntre(pFechaInicial, pFechaFinal);
+            //Se ordenan por el día de la fecha de la consulta. En caso de ser null irá primero.
+            return consulta.ToList();
+        }
+
+        /// <summary>
+        /// Obtener todas las <see cref="Campaña"/> en la base de datos que comprenden la fecha de hoy.
+        /// Ordenadas por el horario de inicio para el día de hoy.
+        /// Las que no posean un horario para el día de hoy se colocan al final de la coleccion.
+        /// </summary>
+        /// <returns>Todas las campañas del día.</returns>
+        public ICollection<Campaña> GetCampañasHoy()
+        {
+            IQueryable<Campaña> consulta = GetQueryAllCampañasEntre(DateTime.Today, DateTime.Today);
+            //Se ordenan por el día de la fecha de la consulta.
+            return consulta.AsEnumerable().OrderBy(elem => elem).ToList();
+        }
+
+        /// <summary>
+        /// Busca y obtiene un elemento específico en la base de datos.
+        /// </summary>
+        /// <param name="pCampaña">ID del objeto a buscar</param>
+        /// <returns>El objeto encontrado ó nulo si no lo encuentra.</returns>
+        public Campaña GetByIdCampaña(Int64 pCampaña)
+		{
+			return iUnitOfWork.CampañaRepositorio.GetByID(pCampaña); ;
+        }
+
+        /// <summary>
+        /// Devuelve la consulta los elementos de carteleria cuyo nombre poseen similitud con la cadena provista.
+        /// </summary>
+        /// <param name="pNombre">Posible nombre.</param>
+        /// <returns>Lista de coincidencias <typeparamref name="Campaña"/></returns>
+        public IQueryable<Campaña> QueryBusquedaAproximacionCampaña(string pCadena)
+        {
+            //Se realiza una consulta a la tabla por las entradas cuyo nombre contiene la cadena provista.
+            IQueryable<Campaña> iCampaña =
+                from campaña in iUnitOfWork.CampañaRepositorio.Queryable
+                where campaña.Nombre.Contains(pCadena) ||
+                      campaña.Descripcion.Contains(pCadena)
+                select campaña;
+            return iCampaña;
+        }
+
+        /// <summary>
+        /// Devuelve la coleccion con los elementos de carteleria cuyo nombre poseen similitud con la cadena provista.
+        /// </summary>
+        /// <param name="pNombre">Posible nombre.</param>
+        /// <returns>Lista de coincidencias <typeparamref name="Campaña"/></returns>
+        public ICollection<Campaña> BusquedaAproximacionCampaña(string pCadena)
+        {
+            return QueryBusquedaAproximacionCampaña(pCadena).ToList();
         }
         #endregion
     }

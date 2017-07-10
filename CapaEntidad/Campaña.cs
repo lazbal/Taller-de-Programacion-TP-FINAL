@@ -8,15 +8,8 @@ namespace CapaEntidad
     /// <summary>
     /// Clase de datos para campañas.
     /// </summary>
-	public class Campaña
+	public class Campaña : ElementoCarteleria
     {
-        /// <summary>
-        /// Clave foránea del elemento cartelería. Funciona como clave principal de la campaña.
-        /// </summary>
-		[Key, ForeignKey("ElementoCarteleria")]
-		public Int64 refElementoCarteleriaId { get; set; }
-		public virtual ElementoCarteleria ElementoCarteleria { get; set; }
-
         /// <summary>
         /// Tiempo que durará cada imágen hasta la siguiente.
         /// </summary>

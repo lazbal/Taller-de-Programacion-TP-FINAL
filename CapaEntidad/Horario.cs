@@ -16,13 +16,6 @@ namespace CapaEntidad
         /// </summary>
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public Int64 HorarioId { get; set; }
-
-        /// <summary>
-        /// Clave foránea del elemento cartelería padre.
-        /// </summary>
-		public Int64 refElementoCarteleriaId { get; set; }
-		[ForeignKey	("refElementoCarteleriaId")]
-		private ElementoCarteleria iElementoCarteleria { get; set; }
         
         /// <summary>
         /// Hora en que inicia el anuncio.

@@ -13,62 +13,98 @@ namespace CapaVisual
             return DateTime.ParseExact(@"01/01/1753", @"dd/mm/yyyy", null);
         }
 
+        #region Banner
+
         public static IEnumerable<RSSItem> LeerRSS(string pURL)
         {
-            return FachadaCapaNegocio.LeerRSS(pURL);
+            return ControladorBanners.LeerRSS(pURL);
         }
 
-        public static void AgregarElementoCarteleria(ElementoCarteleria pElementoCarteleria)
+        public static void AgregarBanner(Banner pBanner)
         {
-            FachadaCapaNegocio.AgregarElementoCarteleria(pElementoCarteleria);
+            ControladorBanners.AgregarBanner(pBanner);
         }
 
-        public static void ActualizarElementoCarteleria(ElementoCarteleria pElementoCarteleria)
+        public static void ActualizarBanner(Banner pBanner)
         {
-            FachadaCapaNegocio.ActualizarElementoCarteleria(pElementoCarteleria);
+            ControladorBanners.ActualizarBanner(pBanner);
         }
 
-        public static ICollection<ElementoCarteleria> ObtenerElementosCarteleria()
+        public static ICollection<Banner> ObtenerBanners()
         {
-            return FachadaCapaNegocio.GetAllElementosCarteleria();
+            return ControladorBanners.GetAllBanners();
         }
 
-        public static ICollection<ElementoCarteleria> ObtenerElementosCarteleriaEntre(DateTime pFechaInicio, DateTime pFechaFin)
+        public static ICollection<Banner> ObtenerBannersEntre(DateTime pFechaInicio, DateTime pFechaFin)
         {
-            return FachadaCapaNegocio.GetAllElementosCarteleriaEntre(pFechaInicio, pFechaFin);
+            return ControladorBanners.GetAllBannersEntre(pFechaInicio, pFechaFin);
         }
 
-        public static ElementoCarteleria SiguienteElementoCarteleria()
+        public static ICollection<Banner> ObtenerBannersHoy()
         {
-            ElementoCarteleria mSig = FachadaCapaNegocio.GetAllElementosCarteleria().FirstOrDefault();
-            FachadaCapaNegocio.GetAllElementosCarteleria().Remove(mSig);
-            FachadaCapaNegocio.GetAllElementosCarteleria().Add(mSig);
-            return mSig;
+            return ControladorBanners.BannersHoy();
         }
 
-        public static ICollection<ElementoCarteleria> ObtenerElementosCarteleriaHoy()
+        public static Banner BuscarBanner(Int64 pId)
         {
-            return FachadaCapaNegocio.ElementosCarteleriaHoy();
+            return ControladorBanners.BuscarBanner(pId);
         }
 
-        public static ElementoCarteleria BuscarElementoCarteleria(Int64 pId)
+        public static ICollection<Banner> BusquedaAproxBanner(string pCadena)
         {
-            return FachadaCapaNegocio.BuscarElementoCarteleria(pId);
+            return ControladorBanners.BusquedaAproxBanner(pCadena);
         }
 
-        public static ICollection<ElementoCarteleria> BusquedaAproxElementoCarteleria(string pTitulo)
+        public static void ActualizarNoticiasHoy(ICollection<Banner> pBanners)
         {
-            return FachadaCapaNegocio.BusquedaAproxElementoCarteleria(pTitulo);
+            ControladorBanners.ActualizarNoticias(pBanners);
         }
 
-        public static void ActualizarNoticiasHoy()
+        public static void EliminarBanner(Int64 pID)
         {
-            FachadaCapaNegocio.ActualizarNoticiasHoy();
+            ControladorBanners.EliminarBanner(pID);
+        }
+        #endregion
+        #region Campaña
+        public static void AgregarCampaña(Campaña pCampaña)
+        {
+            ControladorCampañas.AgregarCampaña(pCampaña);
         }
 
-        public static void EliminarElementoCarteleria(Int64 pID)
+        public static void ActualizarCampaña(Campaña pCampaña)
         {
-            FachadaCapaNegocio.EliminarElementoCarteleria(pID);
+            ControladorCampañas.ActualizarCampaña(pCampaña);
         }
+
+        public static ICollection<Campaña> ObtenerCampañas()
+        {
+            return ControladorCampañas.GetAllCampañas();
+        }
+
+        public static ICollection<Campaña> ObtenerCampañasEntre(DateTime pFechaInicio, DateTime pFechaFin)
+        {
+            return ControladorCampañas.GetAllCampañasEntre(pFechaInicio, pFechaFin);
+        }
+
+        public static ICollection<Campaña> ObtenerCampañasHoy()
+        {
+            return ControladorCampañas.CampañasHoy();
+        }
+
+        public static Campaña BuscarCampaña(Int64 pId)
+        {
+            return ControladorCampañas.BuscarCampaña(pId);
+        }
+
+        public static ICollection<Campaña> BusquedaAproxCampaña(string pCadena)
+        {
+            return ControladorCampañas.BusquedaAproxCampaña(pCadena);
+        }
+
+        public static void EliminarCampaña(Int64 pID)
+        {
+            ControladorCampañas.EliminarCampaña(pID);
+        }
+        #endregion
     }
 }

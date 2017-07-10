@@ -10,13 +10,11 @@ namespace CapaDatos
 	{
 		#region Datos
 		private CapaDatosContexto context = new CapaDatosContexto();
-		private RepositorioGenerico<ElementoCarteleria> iElementoCarteleriaRepositorio;
 		private RepositorioGenerico<RSSItem> iRSSItemRepositorio;
 		private RepositorioGenerico<Horario> iHorarioRepositorio;
 		private RepositorioGenerico<Campaña> iCampañaRepositorio;
 		private RepositorioGenerico<ImagenCampaña> iImagenCampañaRepositorio;
-		private RepositorioGenerico<BannerEstatico> iBannerEstRepositorio;
-		private RepositorioGenerico<RSSFeed> iRSSFeedRepositorio;
+		private RepositorioGenerico<Banner> iBannerRepositorio;
 
 		private bool disposed = false;
 		#endregion
@@ -27,24 +25,8 @@ namespace CapaDatos
 		public UnitOfWork()
 		{
 		}
-		#endregion
-		#region Propiedades
-		/// <summary>
-		/// Obtiene el repositorio de <see cref="ElementoCarteleria"/> .
-		/// </summary>
-		/// <value>The campaña repositorio.</value>
-		public RepositorioGenerico<ElementoCarteleria> ElementoCarteleriaRepositorio
-		{
-			get
-			{
-				if (this.iElementoCarteleriaRepositorio == null)
-				{
-					this.iElementoCarteleriaRepositorio = new RepositorioGenerico<ElementoCarteleria>(context);
-				}
-				return this.iElementoCarteleriaRepositorio;
-			}
-		}
-
+        #endregion
+        #region Propiedades
 		/// <summary>
 		/// Obtiene el repositorio de <see cref="RSSItem"/> .
 		/// </summary>
@@ -110,35 +92,18 @@ namespace CapaDatos
         }
         
 		/// <summary>
-		/// Obtiene el repositorio de <see cref="BannerEstatico"/>.
+		/// Obtiene el repositorio de <see cref="Banner"/>.
 		/// </summary>
 		/// <value>The banner est repositorio.</value>
-        public RepositorioGenerico<BannerEstatico> BannerEstRepositorio
+        public RepositorioGenerico<Banner> BannerRepositorio
         {
             get
             {
-                if (this.iBannerEstRepositorio == null)
+                if (this.iBannerRepositorio == null)
                 {
-                    this.iBannerEstRepositorio = new RepositorioGenerico<BannerEstatico>(context);
+                    this.iBannerRepositorio = new RepositorioGenerico<Banner>(context);
                 }
-                return this.iBannerEstRepositorio;
-            }
-        }
-
-		/// <summary>
-		/// Obtiene el repositorio de <see cref="RSSFeed"/>.
-		/// </summary>
-		/// <value>The RSS feed repositorio.</value>
-        public RepositorioGenerico<RSSFeed> RSSFeedRepositorio
-        {
-            get
-            {
-
-                if (this.iRSSFeedRepositorio == null)
-                {
-                    this.iRSSFeedRepositorio = new RepositorioGenerico<RSSFeed>(context);
-                }
-                return this.iRSSFeedRepositorio;
+                return this.iBannerRepositorio;
             }
         }
 		#endregion
