@@ -91,7 +91,7 @@ namespace CapaVisual
         }
 
         /// <summary>
-        /// Cambia al siguiente cartel. Coloca una imagen por defecto al finalizar.
+        /// Cambia a la siguiente campaña. Coloca una imagen por defecto al finalizar.
         /// </summary>
         private void CambiarCampaña()
         {
@@ -277,7 +277,7 @@ namespace CapaVisual
         }
 
         /// <summary>
-        /// Cambia al banner del cartel actual.
+        /// Cambia al banner actual.
         /// </summary>
         /// <param name="pBanner">Cadena a mostrar</param>
         public void CambiarBannerMetodo(string pBanner)

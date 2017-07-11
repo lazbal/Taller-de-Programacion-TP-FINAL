@@ -34,7 +34,6 @@ namespace CapaDatos
              this.iUnitOfWork = new UnitOfWork();
         }
 		#endregion
-		
         #region Banner
         /// <summary>
         /// Crea una entrada de <typeparamref name="Banner"/> en la tabla de éstos.
@@ -163,7 +162,6 @@ namespace CapaDatos
             return QueryBusquedaAproximacionBanner(pCadena).ToList();
         }
         #endregion
-
         #region Campaña
 		/// <summary>
 		/// Crea una entrada de <typeparamref name="Campaña"/> en la tabla de éstos.

@@ -25,7 +25,7 @@ namespace CapaVisual
         }
 
         /// <summary>
-        /// Abre el formulario para la creación de un nuevo cartel.
+        /// Abre el formulario para la creación de una nueva campaña.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

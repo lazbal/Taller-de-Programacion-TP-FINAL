@@ -133,13 +133,16 @@ namespace CapaVisual
             DialogResult resultado = vTabla.ShowDialog();
         }
 
-        private void btnAceptar_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Sobreescritura del método <see cref="Nuevo.CargarElemento"/>. Carga los datos del banner.
+        /// </summary>
+        protected override bool CargarElemento()
         {
-            //No controlo la cantidad de elementos en ListaHorarios para que se puedan guardar campañas o banners inactivos.
-            //Comprobar que ningun parámetro sea null
-            if (this.tbNombre.Text == "" || this.tbDescripcion.Text == "")
+            //Verificación del texto del banner (URL en caso de fuentes externas).
+            if (this.tbBanner.Text == "")
             {
-                MessageBox.Show("Asegurese de completar todos los campos requeridos");
+                MessageBox.Show("El campo Texto del Banner no puede estar vacío");
+                return false;
             }
             else
             {
@@ -167,18 +170,8 @@ namespace CapaVisual
                 {
                     FachadaCapaVisual.AgregarBanner(iBanner);
                 }
-
-                //Cerrar ventana.
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                return true;
             }
-        }
-
-        private void btnCancelar_Click_1(object sender, EventArgs e)
-        {
-            //Cerrar Ventana.
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
         }
     }
 }

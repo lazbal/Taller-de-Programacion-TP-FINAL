@@ -37,17 +37,20 @@ namespace CapaVisual
 
         private void grillaBusqueda_DoubleClick(object sender, System.EventArgs e)
         {
-            if (iTipo == typeof(Campaña))
+            if (dgBusqueda.CurrentRow != null)
             {
-                Campaña campaña = dgBusqueda.CurrentRow.DataBoundItem as Campaña;
-                NuevoCampaña editarElemento = new NuevoCampaña(campaña, true);
-                editarElemento.ShowDialog();
-            }
-            else if (iTipo == typeof(Banner))
-            {
-                Banner banner = dgBusqueda.CurrentRow.DataBoundItem as Banner;
-                NuevoBanner editarElemento = new NuevoBanner(banner, true);
-                editarElemento.ShowDialog();
+                if (iTipo == typeof(Campaña))
+                {
+                    Campaña campaña = dgBusqueda.CurrentRow.DataBoundItem as Campaña;
+                    NuevoCampaña editarElemento = new NuevoCampaña(campaña, true);
+                    editarElemento.ShowDialog();
+                }
+                else if (iTipo == typeof(Banner))
+                {
+                    Banner banner = dgBusqueda.CurrentRow.DataBoundItem as Banner;
+                    NuevoBanner editarElemento = new NuevoBanner(banner, true);
+                    editarElemento.ShowDialog();
+                }
             }
         }
 
@@ -56,7 +59,7 @@ namespace CapaVisual
             if (e.KeyData == Keys.Delete && this.dgBusqueda.SelectedRows != null)
             {
                 DataGridViewRow mSelectedRow = this.dgBusqueda.SelectedRows[0];
-                DialogResult result = MessageBox.Show("¿Está seguro que desea eliminar el cartel "+ mSelectedRow.Cells[2].Value.ToString()+"?", "Advertencia", MessageBoxButtons.YesNo);
+                DialogResult result = MessageBox.Show("¿Está seguro que desea eliminar el elemento "+ mSelectedRow.Cells[2].Value.ToString()+"?", "Advertencia", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
                 {
                     if (iTipo == typeof(Campaña))

@@ -33,8 +33,6 @@
             this.tbBanner = new System.Windows.Forms.TextBox();
             this.cbTipoBanner = new System.Windows.Forms.ComboBox();
             this.btnHorariosOcupados = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnAceptar = new System.Windows.Forms.Button();
             this.gbBanner.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -104,7 +102,6 @@
             this.btnCancelar.TabIndex = 28;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click_1);
             // 
             // btnAceptar
             // 
@@ -115,7 +112,6 @@
             this.btnAceptar.TabIndex = 27;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
-            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // NuevoBanner
             // 
@@ -150,7 +146,5 @@
         private System.Windows.Forms.TextBox tbBanner;
         private System.Windows.Forms.ComboBox cbTipoBanner;
         private System.Windows.Forms.Button btnHorariosOcupados;
-        private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.Button btnAceptar;
     }
 }

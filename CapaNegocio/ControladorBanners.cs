@@ -101,8 +101,8 @@ namespace CapaNegocio
         /// <summary>
         /// Obtener todos los banners existentes, entre dos fechas.
         /// </summary>
-        /// <param name="pFechaInicio">Fecha inicial en la que debe estar contenida el cartel.</param>
-        /// <param name="pFechaFin">Fecha final en la que debe estar contenida el cartel.</param>
+        /// <param name="pFechaInicio">Fecha inicial en la que debe estar contenida el banner.</param>
+        /// <param name="pFechaFin">Fecha final en la que debe estar contenida el banner.</param>
         /// <returns></returns>
         public static ICollection<Banner> GetAllBannersEntre(DateTime pFechaInicio, DateTime pFechaFin)
         {

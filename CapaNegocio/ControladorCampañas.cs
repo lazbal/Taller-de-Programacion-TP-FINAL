@@ -78,8 +78,8 @@ namespace CapaNegocio
         /// <summary>
         /// Obtener todas las campañas existentes, entre dos fechas.
         /// </summary>
-        /// <param name="pFechaInicio">Fecha inicial en la que debe estar contenida el cartel.</param>
-        /// <param name="pFechaFin">Fecha final en la que debe estar contenida el cartel.</param>
+        /// <param name="pFechaInicio">Fecha inicial en la que debe estar contenida la campaña.</param>
+        /// <param name="pFechaFin">Fecha final en la que debe estar contenida la campaña.</param>
         /// <returns></returns>
         public static ICollection<Campaña> GetAllCampañasEntre(DateTime pFechaInicio, DateTime pFechaFin)
         {

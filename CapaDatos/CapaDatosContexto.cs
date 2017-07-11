@@ -28,6 +28,10 @@ namespace CapaDatos
         /// </summary>
         public DbSet<ImagenCampaña> ImagenCampaña { get; set; }
         /// <summary>
+        /// Propiedad ElementoCarteleria. Es un conjunto de <typeparamref name="ElementoCarteleria"/>
+        /// </summary>
+        public DbSet<ElementoCarteleria> ElementosCarteleria { get; set; }
+        /// <summary>
         /// Propiedad Campaña. Es un conjunto de <typeparamref name="Campaña"/>
         /// </summary>
         public DbSet<Campaña> Campaña { get; set; }
@@ -35,14 +39,14 @@ namespace CapaDatos
         /// Propiedad BannerEstático. Es un conjunto de <typeparamref name="Banner"/>
         /// </summary>
         public DbSet<Banner> Banner { get; set; }
-        /// <summary>
-        /// Propiedad RSSFeed. Es un conjunto de <typeparamref name="RSSFeed"/>
-        /// </summary>
-        //public DbSet<RSSFeed> RSSFeed { get; set; }
 		#endregion
 		#region Overrides
+        //Sobreescribimos la creación de tablas para forzar la separación de clases abstractas y especificaciones.
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Campaña>()
+                .ToTable("Campañas");
+
             modelBuilder.Entity<BannerEstatico>()
                 .ToTable("BannersEstaticos");
 

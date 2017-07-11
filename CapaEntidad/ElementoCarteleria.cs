@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CapaEntidad
 {
-	public class ElementoCarteleria : IComparable<ElementoCarteleria>
+	public abstract class ElementoCarteleria : IComparable<ElementoCarteleria>
     {
         /// <summary>
         /// Identificador del objeto. Generado por la base de datos.
@@ -14,19 +14,19 @@ namespace CapaEntidad
 		public Int64 Id { get; set; }
 
         /// <summary>
-        /// Nombre del cartel
+        /// Nombre del elemento de carteleria
         /// </summary>
         [Required]
         public virtual string Nombre { get; set; } = null;
         
         /// <summary>
-        /// Descripción del cartel
+        /// Descripción del elemento de carteleria
         /// </summary>
         [Required]
         public virtual string Descripcion { get; set; } = null;
 
         /// <summary>
-        /// Fecha en que inicia a estar activo el cartel.
+        /// Fecha en que inicia a estar activo el elemento de carteleria.
         /// </summary>
         [Required]
         public virtual DateTime FechaInicio { get; set; }

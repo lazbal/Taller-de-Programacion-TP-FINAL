@@ -149,26 +149,31 @@ namespace CapaVisual
         }
 
         /// <summary>
-        /// Cancelar los cambios.
+        /// Muestra una tabla con los horarios ocupados actualmente.
         /// </summary>
-        private void btnCancelar_Click(object sender, EventArgs e)
+        private void btnHorariosOcupados_Click(object sender, EventArgs e)
         {
-            //Cerrar Ventana.
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            HorariosOcupados vTabla = new HorariosOcupadosCampañas(this.dtpFechaInicio.Value, this.dtpFechaFin.Value);
+            DialogResult resultado = vTabla.ShowDialog();
         }
 
         /// <summary>
-        /// Aceptar los cambios.
+        /// Sobreescritura del método <see cref="Nuevo.CargarElemento"/>. Carga los datos de la campaña.
         /// </summary>
-        private void btnAceptar_Click(object sender, EventArgs e)
+        protected override bool CargarElemento()
         {
-            //No controlo la cantidad de elementos en ListaHorarios para que se puedan guardar campañas o banners inactivos.
-            //Comprobar que ningun parámetro sea null
-            if (this.tbNombre.Text == "" || this.tbDescripcion.Text == "")
+            //Verificación de lista de imágenes.
+            if (this.lvImagenes.LargeImageList.Images.Count == 0 && MessageBox.Show("Esta campaña no posee imágenes. ¿Desea continuar de esta manera?", "Advertencia", MessageBoxButtons.YesNo) == DialogResult.No)
             {
-                MessageBox.Show("Asegurese de completar todos los campos requeridos");
+                return false;
             }
+            //Verificación de tiempo por imagen.
+            else if (this.numHH.Value + this.numMM.Value + this.numSS.Value == 0)
+            {
+                MessageBox.Show("El tiempo por imagen no puede ser 0");
+                return false;
+            }
+            //Todo en orden.
             else
             {
                 //Cargar los datos en la campaña provista.
@@ -206,19 +211,8 @@ namespace CapaVisual
                     FachadaCapaVisual.AgregarCampaña(iCampaña);
                 }
 
-                //Cerrar ventana.
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                return true;
             }
-        }
-
-        /// <summary>
-        /// Muestra una tabla con los horarios ocupados actualmente.
-        /// </summary>
-        private void btnHorariosOcupados_Click(object sender, EventArgs e)
-        {
-            HorariosOcupados vTabla = new HorariosOcupadosCampañas(this.dtpFechaInicio.Value, this.dtpFechaFin.Value);
-            DialogResult resultado = vTabla.ShowDialog();
         }
     }
 }
