@@ -52,6 +52,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbBanner.BackColor = System.Drawing.SystemColors.InfoText;
             this.tbBanner.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbBanner.Enabled = false;
             this.tbBanner.Font = new System.Drawing.Font("Corbel", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbBanner.ForeColor = System.Drawing.Color.Gold;
             this.tbBanner.Location = new System.Drawing.Point(0, 308);
