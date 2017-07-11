@@ -214,5 +214,10 @@ namespace CapaVisual
                 return true;
             }
         }
+
+        private void NuevoCampaña_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
