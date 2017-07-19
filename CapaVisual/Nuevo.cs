@@ -60,9 +60,9 @@ namespace CapaVisual
                 MessageBox.Show("El campo Descripción no puede estar vacío");
             }
             //Verificación de fechas.
-            else if (this.dtpFechaFin.Value > this.dtpFechaInicio.Value)
+            else if (this.dtpFechaFin.Value < this.dtpFechaInicio.Value)
             {
-                MessageBox.Show("La fecha de fin no puede ser mayor a la de inicio");
+                MessageBox.Show("La fecha de fin no puede ser menor a la de inicio");
             }
             //Campos obligatorios en orden.
             else

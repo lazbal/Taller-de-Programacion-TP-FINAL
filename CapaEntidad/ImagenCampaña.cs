@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Drawing;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -45,8 +46,32 @@ namespace CapaEntidad
             get { return iRuta; }
             set
             {
-                iRuta = value;
-                iImagen = Image.FromFile(iRuta);
+                try
+                {
+                    if (value != null)
+                    {
+                        iRuta = value;
+                        iImagen = Image.FromFile(iRuta);
+                    }
+                    else
+                        throw new ArgumentNullException("La ruta de la imagen no puede ser nula");
+                }
+                catch (ArgumentNullException)
+                {
+                    throw;
+                }
+                catch (FileNotFoundException)
+                {
+                    throw;
+                }
+                catch (OutOfMemoryException)
+                {
+                    throw;
+                }
+                catch (ArgumentException)
+                {
+                    throw;
+                }
             }
         }
 			
@@ -69,8 +94,7 @@ namespace CapaEntidad
 		/// <param name="pRuta">Ruta de la imagen a almacenar.</param>
 		public ImagenCampaña(string pRuta)
 		{
-			iRuta = pRuta;
-			iImagen = Image.FromFile(pRuta);
+            Ruta = pRuta;
 		}
     }
 }

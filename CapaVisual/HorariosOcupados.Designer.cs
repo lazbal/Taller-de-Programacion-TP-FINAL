@@ -1,6 +1,6 @@
 ﻿namespace CapaVisual
 {
-    partial class HorariosOcupados
+    partial class HorariosOcupados<T>
     {
         /// <summary>
         /// Required designer variable.

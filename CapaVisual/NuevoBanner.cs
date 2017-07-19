@@ -129,7 +129,7 @@ namespace CapaVisual
         /// </summary>
         private void btnHorariosOcupados_Click(object sender, EventArgs e)
         {
-            HorariosOcupados vTabla = new HorariosOcupadosBanners(this.dtpFechaInicio.Value, this.dtpFechaFin.Value);
+            HorariosOcupadosBanners vTabla = new HorariosOcupadosBanners(this.dtpFechaInicio.Value, this.dtpFechaFin.Value);
             DialogResult resultado = vTabla.ShowDialog();
         }
 

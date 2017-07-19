@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapaNegocio", "CapaNegocio\CapaNegocio.csproj", "{0F59B224-5B45-4519-ACFE-8C445D796A98}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapaEntidad", "CapaEntidad\CapaEntidad.csproj", "{AE5EBBBC-0506-484D-B9E1-E6192710A624}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "CarteleraSetup", "CarteleraSetup\CarteleraSetup.vdproj", "{74E03633-AC1F-4E21-BBF4-F2F2023FB052}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PruebasUnitarias", "PruebasUnitarias\PruebasUnitarias.csproj", "{C4566E4E-88F2-46FA-98B8-92849676BDD5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{AE5EBBBC-0506-484D-B9E1-E6192710A624}.Release|Any CPU.Build.0 = Release|Any CPU
 		{74E03633-AC1F-4E21-BBF4-F2F2023FB052}.Debug|Any CPU.ActiveCfg = Debug
 		{74E03633-AC1F-4E21-BBF4-F2F2023FB052}.Release|Any CPU.ActiveCfg = Release
+		{C4566E4E-88F2-46FA-98B8-92849676BDD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4566E4E-88F2-46FA-98B8-92849676BDD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4566E4E-88F2-46FA-98B8-92849676BDD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4566E4E-88F2-46FA-98B8-92849676BDD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -28,9 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // HorariosOcupadosCampañas
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "HorariosOcupadosCampañas";
+            this.ClientSize = new System.Drawing.Size(1118, 444);
+            this.Name = "HorariosOcupadosCampañas";
+            this.Text = "Horarios Ocupados de Campañas";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

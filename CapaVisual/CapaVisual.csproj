@@ -168,6 +168,12 @@
     <EmbeddedResource Include="HorariosOcupados.resx">
       <DependentUpon>HorariosOcupados.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HorariosOcupadosBanners.resx">
+      <DependentUpon>HorariosOcupadosBanners.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HorariosOcupadosCampañas.resx">
+      <DependentUpon>HorariosOcupadosCampañas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NuevoBanner.resx">
       <DependentUpon>NuevoBanner.cs</DependentUpon>
     </EmbeddedResource>

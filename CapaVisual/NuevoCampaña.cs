@@ -153,7 +153,7 @@ namespace CapaVisual
         /// </summary>
         private void btnHorariosOcupados_Click(object sender, EventArgs e)
         {
-            HorariosOcupados vTabla = new HorariosOcupadosCampañas(this.dtpFechaInicio.Value, this.dtpFechaFin.Value);
+            HorariosOcupadosCampañas vTabla = new HorariosOcupadosCampañas(this.dtpFechaInicio.Value, this.dtpFechaFin.Value);
             DialogResult resultado = vTabla.ShowDialog();
         }
 
@@ -168,7 +168,7 @@ namespace CapaVisual
                 return false;
             }
             //Verificación de tiempo por imagen.
-            else if (this.numHH.Value + this.numMM.Value + this.numSS.Value == 0)
+            else if (this.lvImagenes.LargeImageList.Images.Count != 0 && this.numHH.Value + this.numMM.Value + this.numSS.Value == 0)
             {
                 MessageBox.Show("El tiempo por imagen no puede ser 0");
                 return false;
@@ -213,11 +213,6 @@ namespace CapaVisual
 
                 return true;
             }
-        }
-
-        private void NuevoCampaña_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

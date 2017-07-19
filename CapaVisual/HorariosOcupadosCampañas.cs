@@ -11,7 +11,7 @@ using CapaEntidad;
 
 namespace CapaVisual
 {
-    public partial class HorariosOcupadosCampañas : HorariosOcupados
+    public partial class HorariosOcupadosCampañas : CampañaHorariosOcupados
     {
         public HorariosOcupadosCampañas(DateTime pFechaInicio, DateTime pFechaFin) : base()
         {
@@ -20,6 +20,14 @@ namespace CapaVisual
         }
 
         protected void GenerarGrilla(DateTime pFechaInicio, DateTime pFechaFin)
+        {
+            {
+                ICollection<Campaña> iElementos = FachadaCapaVisual.ObtenerCampañasHoy();
+                base.GenerarGrilla(iElementos, pFechaInicio, pFechaFin);
+            }
+        }
+
+        /*protected void GenerarGrilla(DateTime pFechaInicio, DateTime pFechaFin)
         {
             {
                 ICollection<Campaña> iElementos = FachadaCapaVisual.ObtenerCampañasHoy();
@@ -63,6 +71,8 @@ namespace CapaVisual
                     mFechaActual = mFechaActual.AddDays(1);
                 }
             }
-        }
+        }*/
     }
+
+    public class CampañaHorariosOcupados : HorariosOcupados<Campaña> { }
 }
