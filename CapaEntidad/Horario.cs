@@ -61,6 +61,7 @@ namespace CapaEntidad
 		/// </summary>
 		public Boolean Colisiona(Horario pHorario)
 		{
+            //En caso de horarios sin duracion (comienzan y terminan a la misma hora) no cuenta como colision.
 			if (this.DiaSemana==pHorario.DiaSemana && this.HoraInicio<pHorario.HoraFin && this.HoraFin>pHorario.HoraInicio) {
 				return true;
 			}

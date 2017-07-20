@@ -14,7 +14,7 @@ namespace CapaEntidad
         /// URL de la cual se obtienen las noticias.
         /// </summary>
         [Required]
-        public string URL { get; set; }
+        public string URL { get; set; } = "";
 
         /// <summary>
         /// Almacena las 20 últimas noticias obtenidas.
@@ -51,7 +51,8 @@ namespace CapaEntidad
         /// <param name="pURL">URL fuente</param>
         public RSSFeed(String pURL) : base()
 		{
-			this.URL = pURL;
+            if (pURL != null)
+			    this.URL = pURL;
 			this.UltimasNoticias = new List<RSSItem> ();
 		}
 
@@ -59,9 +60,10 @@ namespace CapaEntidad
 		/// Constructor de la clase RSSFeed.
 		/// </summary>
 		public RSSFeed (String pURL, ICollection<RSSItem> pNoticias)
-		{
-			this.URL = pURL;
-			this.UltimasNoticias = pNoticias;
+        {
+            if (pURL != null)
+                this.URL = pURL;
+            this.UltimasNoticias = pNoticias;
 		}
 
 		/// <summary>
@@ -70,9 +72,13 @@ namespace CapaEntidad
 		public override string Mostrar()
 		{
 			String union = "";
-			foreach (var rssItem in UltimasNoticias) {
-				union += (rssItem.ObtenerCadena () + " // ");
-			}
+            if (UltimasNoticias != null)
+            {
+                foreach (var rssItem in UltimasNoticias)
+                {
+                    union += (rssItem.ObtenerCadena() + " // ");
+                }
+            }
 			return union;
         }
 

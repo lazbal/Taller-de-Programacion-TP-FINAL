@@ -10,7 +10,10 @@ namespace CapaVisual
     {
         public static DateTime FechaBaseHorarios()
         {
-            return DateTime.ParseExact(@"01/01/1753", @"dd/mm/yyyy", null);
+            //dd = Dia
+            //MM = Mes (confundido con mm)
+            //yyyy = Año en 4 dígitos
+            return DateTime.ParseExact(@"01/01/1753", @"dd/MM/yyyy", null);
         }
 
         #region Banner

@@ -73,14 +73,7 @@ namespace CapaEntidad
 		/// </summary>
 		public Horario GetHorarioHoy()
 		{
-            foreach (Horario horario in Frecuencia)
-            {
-                if (horario.DiaSemana == DateTime.Today.DayOfWeek)
-                {
-                    return horario;
-                }
-            }
-            return null;
+            return this.GetHorarioDia(DateTime.Today.DayOfWeek);
         }
 
         /// <summary>

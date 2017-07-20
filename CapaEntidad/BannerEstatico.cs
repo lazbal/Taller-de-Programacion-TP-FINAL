@@ -14,7 +14,7 @@ namespace CapaEntidad
         /// Texto a mostrar del banner.
         /// </summary>
 		[Required]
-		public string Texto { get; set; }
+        public string Texto { get; set; } = "";
 
         /// <summary>
         /// Inicializa una instancia de la clase <see cref="BannerEstatico"/>.
@@ -48,6 +48,10 @@ namespace CapaEntidad
 		/// </summary>
 		public override string Mostrar()
 		{
+            if (Texto == null)
+            {
+                Texto = "";
+            }
 			return Texto;
         }
 

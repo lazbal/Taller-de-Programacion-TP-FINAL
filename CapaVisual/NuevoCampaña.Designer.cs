@@ -177,6 +177,7 @@
             this.btnHorariosOcupados.TabIndex = 27;
             this.btnHorariosOcupados.Text = "Horarios Ocupados";
             this.btnHorariosOcupados.UseVisualStyleBackColor = true;
+            this.btnHorariosOcupados.Click += new System.EventHandler(this.btnHorariosOcupados_Click);
             // 
             // NuevoCampaña
             // 
@@ -188,7 +189,6 @@
             this.Controls.Add(this.gbCampaña);
             this.Name = "NuevoCampaña";
             this.Text = "Nueva Campaña";
-            this.Load += new System.EventHandler(this.NuevoCampaña_Load);
             this.Controls.SetChildIndex(this.btnAceptar, 0);
             this.Controls.SetChildIndex(this.btnCancelar, 0);
             this.Controls.SetChildIndex(this.gbCampaña, 0);
