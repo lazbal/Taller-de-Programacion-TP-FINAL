@@ -115,7 +115,7 @@ namespace CapaEntidad
         }
 
         /// <summary>
-        /// Verifica sí el elemento se superpone en horarios con una colleción de horarios dada.
+        /// Verifica sí el elemento se superpone en horarios con una colección de horarios dada.
         /// </summary>
         /// <returns>true sí existe al menos una colisión.</returns>
         public Boolean Colisiona(ICollection<Horario> pHorariosExternos)
