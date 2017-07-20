@@ -16,13 +16,15 @@ namespace CapaNegocio
         /// Implementación para leer una fuente RSS.
         /// </summary>
         /// <param name="pUrl">URL de la fuente en formato <see cref="Uri"/>.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="WebException"></exception>
         /// <returns></returns>
         public override ICollection<RSSItem> Read(Uri pUrl)
         {
             //No puede ser nulo.
             if (pUrl == null)
             {
-                throw new ArgumentNullException("pUrl");
+                throw new ArgumentNullException("URL");
             }
             try
             { 
@@ -48,7 +50,7 @@ namespace CapaNegocio
             catch(WebException)
             {
                 //Hubo problemas para conectarse a la url.
-                throw new WebException("No se ha podido acceder a la url especificada. Verifique su conexión a internet y que la URL sea efectivamente de una fuente RSS.");
+                throw new WebException("No se ha podido acceder a la URL especificada. Verifique su conexión a internet y que la URL sea efectivamente de una fuente RSS.");
             }
         }
 

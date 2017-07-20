@@ -150,7 +150,12 @@ namespace CapaVisual
         {
             //Se le carga al RSSFeed la url proporcionada en la ventana.
             iRSSFeed.URL = tbURL.Text;
-            iRSSFeed.UltimasNoticias = iListaItems;
+            iRSSFeed.UltimasNoticias.Clear();
+            foreach (RSSItem item in iListaItems)
+            {
+                iRSSFeed.UltimasNoticias.Add(item);
+            }
+            this.DialogResult = DialogResult.OK;
             //Cerrar ventana.
             this.Close();
         }
@@ -160,6 +165,7 @@ namespace CapaVisual
         /// </summary>
         private void btnCancelar_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             //Cerrar ventana.
             this.Close();
 

@@ -3,23 +3,39 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Linq;
 using CapaEntidad;
+using System.Net;
 
 namespace CapaVisual
 {
+    /// <summary>
+    /// Ventana encargada de mostrar las Campañas y Banners, y el control de los tiempos de duración.
+    /// </summary>
     public partial class Presentacion : Form
     {
+        //Elementos necesarios para la gestión de las campañas.
         #region Campaña
+        //Campaña mostrada.
         private Campaña iCampañaActual;
+        //Siguiente campaña a mostrar.
         private Campaña iCampañaSiguiente;
+        //Enumerador (recorrible) con las campañas para el día de la fecha.
         private IEnumerator<Campaña> iCampañasHoy;
+        //Temporizador que controla el tiempo que dura la campaña actual.
         private System.Timers.Timer iTemporizadorCampaña;
+        //Enumerador (recorrible) con las imágenes de la campaña actual.
         private IEnumerator<ImagenCampaña> iImagenesCampañaActual;
+        //Temporizador que controla el tiempo que dura una imagen de la campaña actual.
         private System.Timers.Timer iTemporizadorImagen;
         #endregion
+        //Elementos necesarios para la gestión de los banners.
         #region Banner
+        //Banner mostrado
         private Banner iBannerActual;
+        //Siguiente banner a mostrar
         private Banner iBannerSiguiente;
+        //Enumerador (recorrible) con los banners para el día de la fecha.
         private IEnumerator<Banner> iBannersHoy;
+        //Temporizador que controla el tiempo que dura el banner actual.
         private System.Timers.Timer iTemporizadorBanner;
         #endregion
         //Delegado para la modificación del texto banner desde distintos hilos.
@@ -183,6 +199,26 @@ namespace CapaVisual
                 //proximas ejecuciones. Será true cuando se esté por mostrar el ultimo banner.
                 else if (iBannerSiguiente != null)
                 {
+                    if (iBannerSiguiente is RSSFeed)
+                    {
+                        string NoSePudoActualizarError = "No se pudo actualizar la fuente <<" + iBannerSiguiente.Nombre + ">>.\n";
+                        string SeUsaranLasNoticiasAlmacenadas = "\nSe utilizarán las noticias anteriormente almacenadas.";
+                        try
+                        {
+                            ((RSSFeed)iBannerSiguiente).UltimasNoticias.Clear();
+                            foreach (RSSItem item in FachadaCapaVisual.LeerRSS(((RSSFeed)iBannerSiguiente).URL))
+                            {
+                                ((RSSFeed)iBannerSiguiente).UltimasNoticias.Add(item);
+                            }
+                            FachadaCapaVisual.ActualizarBanner(iBannerSiguiente);
+                        }
+                        catch (Exception e)
+                        {
+                            AutoClosingMessageBox.Show(NoSePudoActualizarError + e.Message + SeUsaranLasNoticiasAlmacenadas, 
+                                                        "Error actualizando",
+                                                        5000);
+                        }
+                    }
                     this.iBannerActual = iBannerSiguiente;
                     this.iBannerSiguiente = this.iBannersHoy.Current;
                     TimeSpan mHoraLocalActual = DateTime.Now.TimeOfDay;
@@ -297,5 +333,38 @@ namespace CapaVisual
             this.iTemporizadorCampaña.Dispose();
             this.iTemporizadorImagen.Dispose();
         }
+    }
+
+    /// <summary>
+    /// Caja de mensajes de cierre automático por temporizador.
+    /// </summary>
+    public class AutoClosingMessageBox
+    {
+        System.Threading.Timer _timeoutTimer;
+        string _caption;
+        AutoClosingMessageBox(string text, string caption, int timeout_milliseconds)
+        {
+            _caption = caption;
+            _timeoutTimer = new System.Threading.Timer(OnTimerElapsed,
+                null, timeout_milliseconds, System.Threading.Timeout.Infinite);
+            using (_timeoutTimer)
+                MessageBox.Show(text, caption);
+        }
+        public static void Show(string text, string caption, int timeout)
+        {
+            new AutoClosingMessageBox(text, caption, timeout);
+        }
+        void OnTimerElapsed(object state)
+        {
+            IntPtr mbWnd = FindWindow("#32770", _caption); // lpClassName is #32770 for MessageBox
+            if (mbWnd != IntPtr.Zero)
+                SendMessage(mbWnd, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
+            _timeoutTimer.Dispose();
+        }
+        const int WM_CLOSE = 0x0010;
+        [System.Runtime.InteropServices.DllImport("user32.dll", SetLastError = true)]
+        static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+        [System.Runtime.InteropServices.DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, IntPtr wParam, IntPtr lParam);
     }
 }

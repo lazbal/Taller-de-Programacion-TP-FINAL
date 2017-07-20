@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CapaEntidad;
 using CapaNegocio;
+using System.Net;
 
 namespace CapaVisual
 {
@@ -18,7 +19,7 @@ namespace CapaVisual
 
         #region Banner
 
-        public static IEnumerable<RSSItem> LeerRSS(string pURL)
+        public static ICollection<RSSItem> LeerRSS(string pURL)
         {
             return ControladorBanners.LeerRSS(pURL);
         }

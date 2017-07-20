@@ -68,7 +68,7 @@
             this.lvImagenes.Size = new System.Drawing.Size(310, 261);
             this.lvImagenes.TabIndex = 8;
             this.lvImagenes.UseCompatibleStateImageBehavior = false;
-            this.lvImagenes.DoubleClick += new System.EventHandler(this.lvImagenes_DoubleClick);
+            this.lvImagenes.DoubleClick += new System.EventHandler(this.LvImagenes_DoubleClick);
             // 
             // abrirImagenes
             // 
@@ -83,7 +83,7 @@
             this.bAgregarImágenes.TabIndex = 7;
             this.bAgregarImágenes.Text = "Agregar Imágenes";
             this.bAgregarImágenes.UseVisualStyleBackColor = true;
-            this.bAgregarImágenes.Click += new System.EventHandler(this.bAgregarImagenes_Click);
+            this.bAgregarImágenes.Click += new System.EventHandler(this.BAgregarImagenes_Click);
             // 
             // numHH
             // 
@@ -119,7 +119,7 @@
             this.bQuitarImagenes.TabIndex = 9;
             this.bQuitarImagenes.Text = "Quitar Imágenes Seleccionadas";
             this.bQuitarImagenes.UseVisualStyleBackColor = true;
-            this.bQuitarImagenes.Click += new System.EventHandler(this.bQuitarImagenes_Click);
+            this.bQuitarImagenes.Click += new System.EventHandler(this.BQuitarImagenes_Click);
             // 
             // labelTiempoxImagen
             // 
@@ -138,7 +138,7 @@
             this.bTMS.TabIndex = 20;
             this.bTMS.Text = "Tiempo Máximo Sugerido";
             this.bTMS.UseVisualStyleBackColor = true;
-            this.bTMS.Click += new System.EventHandler(this.bTMS_Click);
+            this.bTMS.Click += new System.EventHandler(this.BTMS_Click);
             // 
             // numSS
             // 
@@ -177,7 +177,7 @@
             this.btnHorariosOcupados.TabIndex = 27;
             this.btnHorariosOcupados.Text = "Horarios Ocupados";
             this.btnHorariosOcupados.UseVisualStyleBackColor = true;
-            this.btnHorariosOcupados.Click += new System.EventHandler(this.btnHorariosOcupados_Click);
+            this.btnHorariosOcupados.Click += new System.EventHandler(this.BtnHorariosOcupados_Click);
             // 
             // NuevoCampaña
             // 

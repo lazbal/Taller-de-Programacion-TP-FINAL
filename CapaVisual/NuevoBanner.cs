@@ -35,14 +35,14 @@ namespace CapaVisual
             }
             else if (iBanner is RSSFeed)
             {
-                //Debe ir primero esta linea
+                //Debe ir primero esta linea para evitar la sobreescritura
                 this.tbBanner.Text = (iBanner as RSSFeed).URL;
                 this.cbTipoBanner.SelectedItem = this.cbTipoBanner.Items[0];
                 this.btnSeleccionarFuenteRSS.Visible = true;
             }
             else
             {
-                //Debe ir primero esta linea
+                //Debe ir primero esta linea para evitar la sobreescritura
                 this.tbBanner.Text = (iBanner as BannerEstatico).Texto;
                 this.cbTipoBanner.SelectedItem = this.cbTipoBanner.Items[1];
             }
@@ -67,25 +67,29 @@ namespace CapaVisual
         /// <summary>
         /// Acciónes a realizar cuando se quiere seleccionar una fuente RSS.
         /// </summary>
-        private void btnSeleccionarFuenteRSS_Click(object sender, EventArgs e)
+        private void BtnSeleccionarFuenteRSS_Click(object sender, EventArgs e)
         {
             (this.iBanner as RSSFeed).URL = this.tbBanner.Text;
             //Abrir la ventana para la seleccion de fuentes pasándole el banner como parámetro para modificarlo.
             ComprobarRSSFeed mNuevoRSS = new ComprobarRSSFeed(iBanner as RSSFeed);
-            mNuevoRSS.ShowDialog();
-            this.tbBanner.Text = (this.iBanner as RSSFeed).URL;
+            //Sí se comprobó la fuente, se habilita el botón aceptar.
+            if (mNuevoRSS.ShowDialog() == DialogResult.OK)
+            {
+                this.tbBanner.Text = (this.iBanner as RSSFeed).URL;
+            }
         }
 
         /// <summary>
         /// Evento al cambiar la selección en la lista de tipo de banner.
         /// </summary>
-        private void cbTipoBanner_SelectedValueChanged(object sender, EventArgs e)
+        private void CbTipoBanner_SelectedValueChanged(object sender, EventArgs e)
         {
             switch (this.cbTipoBanner.SelectedIndex)
             {
                 //Caso de que se seleccione RSSFeed
                 case 0:
                     {
+                        //Se deshabilita el botón aceptar para que fuerce a comprobar la fuente.
                         this.btnSeleccionarFuenteRSS.Visible = true;
                         if (!(iBanner is RSSFeed))
                         {
@@ -107,6 +111,7 @@ namespace CapaVisual
                     }
                 default:
                     {
+                        this.btnAceptar.Enabled = true;
                         this.tbBanner.Text = "Seleccione el tipo de banner";
                         this.btnSeleccionarFuenteRSS.Visible = false;
                         break;
@@ -117,7 +122,7 @@ namespace CapaVisual
         /// <summary>
         /// Cancelar los cambios.
         /// </summary>
-        private void btnCancelar_Click(object sender, EventArgs e)
+        private void BtnCancelar_Click(object sender, EventArgs e)
         {
             //Cerrar Ventana.
             this.DialogResult = DialogResult.Cancel;
@@ -127,7 +132,7 @@ namespace CapaVisual
         /// <summary>
         /// Muestra una tabla con los horarios ocupados actualmente.
         /// </summary>
-        private void btnHorariosOcupados_Click(object sender, EventArgs e)
+        private void BtnHorariosOcupados_Click(object sender, EventArgs e)
         {
             HorariosOcupadosBanners vTabla = new HorariosOcupadosBanners(this.dtpFechaInicio.Value, this.dtpFechaFin.Value);
             DialogResult resultado = vTabla.ShowDialog();
@@ -146,7 +151,6 @@ namespace CapaVisual
             }
             else
             {
-                cbTipoBanner_SelectedValueChanged(this, null);
                 //Cargar los datos en la campaña provista.
                 iBanner.Nombre = this.tbNombre.Text;
                 iBanner.Descripcion = this.tbDescripcion.Text;

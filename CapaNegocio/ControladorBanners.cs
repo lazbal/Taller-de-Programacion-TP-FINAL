@@ -18,19 +18,13 @@ namespace CapaNegocio
         /// </summary>
         /// <param name="pUrl">URL de la fuente RSS</param>
         /// <returns>Noticias obtenidas de la fuente.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="UriFormatException"></exception>
+        /// <exception cref="WebException"></exception>
         public static ICollection<RSSItem> LeerRSS(String pURL)
         {
-            return ControladorBanners.LeerRSS(new Uri(pURL));
-        }
-        /// <summary>
-        /// Obtener los ítems o noticias de una fuente RSS desde su URL.
-        /// </summary>
-        /// <param name="pUrl">URL de la fuente RSS</param>
-        /// <returns>Noticias obtenidas de la fuente.</returns>
-        public static ICollection<RSSItem> LeerRSS(Uri pURL)
-        {
             //Se crea un lector RSS.
-            SyndicationFeedRSSReader mRSSReader = new SyndicationFeedRSSReader();
+            IRSSReader mRSSReader = new SyndicationFeedRSSReader();
             //Se le pide que lea la URL y devuelve una lista de items RSSItem.
             return mRSSReader.Read(pURL);
         }

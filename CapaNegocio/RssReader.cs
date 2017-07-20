@@ -14,12 +14,13 @@ namespace CapaNegocio
         /// </summary>
         /// <param name="pUrl">URL de la fuente RSS.</param>
         /// <returns>Devuelve una colección de items <see cref="RSSItem"/>.</returns>
+        /// <exception cref="UriFormatException"></exception>
         public ICollection<RSSItem> Read(String pUrl)
         {
             //Que la URL no esté vacía o compuesta por espacios.
             if (String.IsNullOrWhiteSpace(pUrl))
             {
-                throw new ArgumentNullException("pUrl");
+                throw new ArgumentNullException("URL");
             }
             try 
             {

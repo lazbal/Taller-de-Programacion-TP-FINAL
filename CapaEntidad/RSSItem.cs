@@ -18,7 +18,7 @@ namespace CapaEntidad
         /// <summary>
         /// Clave foránea. Identifica la fuente RSS padre.
         /// </summary>
-        public Int64 refRSSFeed { get; set; }
+        public virtual Int64 refRSSFeed { get; set; }
         [ForeignKey("refRSSFeed")]
         private RSSFeed iRSSFeed { get; set; }
 

@@ -53,6 +53,13 @@ namespace CapaDatos
             modelBuilder.Entity<RSSFeed>()
                 .ToTable("RSSFeeds");
 
+            modelBuilder.Entity<RSSItem>()
+                .Property(r => r.RSSItemId)
+                .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+
+            modelBuilder.Entity<RSSItem>()
+                .HasKey(r => new { r.RSSItemId, r.refRSSFeed });
+
             modelBuilder.Entity<Horario>()
                 .Property(h => h.HorarioId)
                 .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);

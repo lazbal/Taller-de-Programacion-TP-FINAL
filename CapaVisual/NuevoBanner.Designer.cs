@@ -36,6 +36,16 @@
             this.gbBanner.SuspendLayout();
             this.SuspendLayout();
             // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Location = new System.Drawing.Point(460, 55);
+            this.btnCancelar.TabIndex = 28;
+            // 
+            // btnAceptar
+            // 
+            this.btnAceptar.Location = new System.Drawing.Point(460, 12);
+            this.btnAceptar.TabIndex = 27;
+            // 
             // gbBanner
             // 
             this.gbBanner.Controls.Add(this.btnSeleccionarFuenteRSS);
@@ -54,10 +64,10 @@
             this.btnSeleccionarFuenteRSS.Name = "btnSeleccionarFuenteRSS";
             this.btnSeleccionarFuenteRSS.Size = new System.Drawing.Size(195, 36);
             this.btnSeleccionarFuenteRSS.TabIndex = 8;
-            this.btnSeleccionarFuenteRSS.Text = "Seleccionar Fuente RSS";
+            this.btnSeleccionarFuenteRSS.Text = "Comprobar Fuente RSS";
             this.btnSeleccionarFuenteRSS.UseVisualStyleBackColor = true;
             this.btnSeleccionarFuenteRSS.Visible = false;
-            this.btnSeleccionarFuenteRSS.Click += new System.EventHandler(this.btnSeleccionarFuenteRSS_Click);
+            this.btnSeleccionarFuenteRSS.Click += new System.EventHandler(this.BtnSeleccionarFuenteRSS_Click);
             // 
             // tbBanner
             // 
@@ -81,7 +91,7 @@
             this.cbTipoBanner.Size = new System.Drawing.Size(219, 21);
             this.cbTipoBanner.TabIndex = 0;
             this.cbTipoBanner.Text = "Tipo de Banner";
-            this.cbTipoBanner.SelectedIndexChanged += new System.EventHandler(this.cbTipoBanner_SelectedValueChanged);
+            this.cbTipoBanner.SelectedIndexChanged += new System.EventHandler(this.CbTipoBanner_SelectedValueChanged);
             // 
             // btnHorariosOcupados
             // 
@@ -91,35 +101,13 @@
             this.btnHorariosOcupados.TabIndex = 26;
             this.btnHorariosOcupados.Text = "Horarios Ocupados";
             this.btnHorariosOcupados.UseVisualStyleBackColor = true;
-            this.btnHorariosOcupados.Click += new System.EventHandler(this.btnHorariosOcupados_Click);
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancelar.Location = new System.Drawing.Point(460, 55);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 33);
-            this.btnCancelar.TabIndex = 28;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            // 
-            // btnAceptar
-            // 
-            this.btnAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAceptar.Location = new System.Drawing.Point(460, 12);
-            this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(75, 33);
-            this.btnAceptar.TabIndex = 27;
-            this.btnAceptar.Text = "Aceptar";
-            this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnHorariosOcupados.Click += new System.EventHandler(this.BtnHorariosOcupados_Click);
             // 
             // NuevoBanner
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(547, 295);
-            this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.btnHorariosOcupados);
             this.Controls.Add(this.gbBanner);
             this.Name = "NuevoBanner";

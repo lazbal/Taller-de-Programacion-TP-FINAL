@@ -28,5 +28,8 @@ namespace CapaVisual
         }
     }
 
+    /// <summary>
+    /// Clase dummy para engañar a VisualStudio y permita la generalización de forms.
+    /// </summary>
     public class BannersHorariosOcupados : HorariosOcupados<Banner> { }
 }

@@ -20,7 +20,7 @@ namespace CapaVisual
         private bool iModoActualizacion;
 
         /// <summary>
-        /// Constructor de la ventana.
+        /// Inicializa una instancia de la ventana.
         /// </summary>
         /// <param name="pCampaña">Campaña a cargar/modificar.</param>
         public NuevoCampaña(Campaña pCampaña, bool pModoActualizacion = false) : base()
@@ -67,7 +67,7 @@ namespace CapaVisual
         /// <summary>
         /// Acciones a realizar al seleccionar agregar imágenes.
         /// </summary>
-        private void bAgregarImagenes_Click(object sender, EventArgs e)
+        private void BAgregarImagenes_Click(object sender, EventArgs e)
         {
             //Abrir una ventana de seleccion de archivos y filtrar por formatos de imágenes.
             abrirImagenes.Filter = "Todas las Imágenes|*.png;*.jpg;*.bmp";
@@ -90,7 +90,7 @@ namespace CapaVisual
         /// <summary>
         /// Acciones a realizar al seleccionar quitar imágenes seleccionadas.
         /// </summary>
-        private void bQuitarImagenes_Click(object sender, EventArgs e)
+        private void BQuitarImagenes_Click(object sender, EventArgs e)
         {
             //Para cada una de las imágenes seleccionadas.
             for (int i = 0; i < lvImagenes.SelectedItems.Count; i++)
@@ -105,7 +105,7 @@ namespace CapaVisual
         /// <summary>
         /// Acciones a realizar al seleccionar tiempo máximo sugerido.
         /// </summary>
-        private void bTMS_Click(object sender, EventArgs e)
+        private void BTMS_Click(object sender, EventArgs e)
         {
             //Sí la lista de imágenes cargadas está vacía, el tiempo es 0. Caso contrario
             if (this.lvImagenes.Items.Count != 0)
@@ -121,7 +121,7 @@ namespace CapaVisual
         /// <summary>
         /// Acción a realizar al hacer doble click sobre una imágen en la vista previa.
         /// </summary>
-        private void lvImagenes_DoubleClick(object sender, EventArgs e)
+        private void LvImagenes_DoubleClick(object sender, EventArgs e)
         {
             //Recrear la imagen.
             string imagen = lvImagenes.SelectedItems[0].ImageKey;
@@ -151,7 +151,7 @@ namespace CapaVisual
         /// <summary>
         /// Muestra una tabla con los horarios ocupados actualmente.
         /// </summary>
-        private void btnHorariosOcupados_Click(object sender, EventArgs e)
+        private void BtnHorariosOcupados_Click(object sender, EventArgs e)
         {
             HorariosOcupadosCampañas vTabla = new HorariosOcupadosCampañas(this.dtpFechaInicio.Value, this.dtpFechaFin.Value);
             DialogResult resultado = vTabla.ShowDialog();
