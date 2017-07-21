@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Linq;
 using CapaEntidad;
 using System.Net;
+using System.ComponentModel;
 
 namespace CapaVisual
 {
@@ -37,11 +38,11 @@ namespace CapaVisual
         private IEnumerator<Banner> iBannersHoy;
         //Temporizador que controla el tiempo que dura el banner actual.
         private System.Timers.Timer iTemporizadorBanner;
-        #endregion
         //Delegado para la modificación del texto banner desde distintos hilos.
         public delegate void CambiarTBBanner(string pBanner);
         public CambiarTBBanner BannerDelegado;
-        
+        #endregion
+
         /// <summary>
         /// Inicializa una instancia de la ventana de presentación
         /// </summary>
@@ -194,31 +195,13 @@ namespace CapaVisual
                 if (iBannerSiguiente == null && iBannerActual == null)
                 {
                     this.iBannerSiguiente = this.iBannersHoy.Current;
+                    //Actualizar noticias del siguiente banner sí es de fuente externa.
+                    ActualizarNoticiasBanner(iBannerSiguiente);
                     this.CambiarBanner();
                 }
                 //proximas ejecuciones. Será true cuando se esté por mostrar el ultimo banner.
                 else if (iBannerSiguiente != null)
                 {
-                    if (iBannerSiguiente is RSSFeed)
-                    {
-                        string NoSePudoActualizarError = "No se pudo actualizar la fuente <<" + iBannerSiguiente.Nombre + ">>.\n";
-                        string SeUsaranLasNoticiasAlmacenadas = "\nSe utilizarán las noticias anteriormente almacenadas.";
-                        try
-                        {
-                            ((RSSFeed)iBannerSiguiente).UltimasNoticias.Clear();
-                            foreach (RSSItem item in FachadaCapaVisual.LeerRSS(((RSSFeed)iBannerSiguiente).URL))
-                            {
-                                ((RSSFeed)iBannerSiguiente).UltimasNoticias.Add(item);
-                            }
-                            FachadaCapaVisual.ActualizarBanner(iBannerSiguiente);
-                        }
-                        catch (Exception e)
-                        {
-                            AutoClosingMessageBox.Show(NoSePudoActualizarError + e.Message + SeUsaranLasNoticiasAlmacenadas, 
-                                                        "Error actualizando",
-                                                        5000);
-                        }
-                    }
                     this.iBannerActual = iBannerSiguiente;
                     this.iBannerSiguiente = this.iBannersHoy.Current;
                     TimeSpan mHoraLocalActual = DateTime.Now.TimeOfDay;
@@ -248,6 +231,8 @@ namespace CapaVisual
                             this.iTemporizadorBanner.Start();
                             //Colocamos el banner.
                             Invoke(BannerDelegado, iBannerActual.Mostrar());
+                            //Actualizar noticias del siguiente banner sí es de fuente externa.
+                            ActualizarNoticiasBanner(iBannerSiguiente);
                         }
                         else
                         {
@@ -332,6 +317,35 @@ namespace CapaVisual
             this.iTemporizadorBanner.Dispose();
             this.iTemporizadorCampaña.Dispose();
             this.iTemporizadorImagen.Dispose();
+        }
+
+        /// <summary>
+        /// Actualiza las noticias de un banner.
+        /// </summary>
+        /// <param name="iBannerSiguiente"></param>
+        private void ActualizarNoticiasBanner(Banner pBanner)
+        {
+            if (pBanner != null && pBanner is RSSFeed)
+            {
+                string NoSePudoActualizarError = "No se pudo actualizar la fuente <<" + iBannerSiguiente.Nombre + ">>.\n";
+                string SeUsaranLasNoticiasAlmacenadas = "\nSe utilizarán las noticias anteriormente almacenadas.";
+                try
+                {
+                    ICollection<RSSItem> iItems = FachadaCapaVisual.LeerRSS(((RSSFeed)iBannerSiguiente).URL);
+                    ((RSSFeed)iBannerSiguiente).UltimasNoticias.Clear();
+                    foreach (RSSItem item in iItems)
+                    {
+                        ((RSSFeed)iBannerSiguiente).UltimasNoticias.Add(item);
+                    }
+                    FachadaCapaVisual.ActualizarBanner(iBannerSiguiente);
+                }
+                catch (Exception e)
+                {
+                    AutoClosingMessageBox.Show(NoSePudoActualizarError + e.Message + SeUsaranLasNoticiasAlmacenadas,
+                                                "Error actualizando",
+                                                5000);
+                }
+            }
         }
     }
 

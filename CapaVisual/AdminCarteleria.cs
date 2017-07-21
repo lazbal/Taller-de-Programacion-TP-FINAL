@@ -20,7 +20,7 @@ namespace CapaVisual
         private void btnPresentacion_Click(object sender, System.EventArgs e)
         {
             Presentacion iPresentacion = new Presentacion();
-            iPresentacion.ShowDialog();
+            iPresentacion.Show();
             this.Show();
         }
 

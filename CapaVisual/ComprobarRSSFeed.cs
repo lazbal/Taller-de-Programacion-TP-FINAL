@@ -103,7 +103,6 @@ namespace CapaVisual
                 MessageBox.Show(ex.Message);
                 e.Cancel = true;
             }
-
         }
 
         /// <summary>
