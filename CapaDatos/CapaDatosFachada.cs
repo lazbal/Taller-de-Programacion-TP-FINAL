@@ -87,21 +87,6 @@ namespace CapaDatos
         }
 
         /// <summary>
-        /// Devuelve la consulta con todos los banners entre dos fechas
-        /// </summary>
-        /// <param name="pFechaInicial">Fecha inicial.</param>
-        /// <param name="pFechaFinal">Fecha final.</param>
-        private IQueryable<Banner> GetQueryAllBannersEntre(DateTime pFechaInicial, DateTime pFechaFinal)
-        {
-            IQueryable<Banner> iBanners =
-                from banner in iUnitOfWork.BannerRepositorio.Queryable
-                where (banner.FechaInicio <= pFechaFinal) &&
-                      (banner.FechaFin >= pFechaInicial)
-                select banner;
-            return iBanners;
-        }
-
-        /// <summary>
         /// Obtener todas las <see cref="Banner"/> en la base de datos que comprenden la fecha de hoy.
         /// Ordenadas por el horario de inicio para el día de hoy.
         /// Las que no posean un horario para el día de hoy se colocan al final de la coleccion.
@@ -109,9 +94,12 @@ namespace CapaDatos
         /// <returns>Todos los Banners del día.</returns>
         public ICollection<Banner> GetBannersHoy()
         {
-            IQueryable<Banner> consulta = GetQueryAllBannersEntre(DateTime.Today, DateTime.Today);
-            //Se ordenan por el día de la fecha de la consulta.
-            return consulta.AsEnumerable().OrderBy(elem => elem).ToList();
+            IQueryable<Banner> iBanners =
+                from banner in iUnitOfWork.BannerRepositorio.Queryable
+                where (banner.FechaInicio <= DateTime.Today) &&
+                      (banner.FechaFin >= DateTime.Today)
+                select banner;
+            return iBanners.AsEnumerable().OrderBy(elem => elem).ToList();
         }
 
         /// <summary>
@@ -121,9 +109,12 @@ namespace CapaDatos
         /// <param name="pFechaFinal">Fecha final.</param>
         public ICollection<Banner> GetAllBannersEntre(DateTime pFechaInicial, DateTime pFechaFinal)
         {
-            IQueryable<Banner> consulta = GetQueryAllBannersEntre(pFechaInicial, pFechaFinal);
-            //Se ordenan por el día de la fecha de la consulta. En caso de ser null irá primero.
-            return consulta.ToList();
+            IQueryable<Banner> iBanners =
+                from banner in iUnitOfWork.BannerRepositorio.Queryable
+                where (banner.FechaInicio <= pFechaFinal) &&
+                      (banner.FechaFin >= pFechaInicial)
+                select banner;
+            return iBanners.ToList();
         }
 
         /// <summary>
@@ -133,23 +124,7 @@ namespace CapaDatos
         /// <returns>El objeto encontrado ó nulo si no lo encuentra.</returns>
         public Banner GetByIdBanner(Int64 pBanner)
         {
-            return iUnitOfWork.BannerRepositorio.GetByID(pBanner); ;
-        }
-
-        /// <summary>
-        /// Devuelve la consulta los elementos de carteleria cuyo nombre poseen similitud con la cadena provista.
-        /// </summary>
-        /// <param name="pNombre">Posible nombre.</param>
-        /// <returns>Lista de coincidencias <typeparamref name="Banner"/></returns>
-        public IQueryable<Banner> QueryBusquedaAproximacionBanner(string pCadena)
-        {
-            //Se realiza una consulta a la tabla por las entradas cuyo nombre contiene la cadena provista.
-            IQueryable<Banner> iBanner =
-                from banner in iUnitOfWork.BannerRepositorio.Queryable
-                where banner.Nombre.Contains(pCadena) ||
-                        banner.Descripcion.Contains(pCadena)
-                select banner;
-            return iBanner;
+            return iUnitOfWork.BannerRepositorio.GetByID(pBanner);
         }
 
         /// <summary>
@@ -159,7 +134,13 @@ namespace CapaDatos
         /// <returns>Lista de coincidencias <typeparamref name="Banner"/></returns>
         public ICollection<Banner> BusquedaAproximacionBanner(string pCadena)
         {
-            return QueryBusquedaAproximacionBanner(pCadena).ToList();
+            //Se realiza una consulta a la tabla por las entradas cuyo nombre contiene la cadena provista.
+            IQueryable<Banner> iBanners =
+                 from banner in iUnitOfWork.BannerRepositorio.Queryable
+                 where banner.Nombre.Contains(pCadena) ||
+                         banner.Descripcion.Contains(pCadena)
+                 select banner;
+            return iBanners.ToList();
         }
         #endregion
         #region Campaña
@@ -212,30 +193,18 @@ namespace CapaDatos
         }
 
         /// <summary>
-        /// Devuelve la consulta con todas las campañas entre dos fechas
-        /// </summary>
-        /// <param name="pFechaInicial">Fecha inicial.</param>
-        /// <param name="pFechaFinal">Fecha final.</param>
-        private IQueryable<Campaña> GetQueryAllCampañasEntre(DateTime pFechaInicial, DateTime pFechaFinal)
-        {
-            IQueryable<Campaña> iCampañas =
-                from campaña in iUnitOfWork.CampañaRepositorio.Queryable
-                where (campaña.FechaInicio <= pFechaFinal) &&
-                      (campaña.FechaFin >= pFechaInicial)
-                select campaña;
-            return iCampañas;
-        }
-
-        /// <summary>
         /// Devuelve todas las campañas entre dos fechas.
         /// </summary>
         /// <param name="pFechaInicial">Fecha inicial.</param>
         /// <param name="pFechaFinal">Fecha final.</param>
         public ICollection<Campaña> GetAllCampañasEntre(DateTime pFechaInicial, DateTime pFechaFinal)
         {
-            IQueryable<Campaña> consulta = GetQueryAllCampañasEntre(pFechaInicial, pFechaFinal);
-            //Se ordenan por el día de la fecha de la consulta. En caso de ser null irá primero.
-            return consulta.ToList();
+            IQueryable<Campaña> iCampañas =
+                from campaña in iUnitOfWork.CampañaRepositorio.Queryable
+                where (campaña.FechaInicio <= pFechaFinal) &&
+                      (campaña.FechaFin >= pFechaInicial)
+                select campaña;
+            return iCampañas.ToList();
         }
 
         /// <summary>
@@ -246,9 +215,12 @@ namespace CapaDatos
         /// <returns>Todas las campañas del día.</returns>
         public ICollection<Campaña> GetCampañasHoy()
         {
-            IQueryable<Campaña> consulta = GetQueryAllCampañasEntre(DateTime.Today, DateTime.Today);
-            //Se ordenan por el día de la fecha de la consulta.
-            return consulta.AsEnumerable().OrderBy(elem => elem).ToList();
+            IQueryable<Campaña> iCampañas =
+                from campaña in iUnitOfWork.CampañaRepositorio.Queryable
+                where (campaña.FechaInicio <= DateTime.Today) &&
+                      (campaña.FechaFin >= DateTime.Today)
+                select campaña;
+            return iCampañas.AsEnumerable().OrderBy(elem => elem).ToList();
         }
 
         /// <summary>
@@ -262,11 +234,11 @@ namespace CapaDatos
         }
 
         /// <summary>
-        /// Devuelve la consulta los elementos de carteleria cuyo nombre poseen similitud con la cadena provista.
+        /// Devuelve la coleccion con los elementos de carteleria cuyo nombre poseen similitud con la cadena provista.
         /// </summary>
         /// <param name="pNombre">Posible nombre.</param>
         /// <returns>Lista de coincidencias <typeparamref name="Campaña"/></returns>
-        public IQueryable<Campaña> QueryBusquedaAproximacionCampaña(string pCadena)
+        public ICollection<Campaña> BusquedaAproximacionCampaña(string pCadena)
         {
             //Se realiza una consulta a la tabla por las entradas cuyo nombre contiene la cadena provista.
             IQueryable<Campaña> iCampaña =
@@ -274,17 +246,7 @@ namespace CapaDatos
                 where campaña.Nombre.Contains(pCadena) ||
                       campaña.Descripcion.Contains(pCadena)
                 select campaña;
-            return iCampaña;
-        }
-
-        /// <summary>
-        /// Devuelve la coleccion con los elementos de carteleria cuyo nombre poseen similitud con la cadena provista.
-        /// </summary>
-        /// <param name="pNombre">Posible nombre.</param>
-        /// <returns>Lista de coincidencias <typeparamref name="Campaña"/></returns>
-        public ICollection<Campaña> BusquedaAproximacionCampaña(string pCadena)
-        {
-            return QueryBusquedaAproximacionCampaña(pCadena).ToList();
+            return iCampaña.ToList();
         }
         #endregion
     }
