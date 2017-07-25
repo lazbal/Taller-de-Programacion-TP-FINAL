@@ -56,23 +56,30 @@ namespace CapaVisual
 
         private void dgBusqueda_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.Delete && this.dgBusqueda.SelectedRows != null)
+            try
             {
-                DataGridViewRow mSelectedRow = this.dgBusqueda.SelectedRows[0];
-                DialogResult result = MessageBox.Show("¿Está seguro que desea eliminar el elemento "+ mSelectedRow.Cells[2].Value.ToString()+"?", "Advertencia", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
+                if (e.KeyData == Keys.Delete && this.dgBusqueda.SelectedRows != null)
                 {
-                    if (iTipo == typeof(Campaña))
+                    DataGridViewRow mSelectedRow = this.dgBusqueda.SelectedRows[0];
+                    DialogResult result = MessageBox.Show("¿Está seguro que desea eliminar el elemento " + mSelectedRow.Cells[2].Value.ToString() + "?", "Advertencia", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
                     {
-                        FachadaCapaVisual.EliminarCampaña((Int64)mSelectedRow.Cells[1].Value);
+                        if (iTipo == typeof(Campaña))
+                        {
+                            FachadaCapaVisual.EliminarCampaña((Int64)mSelectedRow.Cells[1].Value);
+                        }
+                        else if (iTipo == typeof(Banner))
+                        {
+                            FachadaCapaVisual.EliminarBanner((Int64)mSelectedRow.Cells[1].Value);
+                        }
+                        cadenaBuscar_TextChanged(this, null);
+                        MessageBox.Show("Eliminación realizada con éxito");
                     }
-                    else if (iTipo == typeof(Banner))
-                    {
-                        FachadaCapaVisual.EliminarBanner((Int64)mSelectedRow.Cells[1].Value);
-                    }
-                    cadenaBuscar_TextChanged(this, null);
-                    MessageBox.Show("Eliminación realizada con éxito");
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

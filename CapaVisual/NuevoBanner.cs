@@ -164,17 +164,24 @@ namespace CapaVisual
                         iBanner.Frecuencia.Add(mHorario);
                     }
                 }
-
-                //Insertar en la base de datos
-                if (iModoActualizacion)
-                {
-                    FachadaCapaVisual.ActualizarBanner(iBanner);
+                try
+                { 
+                    //Insertar en la base de datos
+                    if (iModoActualizacion)
+                    {
+                        FachadaCapaVisual.ActualizarBanner(iBanner);
+                    }
+                    else
+                    {
+                        FachadaCapaVisual.AgregarBanner(iBanner);
+                    }
+                    return true;
                 }
-                else
+                catch (Exception ex)
                 {
-                    FachadaCapaVisual.AgregarBanner(iBanner);
+                    MessageBox.Show(ex.Message);
+                    return false;
                 }
-                return true;
             }
         }
     }

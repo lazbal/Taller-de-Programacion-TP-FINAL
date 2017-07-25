@@ -41,6 +41,14 @@ namespace CapaDatos
         /// <param name="pBanner">Objeto a insertar en tabla.</param>
         public void Create(Banner pBanner)
         {
+            if (pBanner == null)
+            {
+                throw new ArgumentNullException("El Banner que se desea crear es nulo.");
+            }
+            if (String.IsNullOrEmpty(pBanner.Nombre))
+            {
+                throw new ArgumentNullException("El nombre del Banner está vacío o es nulo.");
+            }
             iUnitOfWork.BannerRepositorio.Insert(pBanner);
             iUnitOfWork.Save();
         }
@@ -51,6 +59,14 @@ namespace CapaDatos
         /// <param name="pCamapaña">Objeto actualizado.</param>
         public void Update(Banner pBanner)
         {
+            if (pBanner == null)
+            {
+                throw new ArgumentNullException("El Banner que desea modificar el nulo.");
+            }
+            if (String.IsNullOrEmpty(pBanner.Nombre))
+            {
+                throw new ArgumentNullException("El nombre del Banner es vacío.");
+            }
             iUnitOfWork.BannerRepositorio.Update(pBanner);
             iUnitOfWork.Save();
         }
@@ -61,6 +77,14 @@ namespace CapaDatos
         /// <param name="pBanner">Objeto a eliminar.</param>
         public void Delete(Banner pBanner)
         {
+            if (pBanner == null)
+            {
+                throw new ArgumentNullException("El Banner que se desea eliminar es nulo.");
+            }
+            if (String.IsNullOrEmpty(pBanner.Nombre))
+            {
+                throw new ArgumentNullException("El nombre del Banner es vacío.");
+            }
             if (pBanner is RSSFeed)
             {
                 //se eliminan todas las noticias almacenadas primero
@@ -150,7 +174,15 @@ namespace CapaDatos
 		/// <param name="pCampaña">Objeto a insertar en tabla.</param>
 		public void Create(Campaña pCampaña)
 		{
-			iUnitOfWork.CampañaRepositorio.Insert(pCampaña);
+            if (pCampaña == null)
+            {
+                throw new ArgumentNullException("La campaña que desea crear es nula.");
+            }
+            if (String.IsNullOrEmpty(pCampaña.Nombre))
+            {
+                throw new ArgumentNullException("El nombre de la Campaña es nulo o vacío.");
+            }
+            iUnitOfWork.CampañaRepositorio.Insert(pCampaña);
 			iUnitOfWork.Save();
         }
 
@@ -160,7 +192,15 @@ namespace CapaDatos
         /// <param name="pCamapaña">Objeto actualizado.</param>
         public void Update(Campaña pCampaña)
 		{
-			iUnitOfWork.CampañaRepositorio.Update(pCampaña);
+            if (pCampaña == null)
+            {
+                throw new ArgumentNullException("La campaña que se desea modificar es nula.");
+            }
+            if (String.IsNullOrEmpty(pCampaña.Nombre))
+            {
+                throw new ArgumentNullException("El nombre de la Campaña es nulo o vacío.");
+            }
+            iUnitOfWork.CampañaRepositorio.Update(pCampaña);
 			iUnitOfWork.Save();
 		}
 
@@ -170,6 +210,14 @@ namespace CapaDatos
         /// <param name="pCampaña">Objeto a eliminar.</param>
         public void Delete(Campaña pCampaña)
         {
+            if (pCampaña == null)
+            {
+                throw new ArgumentNullException("La campaña que desea eliminar es nula.");
+            }
+            if (String.IsNullOrEmpty(pCampaña.Nombre))
+            {
+                throw new ArgumentNullException("El nombre de la Campaña es nulo o vacío.");
+            }
             //Para forzar la eliminación en cascada. Se eliminan primero los items que contienen claves foráneas.
             //Eliminar todas las imágenes de la campaña.
             foreach (ImagenCampaña imagen in pCampaña.ListaImagenes.Reverse())

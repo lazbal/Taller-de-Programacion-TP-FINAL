@@ -110,7 +110,7 @@ namespace CapaVisual
             //Sí la lista de imágenes cargadas está vacía, el tiempo es 0. Caso contrario
             if (this.lvImagenes.Items.Count != 0)
             {
-                //Se obtiene el menos intervalo de tiempo que durará la campaña en un día y se lo divide por la cantidad de imágenes que lleve la campaña.
+                //Se obtiene el menor intervalo de tiempo que durará la campaña en un día y se lo divide por la cantidad de imágenes que lleve la campaña.
                 decimal tiempoMinimoPorImagenSegundos = Convert.ToDecimal(TiempoMinimo().TotalSeconds / lvImagenes.Items.Count);
                 this.numHH.Value = Convert.ToInt32(Math.Truncate(tiempoMinimoPorImagenSegundos / (decimal)3600.0));
                 this.numMM.Value = Convert.ToInt32(Math.Truncate((tiempoMinimoPorImagenSegundos - this.numHH.Value * 3600) / (decimal)60.0));

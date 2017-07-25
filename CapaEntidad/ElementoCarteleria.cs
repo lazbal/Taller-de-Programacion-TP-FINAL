@@ -22,7 +22,6 @@ namespace CapaEntidad
         /// <summary>
         /// Descripción del elemento de carteleria
         /// </summary>
-        [Required]
         public virtual string Descripcion { get; set; } = null;
 
         /// <summary>
@@ -41,7 +40,6 @@ namespace CapaEntidad
         /// Días y horas en que se debe mostrar durante la semana.
         /// Para más información véase <see cref="Horario"/>
         /// </summary>
-        [Required]
 		public virtual ICollection<Horario> Frecuencia { get; set; }
 
         /// <summary>
