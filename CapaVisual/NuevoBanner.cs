@@ -152,6 +152,7 @@ namespace CapaVisual
             else
             {
                 //Cargar los datos en la campaña provista.
+                this.CbTipoBanner_SelectedValueChanged(this, null);
                 iBanner.Nombre = this.tbNombre.Text;
                 iBanner.Descripcion = this.tbDescripcion.Text;
                 iBanner.FechaInicio = this.dtpFechaInicio.Value;
